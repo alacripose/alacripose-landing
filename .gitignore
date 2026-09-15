@@ -1,0 +1,4 @@
+tools/vrf/
+tools/*.zip
+assets/previews/
+*.vpk

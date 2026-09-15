@@ -4,121 +4,253 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>alacripose — Deadlock mods</title>
-<meta name="description" content="Deadlock skins, ports, HUD and sound mods by alacripose. 30 published, 28 more on Drive. Commissions open.">
+<meta name="description" content="Deadlock skins, ports, HUD and sound mods by alacripose. 30 published, 28 Drive-only. Commissions open.">
 <meta property="og:title" content="alacripose — Deadlock mods">
 <meta property="og:description" content="Deadlock skins, ports, HUD and sound mods. Commissions open.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='14' fill='%23120f0b' stroke='%23d1a437' stroke-width='2'/%3E%3Ccircle cx='16' cy='16' r='5' fill='%23d1a437'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Limelight&family=Bitter:wght@300;400;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Limelight&family=Bitter:ital,wght@0,300;0,400;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <style>
   :root {
-    --bg: #0e0c09; --bg2: #14110c;
-    --card: #1a150e; --card2: #211a11;
-    --paper: #eadfc4; --paper-dim: #c9bb9a; --paper-faint: #8f8367;
-    --brass: #d1a437; --brass-dim: #9a7a29;
-    --teal: #8fbdb0; --red: #c25b4e;
-    --line: rgba(209, 164, 55, .28); --line-faint: rgba(209, 164, 55, .14);
+    --ground: #0e0c09;
+    --ground2: #161209;
+    --surface: #1d1710;        /* 2dp */
+    --surface4: #241d14;       /* 4dp app-bar tier */
+    --surface6: #2a2216;       /* 6dp */
+    --surface8: #31281b;       /* 8dp menus */
+    --surface16: #382e20;      /* 16dp */
+    --ink: #eadfc4;
+    --ink70: rgba(234,223,196,.72);
+    --ink50: rgba(234,223,196,.52);
+    --divider: rgba(234,223,196,.12);
+    --brass: #d1a437;
+    --brass-hi: #e9c158;
+    --brass-dim: #9a7a29;
+    --teal: #8fbdb0;
+    --red: #c25b4e;
+    --radius: 2px;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
-    * { animation: none !important; transition: none !important; }
+    *, *::before, *::after { animation: none !important; transition: none !important; }
   }
   body {
-    background: var(--bg); color: var(--paper);
-    font-family: "Bitter", Georgia, serif; font-size: 17px; line-height: 1.6;
+    background: var(--ground); color: var(--ink);
+    font-family: "Bitter", Georgia, serif; font-size: 16.5px; line-height: 1.62;
+    -webkit-font-smoothing: antialiased;
   }
-  ::selection { background: var(--brass); color: var(--bg); }
-  .wrap { max-width: 1060px; margin: 0 auto; padding: 0 24px; }
-  .mono { font-family: "IBM Plex Mono", monospace; }
-
-  .topbar {
-    position: sticky; top: 0; z-index: 50;
-    background: rgba(14,12,9,.93); backdrop-filter: blur(6px);
-    border-bottom: 1px solid var(--line-faint);
-  }
-  .topbar .wrap { display: flex; align-items: center; justify-content: space-between; height: 58px; }
-  .wordmark { font-family: "Limelight", serif; color: var(--brass); letter-spacing: .18em; font-size: 17px; }
-  nav { display: flex; gap: 26px; }
-  nav a { font-family: "IBM Plex Mono", monospace; font-size: 12.5px; letter-spacing: .14em; text-transform: uppercase; color: var(--paper-dim); }
-  nav a:hover { color: var(--brass); }
-  @media (max-width: 640px) { nav { display: none; } }
-
-  header.hero { padding: 80px 0 60px; border-bottom: 1px solid var(--line-faint);
-    background: radial-gradient(ellipse 80% 60% at 50% -10%, rgba(209,164,55,.09), transparent), linear-gradient(180deg, var(--bg2), var(--bg)); }
-  .stamp { display: inline-block; font-family: "IBM Plex Mono", monospace; font-size: 11px; letter-spacing: .22em; text-transform: uppercase; color: var(--brass); border: 1px solid var(--line); padding: 7px 14px; transform: rotate(-1.2deg); }
-  h1 { font-family: "Limelight", serif; font-size: clamp(48px, 9vw, 88px); letter-spacing: .06em; line-height: 1.05; margin: 24px 0 8px; text-shadow: 0 2px 0 rgba(0,0,0,.6); }
-  h1 em { font-style: normal; color: var(--brass); }
-  .tag { color: var(--paper-dim); font-family: "IBM Plex Mono", monospace; font-size: 13.5px; }
-  .pitch { max-width: 580px; margin: 24px 0 30px; font-size: 20px; font-weight: 300; }
-  .pitch strong { color: var(--brass); font-weight: 600; }
-  .cta-row { display: flex; flex-wrap: wrap; gap: 14px; }
-  .btn { display: inline-flex; align-items: center; gap: 10px; font-family: "IBM Plex Mono", monospace; font-size: 13px; letter-spacing: .12em; text-transform: uppercase; padding: 15px 26px; border: 1px solid var(--brass); color: var(--brass); position: relative; }
-  .btn.primary { background: var(--brass); color: #14110c; }
-  .btn.primary:hover { background: var(--paper); border-color: var(--paper); }
-  .btn:not(.primary):hover { background: rgba(209,164,55,.12); }
-  .hero-stats { margin-top: 48px; display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1px; background: var(--line-faint); border: 1px solid var(--line-faint); }
-  .hero-stats > div { background: var(--bg); padding: 18px 20px; }
-  .hero-stats .num { font-family: "Limelight", serif; font-size: 30px; color: var(--brass); }
-  .hero-stats .lbl { font-family: "IBM Plex Mono", monospace; font-size: 10.5px; letter-spacing: .18em; text-transform: uppercase; color: var(--paper-faint); margin-top: 4px; }
-
-  section { padding: 72px 0; border-bottom: 1px solid var(--line-faint); }
-  .sec-head { display: flex; align-items: baseline; gap: 18px; margin-bottom: 10px; }
-  .sec-head h2 { font-family: "Limelight", serif; font-size: clamp(28px, 4.5vw, 42px); letter-spacing: .08em; }
-  .sec-head .num { font-family: "IBM Plex Mono", monospace; color: var(--brass-dim); font-size: 14px; }
-  .sec-sub { color: var(--paper-dim); max-width: 640px; margin-bottom: 36px; font-size: 16px; }
+  ::selection { background: var(--brass); color: var(--ground); }
+  /* browser surfaces */
+  * { scrollbar-width: thin; scrollbar-color: var(--brass-dim) var(--ground); }
+  *::-webkit-scrollbar { width: 10px; height: 10px; }
+  *::-webkit-scrollbar-track { background: var(--ground); }
+  *::-webkit-scrollbar-thumb { background: var(--brass-dim); border-radius: 0; }
+  :focus-visible { outline: 2px solid var(--brass); outline-offset: 2px; }
   a { color: var(--teal); text-decoration: none; }
-  a:hover { color: var(--brass); }
+  a:hover { color: var(--brass-hi); }
+  .mono { font-family: "IBM Plex Mono", monospace; }
+  .deco { font-family: "Limelight", serif; }
+  .wrap { max-width: 1160px; margin: 0 auto; padding: 0 22px; }
 
-  /* catalog table — dense, real links */
-  .mods { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 12px; }
-  .mod { display: flex; flex-direction: column; gap: 4px; background: var(--card); border: 1px solid var(--line-faint); padding: 16px 18px 14px; }
-  .mod:hover { border-color: var(--line); }
-  .mod a.name { font-family: "Limelight", serif; font-size: 17px; color: var(--paper); letter-spacing: .02em; }
-  .mod a.name:hover { color: var(--brass); }
-  .mod .meta { font-family: "IBM Plex Mono", monospace; font-size: 11.5px; color: var(--paper-faint); display: flex; gap: 12px; flex-wrap: wrap; }
-  .mod .meta .dl { color: var(--brass); }
-  .mod .note { font-size: 13.5px; color: var(--paper-dim); }
-  .mod.nsfx { border-color: rgba(194, 91, 78, .25); }
-  .mod.nsfx .badge-nsfw { color: var(--red); border-color: rgba(194,91,78,.4); }
+  /* ── top bar (4dp) ─────────────────────────────── */
+  .topbar {
+    position: sticky; top: 0; z-index: 60;
+    background: var(--surface4);
+    border-bottom: 1px solid var(--divider);
+  }
+  .topbar .wrap { display: flex; align-items: center; justify-content: space-between; height: 60px; gap: 16px; }
+  .wordmark { font-family: "Limelight", serif; color: var(--brass); letter-spacing: .17em; font-size: 16px; white-space: nowrap; }
+  nav { display: flex; gap: 4px; overflow-x: auto; }
+  nav a {
+    font-family: "IBM Plex Mono", monospace; font-size: 12px; letter-spacing: .12em;
+    text-transform: uppercase; color: var(--ink70);
+    padding: 13px 12px; white-space: nowrap;
+  }
+  nav a:hover { color: var(--brass); background: var(--surface8); }
 
-  .badge { display: inline-block; padding: 2px 8px; border: 1px solid var(--line); color: var(--brass-dim); font-size: 10px; letter-spacing: .14em; text-transform: uppercase; font-family: "IBM Plex Mono", monospace; }
+  /* ── hero: the work leads ─────────────────────── */
+  .hero { padding: 44px 0 0; background: linear-gradient(180deg, var(--ground2), var(--ground)); }
+  .hero-grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: 34px; align-items: end; }
+  @media (max-width: 880px) { .hero-grid { grid-template-columns: 1fr; } }
+  .hero h1 { font-family: "Limelight", serif; font-size: clamp(44px, 7vw, 72px); letter-spacing: .05em; line-height: 1.02; }
+  .hero h1 em { font-style: normal; color: var(--brass); }
+  .hero .tag { color: var(--ink70); font-family: "IBM Plex Mono", monospace; font-size: 13px; margin: 10px 0 20px; }
+  .hero .pitch { max-width: 54ch; font-weight: 300; font-size: 19px; }
+  .hero .pitch strong { color: var(--brass-hi); font-weight: 600; }
+  .cta-row { display: flex; flex-wrap: wrap; gap: 12px; margin: 24px 0 8px; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 9px; min-height: 48px;
+    font-family: "IBM Plex Mono", monospace; font-size: 13px; letter-spacing: .1em;
+    text-transform: uppercase; padding: 0 24px; border: 1px solid var(--brass);
+    color: var(--brass); background: transparent; cursor: pointer;
+  }
+  .btn .material-icons { font-size: 18px; }
+  .btn.primary { background: var(--brass); color: var(--ground); }
+  .btn.primary:hover { background: var(--ink); border-color: var(--ink); }
+  .btn:not(.primary):hover { background: var(--surface8); }
+  .btn:active { filter: brightness(.85); }
 
-  .subhead { font-family: "IBM Plex Mono", monospace; font-size: 12px; letter-spacing: .2em; text-transform: uppercase; color: var(--brass); margin: 40px 0 16px; }
-  .subhead:first-child { margin-top: 0; }
+  /* image mosaic: top mods lead the first viewport */
+  .mosaic { display: grid; grid-template-columns: repeat(2, 1fr); grid-auto-rows: 150px; gap: 6px; }
+  .mosaic a { display: block; overflow: hidden; background: var(--surface); position: relative; }
+  .mosaic img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .mosaic a:first-child { grid-row: span 2; grid-column: span 2; }
+  .mosaic .mosaic-cap {
+    position: absolute; left: 0; right: 0; bottom: 0; padding: 26px 12px 8px;
+    background: linear-gradient(transparent, rgba(10,8,5,.92));
+    font-family: "IBM Plex Mono", monospace; font-size: 11.5px; letter-spacing: .06em;
+    color: var(--ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .mosaic a:hover img { filter: brightness(1.12); }
 
-  /* pricing */
-  .price-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 14px; }
-  .price-card { background: var(--card); border: 1px solid var(--line-faint); padding: 26px 22px; }
-  .price-kind { font-family: "IBM Plex Mono", monospace; font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: var(--teal); margin-bottom: 12px; }
-  .price { font-family: "Limelight", serif; font-size: 36px; color: var(--brass); letter-spacing: .04em; }
-  .price small { font-size: 15px; color: var(--paper-faint); font-family: "IBM Plex Mono", monospace; }
-  .price-card p { font-size: 13.5px; color: var(--paper-dim); margin-top: 10px; }
+  .hero-stats { display: flex; flex-wrap: wrap; gap: 34px; padding: 22px 0 30px; border-bottom: 1px solid var(--divider); }
+  .hero-stats .num { font-family: "Limelight", serif; font-size: 27px; color: var(--brass); }
+  .hero-stats .lbl { font-family: "IBM Plex Mono", monospace; font-size: 10.5px; letter-spacing: .16em; text-transform: uppercase; color: var(--ink50); }
 
-  .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 0; border: 1px solid var(--line-faint); margin-top: 36px; }
-  .step { padding: 20px 20px 18px; border-right: 1px solid var(--line-faint); }
+  /* ── sections ──────────────────────────────────── */
+  section { padding: 64px 0 70px; border-bottom: 1px solid var(--divider); }
+  h2.sec { font-family: "Limelight", serif; font-size: clamp(26px, 4vw, 38px); letter-spacing: .06em; margin-bottom: 6px; }
+  .sec-sub { color: var(--ink70); max-width: 66ch; margin-bottom: 30px; }
+
+  /* ── catalog: image cards, the artifact ────────── */
+  .chips { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 26px; }
+  .chip {
+    font-family: "IBM Plex Mono", monospace; font-size: 12px; letter-spacing: .1em;
+    text-transform: uppercase; color: var(--ink70); background: var(--surface);
+    border: 1px solid var(--divider); padding: 11px 16px; cursor: pointer; min-height: 44px;
+  }
+  .chip[aria-pressed="true"] { color: var(--ground); background: var(--brass); border-color: var(--brass); }
+  .chip:hover { border-color: var(--brass-dim); }
+
+  .mods { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 14px; }
+  .mod-card {
+    position: relative; background: var(--surface); border: 1px solid var(--divider);
+    border-radius: var(--radius); overflow: hidden; cursor: pointer;
+  }
+  .mod-card:hover, .mod-card:focus-visible { border-color: var(--brass-dim); background: var(--surface4); }
+  .mod-card img.thumb { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; display: block; background: var(--ground2); }
+  .mod-card .noimg {
+    width: 100%; aspect-ratio: 16 / 10; display: flex; align-items: center; justify-content: center;
+    background: repeating-linear-gradient(45deg, var(--ground2) 0 12px, var(--surface) 12px 24px);
+    color: var(--ink50); font-family: "IBM Plex Mono", monospace; font-size: 11px; letter-spacing: .2em; text-transform: uppercase;
+  }
+  .mod-card .cardbody { padding: 12px 14px 13px; }
+  .mod-card .mname { font-family: "Limelight", serif; font-size: 16.5px; letter-spacing: .02em; color: var(--ink); line-height: 1.25; }
+  .mod-card .mmeta { display: flex; flex-wrap: wrap; gap: 4px 12px; margin-top: 6px; font-family: "IBM Plex Mono", monospace; font-size: 11.5px; color: var(--ink50); }
+  .mod-card .mmeta .dl { color: var(--brass); }
+  .badges { position: absolute; top: 8px; left: 8px; display: flex; gap: 6px; z-index: 2; }
+  .badge {
+    font-family: "IBM Plex Mono", monospace; font-size: 10px; letter-spacing: .12em;
+    text-transform: uppercase; padding: 4px 8px; border-radius: var(--radius);
+    background: rgba(14,12,9,.86); color: var(--brass); border: 1px solid var(--brass-dim);
+  }
+  .badge.collab { color: var(--teal); border-color: var(--teal); }
+  .badge.nsfw { color: var(--red); border-color: var(--red); }
+  .badge.commission { color: var(--ink70); border-color: var(--divider); }
+
+  /* hover / focus preview popover (8dp) */
+  #pop {
+    position: fixed; z-index: 90; width: 340px; max-width: calc(100vw - 28px);
+    background: var(--surface8); border: 1px solid var(--brass-dim); border-radius: var(--radius);
+    box-shadow: 6px 8px 0 rgba(0,0,0,.45); pointer-events: none; display: none;
+  }
+  #pop img { width: 100%; aspect-ratio: 16/9; object-fit: cover; display: block; background: var(--ground2); }
+  #pop .pbody { padding: 13px 15px 15px; }
+  #pop .pname { font-family: "Limelight", serif; font-size: 17px; letter-spacing: .02em; }
+  #pop .pdesc { color: var(--ink70); font-size: 13.5px; margin: 7px 0 9px; }
+  #pop .prow { display: flex; justify-content: space-between; gap: 10px; font-family: "IBM Plex Mono", monospace; font-size: 11.5px; color: var(--ink50); flex-wrap: wrap; }
+  #pop .prow b { color: var(--brass); font-weight: 500; }
+  #pop .credit { color: var(--teal); font-size: 12px; margin-top: 7px; }
+  #pop .go { position: absolute; top: 10px; right: 10px; color: var(--brass); background: rgba(14,12,9,.85); border-radius: var(--radius); padding: 6px; }
+  #pop .go .material-icons { font-size: 18px; }
+
+  /* ── 18+ gate ───────────────────────────────────── */
+  #nsfw-gate {
+    max-width: 460px; margin: 0 auto 26px; text-align: center; background: var(--surface);
+    border: 1px solid var(--divider); border-radius: var(--radius); padding: 30px 26px;
+  }
+  #nsfw-gate .material-icons { font-size: 30px; color: var(--red); }
+  #nsfw-gate p { color: var(--ink70); font-size: 14.5px; margin: 10px 0 18px; }
+  .blurred .mod-card { filter: blur(14px) saturate(.4); pointer-events: none; user-select: none; }
+  .blurred .mod-card .badges { filter: none; }
+
+  /* ── clicker ───────────────────────────────────── */
+  #clicker { background: linear-gradient(180deg, var(--ground), var(--ground2)); }
+  .game { display: grid; grid-template-columns: 300px 1fr; gap: 30px; align-items: start; }
+  @media (max-width: 760px) { .game { grid-template-columns: 1fr; } }
+  .orb-zone { position: relative; text-align: center; touch-action: manipulation; user-select: none; -webkit-user-select: none; }
+  #orb {
+    width: min(220px, 60vw); height: auto; cursor: pointer; display: block; margin: 6px auto 14px;
+    filter: drop-shadow(0 10px 18px rgba(209,164,55,.18));
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    #orb { animation: orbreathe 3.4s ease-in-out infinite; }
+    @keyframes orbreathe { 50% { transform: scale(1.028); } }
+    #orb:active { transform: scale(.96); }
+  }
+  .souls-read { font-family: "Limelight", serif; font-size: 34px; color: var(--brass); line-height: 1; }
+  .souls-rate { font-family: "IBM Plex Mono", monospace; font-size: 12.5px; color: var(--ink70); margin-top: 6px; }
+  .float-n {
+    position: absolute; font-family: "IBM Plex Mono", monospace; font-size: 15px; color: var(--brass-hi);
+    pointer-events: none; z-index: 5; animation: floatup .16s ease-out forwards;
+  }
+  @keyframes floatup { to { transform: translateY(-34px); opacity: 0; } }
+  .frenzy-note { font-family: "IBM Plex Mono", monospace; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--teal); min-height: 16px; margin-top: 10px; }
+  .rejuv { position: absolute; width: 42px; height: 42px; cursor: pointer; z-index: 6; }
+  .gens { display: grid; gap: 8px; }
+  .gen {
+    display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 4px 14px;
+    background: var(--surface); border: 1px solid var(--divider); border-radius: var(--radius);
+    padding: 12px 16px; cursor: pointer; min-height: 56px; text-align: left; color: var(--ink); width: 100%;
+  }
+  .gen:hover:not(:disabled) { background: var(--surface4); border-color: var(--brass-dim); }
+  .gen:disabled { opacity: .52; cursor: default; }
+  .gen .gname { font-family: "Limelight", serif; font-size: 15.5px; }
+  .gen .gsub { color: var(--ink50); font-family: "IBM Plex Mono", monospace; font-size: 11px; }
+  .gen .gcost { font-family: "IBM Plex Mono", monospace; font-size: 13px; color: var(--brass); text-align: right; }
+  .gen .gcount { font-family: "IBM Plex Mono", monospace; font-size: 11.5px; color: var(--ink70); text-align: right; }
+  .gen .gcost.cant { color: var(--ink50); }
+  .upg { border-color: var(--teal); }
+  .upg .gname { color: var(--teal); }
+  .game-foot { font-family: "IBM Plex Mono", monospace; font-size: 10.5px; color: var(--ink50); margin-top: 18px; letter-spacing: .08em; }
+
+  /* ── commissions ───────────────────────────────── */
+  .price-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(215px, 1fr)); gap: 12px; }
+  .price-card { background: var(--surface); border: 1px solid var(--divider); border-radius: var(--radius); padding: 24px 20px; }
+  .price-kind { font-family: "IBM Plex Mono", monospace; font-size: 10.5px; letter-spacing: .18em; text-transform: uppercase; color: var(--teal); margin-bottom: 10px; }
+  .price { font-family: "Limelight", serif; font-size: 32px; color: var(--brass); }
+  .price small { font-size: 14px; color: var(--ink50); font-family: "IBM Plex Mono", monospace; }
+  .price-card p { font-size: 13.5px; color: var(--ink70); margin-top: 8px; }
+  .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); border: 1px solid var(--divider); border-radius: var(--radius); margin-top: 30px; overflow: hidden; }
+  .step { padding: 18px 18px 16px; border-right: 1px solid var(--divider); }
   .step:last-child { border-right: none; }
-  .step .n { font-family: "Limelight", serif; color: var(--brass-dim); font-size: 14px; margin-bottom: 6px; }
-  .step .t { color: var(--paper); font-weight: 600; font-size: 14.5px; margin-bottom: 4px; }
-  .step p { font-size: 13px; color: var(--paper-dim); }
+  .step .t { color: var(--ink); font-weight: 600; font-size: 14px; margin-bottom: 3px; }
+  .step p { font-size: 12.5px; color: var(--ink70); }
 
-  /* support + contact */
-  .support-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 14px; }
-  .sup { background: var(--card); border: 1px solid var(--line-faint); padding: 26px 24px; display: flex; flex-direction: column; gap: 8px; }
-  .sup h3 { font-family: "Limelight", serif; font-size: 19px; letter-spacing: .05em; }
-  .sup .kind { font-family: "IBM Plex Mono", monospace; font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: var(--teal); }
-  .sup p { font-size: 14px; color: var(--paper-dim); flex: 1; }
-  .sup .go { font-family: "IBM Plex Mono", monospace; font-size: 12.5px; letter-spacing: .14em; text-transform: uppercase; color: var(--brass); }
-  .sup .go::after { content: " →"; }
+  /* ── support / contact ──────────────────────────── */
+  .support-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 12px; }
+  .sup { background: var(--surface); border: 1px solid var(--divider); border-radius: var(--radius); padding: 24px 22px; display: flex; flex-direction: column; gap: 8px; }
+  .sup h3 { font-family: "Limelight", serif; font-size: 18px; letter-spacing: .04em; }
+  .sup p { font-size: 13.5px; color: var(--ink70); flex: 1; }
+  .sup .go { font-family: "IBM Plex Mono", monospace; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--brass); display: inline-flex; align-items: center; gap: 6px; min-height: 44px; }
+  .sup .go .material-icons { font-size: 16px; }
+  .contact-box { text-align: center; max-width: 640px; margin: 0 auto; }
+  .contact-box h2 { font-family: "Limelight", serif; font-size: clamp(26px, 4.5vw, 40px); letter-spacing: .07em; margin-bottom: 10px; }
+  .contact-box p { color: var(--ink70); margin-bottom: 26px; }
+  .social-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+  .soc {
+    display: inline-flex; align-items: center; gap: 9px; min-height: 48px; padding: 0 18px;
+    border: 1px solid var(--divider); border-radius: var(--radius); background: var(--surface);
+    color: var(--ink70); font-family: "IBM Plex Mono", monospace; font-size: 12px; letter-spacing: .1em; text-transform: uppercase;
+  }
+  .soc:hover { color: var(--brass); border-color: var(--brass-dim); background: var(--surface4); }
+  .soc svg { width: 17px; height: 17px; fill: currentColor; }
 
-  .contact-box { text-align: center; max-width: 620px; margin: 0 auto; }
-  .contact-box h2 { font-family: "Limelight", serif; font-size: clamp(28px, 5vw, 44px); letter-spacing: .08em; margin-bottom: 12px; }
-  .contact-box p { color: var(--paper-dim); margin-bottom: 30px; }
-  .contact-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 14px; }
-
-  footer { padding: 48px 0 60px; text-align: center; color: var(--paper-faint); font-family: "IBM Plex Mono", monospace; font-size: 12px; letter-spacing: .08em; }
+  footer { padding: 44px 0 56px; text-align: center; color: var(--ink50); font-family: "IBM Plex Mono", monospace; font-size: 11.5px; letter-spacing: .08em; }
   footer .sig { color: var(--brass-dim); margin-top: 6px; }
 </style>
 </head>
@@ -127,9 +259,11 @@
 <div class="topbar">
   <div class="wrap">
     <a class="wordmark" href="#top">ALACRIPOSE</a>
-    <nav>
-      <a href="#published">Published</a>
-      <a href="#drive">Drive-only</a>
+    <nav aria-label="sections">
+      <a href="#published">Mods</a>
+      <a href="#drive">Drive drops</a>
+      <a href="#adult">18+</a>
+      <a href="#clicker">Soul urn</a>
       <a href="#commissions">Commissions</a>
       <a href="#contact">Contact</a>
     </nav>
@@ -138,275 +272,140 @@
 
 <header class="hero">
   <div class="wrap">
-    <span class="stamp">Deadlock modder — commissions open</span>
-    <h1>ALA<em>CRIOSE</em></h1>
-    <p class="tag mono">deadlock modder · anomalous entity · loves warm hugs</p>
-    <p class="pitch">
-      I make <strong>Deadlock skins, ports, HUD edits and sound mods</strong>.
-      Made in Blender, published free. 400k+ downloads across the catalog.
-    </p>
-    <div class="cta-row">
-      <a class="btn primary" href="#commissions">Commission a mod</a>
-      <a class="btn" href="#published">Published mods</a>
-      <a class="btn" href="#drive">Drive-only drops</a>
+    <div class="hero-grid">
+      <div>
+        <h1>ALA<em>CRIOSE</em></h1>
+        <p class="tag mono">deadlock modder · anomalous entity · loves warm hugs</p>
+        <p class="pitch">Deadlock <strong>skins, ports, HUD edits and sound mods</strong> — built in Blender, published free, 400k+ downloads. Most of my work comes word-of-mouth; this page is the direct route.</p>
+        <div class="cta-row">
+          <a class="btn primary" href="#commissions"><span class="material-icons" aria-hidden="true">brush</span>Commission a mod</a>
+          <a class="btn" href="#published"><span class="material-icons" aria-hidden="true">grid_view</span>Browse mods</a>
+        </div>
+      </div>
+      <div class="mosaic" aria-label="most downloaded mods">
+        <a href="https://gamebanana.com/mods/594818"><img src="assets/gbthumbs/594818.webp" alt="LeBron James Abrams hero card" loading="lazy"><span class="mosaic-cap">LeBron James Abrams · 144k</span></a>
+        <a href="https://gamebanana.com/mods/653836"><img src="assets/gbthumbs/653836.webp" alt="Kylo Ren Apollo hero card" loading="lazy"><span class="mosaic-cap">Kylo Ren BF2 Apollo · 35k</span></a>
+        <a href="https://gamebanana.com/mods/620626"><img src="assets/gbthumbs/620626.webp" alt="Ava-Headed Calico hero card" loading="lazy"><span class="mosaic-cap">Ava-Headed Calico · 15k</span></a>
+        <a href="https://gamebanana.com/mods/665822"><img src="assets/gbthumbs/665822.webp" alt="Sancho Apollo hero card" loading="lazy"><span class="mosaic-cap">Sancho · 22k</span></a>
+        <a href="https://gamebanana.com/mods/623942"><img src="assets/gbthumbs/623942.webp" alt="Tec-9 Haze hero card" loading="lazy"><span class="mosaic-cap">Tec-9 Haze · 16k</span></a>
+      </div>
     </div>
-    <div class="hero-stats">
-      <div><div class="num">30</div><div class="lbl">published mods</div></div>
-      <div><div class="num">28</div><div class="lbl">drive-only releases</div></div>
-      <div><div class="num">400k+</div><div class="lbl">total downloads</div></div>
-      <div><div class="num">$60+</div><div class="lbl">commission from</div></div>
+    <div class="hero-stats" role="list">
+      <div role="listitem"><div class="num">30</div><div class="lbl">published mods</div></div>
+      <div role="listitem"><div class="num">28</div><div class="lbl">drive-only drops</div></div>
+      <div role="listitem"><div class="num">400k+</div><div class="lbl">downloads</div></div>
+      <div role="listitem"><div class="num">$60+</div><div class="lbl">commissions from</div></div>
     </div>
   </div>
 </header>
 
 <section id="published">
   <div class="wrap">
-    <div class="sec-head"><span class="num">01</span><h2>Published</h2></div>
-    <p class="sec-sub">On GameBanana, mirrored on DeadlockSkins and installable via Deadlock Mod Manager. Every link goes to the real mod page.</p>
-
-    <div class="subhead">most downloaded</div>
-    <div class="mods">
-      <div class="mod">
-        <a class="name" href="https://gamebanana.com/mods/594818">LeBron James Abrams</a>
-        <div class="meta"><span class="dl">144k downloads</span><span>hero skin</span></div>
-        <p class="note">Abrams, but LeBron.</p>
-      </div>
-      <div class="mod">
-        <a class="name" href="https://gamebanana.com/mods/653836">Kylo Ren BF2 Apollo</a>
-        <div class="meta"><span class="dl">35k downloads</span><span>hero skin</span></div>
-        <p class="note">Battlefront II Kylo on Apollo.</p>
-      </div>
-      <div class="mod">
-        <a class="name" href="https://gamebanana.com/mods/665822">Sancho Mod (Apollo)</a>
-        <div class="meta"><span class="dl">22k downloads</span><span>hero skin</span></div>
-      </div>
-      <div class="mod">
-        <a class="name" href="https://gamebanana.com/mods/620626">Ava-Headed Calico</a>
-        <div class="meta"><span class="dl">15k downloads</span><span>hero skin</span></div>
-        <p class="note">Ava from Gloink, on Calico.</p>
-      </div>
-      <div class="mod">
-        <a class="name" href="https://gamebanana.com/mods/623942">Tec-9 bobbyakimbo Haze Refreshed</a>
-        <div class="meta"><span class="dl">16k downloads</span><span>hero skin</span></div>
-      </div>
-      <div class="mod">
-        <a class="name" href="https://gamebanana.com/mods/619131">Labubu Soul Container</a>
-        <div class="meta"><span class="dl">12k downloads</span><span>prop</span></div>
-        <p class="note">Commission for LGTK.</p>
-      </div>
+    <h2 class="sec">Published mods</h2>
+    <p class="sec-sub">On GameBanana, mirrored on DeadlockSkins, installable through Deadlock Mod Manager or Grimoire. Hover a card for details; every badge marks what's mine versus what I contributed to.</p>
+    <div class="chips" role="group" aria-label="filter mods">
+      <button class="chip" data-filter="all" aria-pressed="true">All</button>
+      <button class="chip" data-filter="skin" aria-pressed="false">Skins</button>
+      <button class="chip" data-filter="hud" aria-pressed="false">HUD · QoL</button>
+      <button class="chip" data-filter="sound" aria-pressed="false">Sound</button>
+      <button class="chip" data-filter="prop" aria-pressed="false">Props</button>
+      <button class="chip" data-filter="collab" aria-pressed="false">Collabs</button>
     </div>
-
-    <div class="subhead">skins &amp; ports</div>
-    <div class="mods">
-      <div class="mod"><a class="name" href="https://gamebanana.com/mods/641750">Lovander Haze skin</a>
-        <div class="meta"><span class="dl">6.7k</span><span>hero skin</span></div>
-        <p class="note">MasterManki7777's Lovander.</p></div>
-      <div class="mod"><a class="name" href="https://gamebanana.com/mods/632290">2 BONUS Haze Colors — Rainbow Pack</a>
-        <div class="meta"><span class="dl">5.2k</span><span>skin pack</span></div></div>
-      <div class="mod"><a class="name" href="https://gamebanana.com/mods/658752">Villince the Nargacuga as Apollo</a>
-        <div class="meta"><span class="dl">4k</span><span>hero skin</span></div></div>
-      <div class="mod"><a class="name" href="https://gamebanana.com/mods/695176">Sombra Wraith (Overwatch 2)</a>
-        <div class="meta"><span class="dl">2.8k</span><span>hero skin</span></div></div>
-      <div class="mod"><a class="name" href="https://gamebanana.com/mods/644930">Snicker's Community Hero Labs</a>
-        <div class="meta"><span class="dl">2.7k</span><span>skin pack</span></div></div>
-      <div class="mod"><a class="name" href="https://gamebanana.com/mods/626307">Glowing Jungle Creeps recolor</a>
-        <div class="meta"><span class="dl">2.6k</span><span>world</span></div></div>
-      <div class="mod"><a class="name" href="https://gamebanana.com/mods/632723">Ava Bee Costume</a>
-        <div class="meta"><span class="dl">1.4k</span><span>hero skin</span></div></div>
-      <div class="mod"><a class="name" href="https://gamebanana.com/mods/592991">Stars (OC) Minecraft Wrecker</a>
-        <div class="meta"><span class="dl">1.5k</span><span>hero skin</span></div></div>
-      <div class="mod"><a class="name" href="https://gamebanana.com/mods/687330">Sly Haze</a>
-        <div class="meta"><span class="dl">1.2k</span><span>hero skin</span></div></div>
-      <div class="mod"><a class="name" href="https://gamebanana.com/sounds/82432">COD Zombies SoE Soundtrack</a>
-        <div class="meta"><span class="dl">1.9k</span><span>sound</span></div>
-        <p class="note">Round-timer cues; BO3 composers credited.</p></div>
-      <div class="mod"><a class="name" href="https://gamebanana.com/mods/698733">Moa (Warframe) over Paradox</a>
-        <div class="meta"><span class="dl">617</span><span>hero skin</span></div></div>
-      <div class="mod"><a class="name" href="https://gamebanana.com/mods/697789">Blazion (Mega Blaziken) Infernus</a>
-        <div class="meta"><span class="dl">684</span><span>commission</span></div></div>
-      <div class="mod"><a class="name" href="https://gamebanana.com/mods/687431">Okina Matara Sinclair</a>
-        <div class="meta"><span class="dl">805</span><span>hero skin</span></div></div>
-      <div class="mod"><a class="name" href="https://gamebanana.com/mods/668772">Gamma Doppler Graves</a>
-        <div class="meta"><span class="dl">897</span><span>hero skin</span></div></div>
-      <div class="mod"><a class="name" href="https://gamebanana.com/mods/696578">Cloakless Pocket</a>
-        <div class="meta"><span class="dl">372</span><span>hero skin</span></div>
-        <p class="note">With/without scarf variants.</p></div>
-      <div class="mod"><a class="name" href="https://gamebanana.com/mods/692786">Ivy MASSIVE wingspan</a>
-        <div class="meta"><span class="dl">288</span><span>hero skin</span></div></div>
-      <div class="mod"><a class="name" href="https://gamebanana.com/mods/701952">Light mode Frutiger Aero Haze</a>
-        <div class="meta"><span class="dl">213</span><span>hero skin</span></div></div>
-    </div>
-
-    <div class="subhead">HUD · props · QoL · collabs</div>
-    <div class="mods">
-      <div class="mod"><a class="name" href="https://gamebanana.com/mods/675565">(OUTDATED) Minified Shop HUD</a>
-        <div class="meta"><span class="dl">869</span><span>HUD</span></div></div>
-      <div class="mod"><a class="name" href="https://gamebanana.com/mods/619268">Gun Turret McGinnis V2</a>
-        <div class="meta"><span class="dl">811</span><span>prop</span></div></div>
-      <div class="mod"><a class="name" href="https://gamebanana.com/mods/658752">Remove Cover Red X UI</a>
-        <div class="meta"><span class="dl">870</span><span>QoL</span></div></div>
-      <div class="mod"><a class="name" href="https://gamebanana.com/mods/686138">Dr Pepper Holliday barrel</a>
-        <div class="meta"><span class="dl">521</span><span>prop</span></div></div>
-      <div class="mod"><a class="name" href="https://gamebanana.com/mods/685208">Noir Kodak Tri-X 400</a>
-        <div class="meta"><span class="dl">126</span><span>post-fx</span></div></div>
-      <div class="mod"><a class="name" href="https://gamebanana.com/mods/624294">Neon Prime Overhaul</a>
-        <div class="meta"><span class="dl">2.3k</span><span>collab</span></div>
-        <p class="note">Community HUD. I did the NP coins.</p></div>
-      <div class="mod nsfx"><a class="name" href="https://gamebanana.com/mods/705887">EVIL A$$ DYLAN</a>
-        <div class="meta"><span class="dl">203</span><span class="badge-nsfw badge">nsfw</span></div></div>
-    </div>
+    <div class="mods" id="pubgrid"><!-- filled by JS from MODDATA --></div>
   </div>
 </section>
 
 <section id="drive">
   <div class="wrap">
-    <div class="sec-head"><span class="num">02</span><h2>Drive-only drops</h2></div>
-    <p class="sec-sub">Mods announced on X but never uploaded to GameBanana. Straight from my releases folder — each link opens the Drive file. Same VPKs I hand to clients.</p>
+    <h2 class="sec">Drive-only drops</h2>
+    <p class="sec-sub">Announced on X, never uploaded anywhere else. Straight from my releases folder. Previews are pulled from the VPK files themselves — the same way mod managers render them.</p>
+    <div class="mods" id="drivegrid"><!-- filled by JS --></div>
+  </div>
+</section>
 
-    <div class="subhead">hero skins</div>
-    <div class="mods">
-      <div class="mod"><a class="name" href="https://drive.google.com/file/d/11VUuTyj4_DcKWBxc7HgrAQmVr9-XYn9g/view">Mayu over The Doorman</a>
-        <div class="meta"><span>hero skin</span><span>42 files</span></div>
-        <p class="note">Full skin, cards, deagle.</p></div>
-      <div class="mod"><a class="name" href="https://drive.google.com/file/d/1XIyL_L7TXyXtyGDq90gjT15d1dVHlu06/view">Mayu v2</a>
-        <div class="meta"><span>hero skin</span><span>86 files</span></div></div>
-      <div class="mod"><a class="name" href="https://drive.google.com/file/d/1TNal6zvD9xkIOsLz1K3A3lNiaH_vqac2/view">Mayu hoodie</a>
-        <div class="meta"><span>hero skin</span></div></div>
-      <div class="mod"><a class="name" href="https://drive.google.com/file/d/1VHRbA75zR8uiKTMCdpeEmJsBZemkxYGk/view">Weiss over Apollo</a>
-        <div class="meta"><span>hero skin</span><span>43 files</span></div></div>
-      <div class="mod"><a class="name" href="https://drive.google.com/file/d/1DU_wU2p5ixOnAzYwx8gMU-kVr6QKK6mi/view">Limbus Company over Apollo</a>
-        <div class="meta"><span>hero skin</span><span>39 files</span></div></div>
-      <div class="mod"><a class="name" href="https://drive.google.com/file/d/1lMP_r5eEN-GwvjtT8O75vfU4fDNEjnHx/view">Moa (Warframe) over Paradox</a>
-        <div class="meta"><span>hero skin</span></div>
-        <p class="note">Older build of the GB release.</p></div>
-      <div class="mod"><a class="name" href="https://drive.google.com/file/d/1WAtOqduTa90tDn2HzHtdNAUrBfGTcuCY/view">Pit (Hades) over archer slot</a>
-        <div class="meta"><span>hero skin</span><span>106 files</span></div></div>
-      <div class="mod"><a class="name" href="https://drive.google.com/file/d/1yPUKa6gJunaePFdBd8kZm9XKFawt-t9T/view">Kinger (TADC) over Mirage</a>
-        <div class="meta"><span>hero skin</span></div></div>
-      <div class="mod"><a class="name" href="https://drive.google.com/file/d/16Em3TBg-TAaATdY9tlGw0MGaZH579S0W/view">Xenomorph over Drifter</a>
-        <div class="meta"><span>hero skin</span></div>
-        <p class="note">Model + desperation VO.</p></div>
-      <div class="mod"><a class="name" href="https://drive.google.com/file/d/1uqLnOsJUiirJ3zb4on75-9B10SngTIBB/view">RTL unicorn (Celeste)</a>
-        <div class="meta"><span>hero skin</span></div></div>
-      <div class="mod"><a class="name" href="https://drive.google.com/file/d/1iAPd8V91HkGk09VyDeTnn81Z6RIskmvZ/view">Werewolf swap (Silver)</a>
-        <div class="meta"><span>hero skin</span></div>
-        <p class="note">werewolf + transform models.</p></div>
-      <div class="mod"><a class="name" href="https://drive.google.com/file/d/1UMDVM2VioPW0MxQh2JUM2AqUr56VR9Pb/view">Cowboy Bebop Bebop</a>
-        <div class="meta"><span>hero skin</span></div></div>
-      <div class="mod"><a class="name" href="https://drive.google.com/file/d/1WhROL9UkiY5vd0PDwlbvn6Io0rCbMh8b/view">Gloink Queen over Viper</a>
-        <div class="meta"><span>hero skin</span><span>44 files</span></div></div>
-      <div class="mod"><a class="name" href="https://drive.google.com/file/d/1lgJr9ewEiG6WuxS3CBkhIuecfoE5EVir/view">Trunks (DBZ) over Rem</a>
-        <div class="meta"><span>hero skin</span><span>118 files</span></div></div>
-      <div class="mod"><a class="name" href="https://drive.google.com/file/d/1LivG6I1Y2I0x53ZCZ9p4sWQEnmUvH3LJ/view">Harlem Rose Ivy</a>
-        <div class="meta"><span>hero skin</span></div></div>
-      <div class="mod"><a class="name" href="https://drive.google.com/file/d/1EuPKtSb4iyNfRNQ_GySC2bBJFLd3zIsg/view">Harrier du Bois over Lash</a>
-        <div class="meta"><span>hero skin</span></div></div>
-      <div class="mod"><a class="name" href="https://drive.google.com/file/d/17UrGoCqa_hEo_MXso-a3jEyM72amFOF-/view">Okina Matara over Sinclair</a>
-        <div class="meta"><span>hero skin</span></div></div>
-      <div class="mod"><a class="name" href="https://drive.google.com/file/d/1szRtfsVvt8Hnee2W95QwmeUdJdrP5zdp/view">Villince over Apollo</a>
-        <div class="meta"><span>hero skin</span></div></div>
-      <div class="mod"><a class="name" href="https://drive.google.com/file/d/1hlM9CRD2_gySsNIk695wf-PjrbcRhVWI/view">Bookworm CU (Paige)</a>
-        <div class="meta"><span>hero skin</span></div></div>
-      <div class="mod"><a class="name" href="https://drive.google.com/file/d/1fNiFTZ_yuGrMrfpi_MREZ0Rl8ii93y5X/view">Trans flag bookworm tassel (Paige)</a>
-        <div class="meta"><span>hero skin</span></div></div>
-      <div class="mod"><a class="name" href="https://drive.google.com/file/d/1HwIrHiAg0zQ05lLSZ6gPLJjtXXwpbobn/view">Face swap Drifter</a>
-        <div class="meta"><span>hero skin</span></div></div>
-      <div class="mod"><a class="name" href="https://drive.google.com/file/d/1IOl9pTrgkmVX0OFaaxlF9YWLPiQXPBTm/view">Sly Haze creature variant</a>
-        <div class="meta"><span>hero skin</span></div></div>
+<section id="adult">
+  <div class="wrap">
+    <h2 class="sec">18+ drops</h2>
+    <p class="sec-sub">Adult content, Drive-only. Hidden until you confirm.</p>
+    <div id="nsfw-gate" role="dialog" aria-label="age confirmation">
+      <span class="material-icons" aria-hidden="true">lock</span>
+      <p>This section contains adult (NSFW) mods. Confirm you're 18 or older to reveal it.</p>
+      <button class="btn primary" id="nsfw-ok"><span class="material-icons" aria-hidden="true">key</span>I'm 18+</button>
     </div>
+    <div class="mods blurred" id="nsfwgrid" aria-hidden="true"><!-- filled by JS --></div>
+  </div>
+</section>
 
-    <div class="subhead">props · models · WIP</div>
-    <div class="mods">
-      <div class="mod"><a class="name" href="https://drive.google.com/file/d/1xO9vetez0n97FlJK7kdfi535ghSL1spV/view">Graf soul container</a>
-        <div class="meta"><span>prop</span></div>
-        <p class="note">Brown-fur cat accessory.</p></div>
-      <div class="mod"><a class="name" href="https://drive.google.com/file/d/1K9yIfhYRrsTUhMSm7DHz9sBzpuQRzO7T/view">Atlas Detective Abrams ult anim</a>
-        <div class="meta"><span>animation</span></div></div>
-      <div class="mod"><a class="name" href="https://drive.google.com/file/d/17PvsQlhWy6js10GXtc1bRpFdnZ19nB-h/view">Archer v2 model</a>
-        <div class="meta"><span>model</span></div></div>
-      <div class="mod"><a class="name" href="https://drive.google.com/file/d/16wSSIjPunzFR2SSd8Gg6GWxKKIW4Gdqp/view">Old Deadlock Vindicta</a>
-        <div class="meta"><span>restore</span></div></div>
-      <div class="mod"><a class="name" href="https://drive.google.com/file/d/1UEnyjN5VC3ojg6S2SvAg0LaR5wPP6w2D/view">Old Deadlock modern Ivy</a>
-        <div class="meta"><span>restore</span></div></div>
-      <div class="mod"><a class="name" href="https://drive.google.com/file/d/1O3oaimO2VC752xN3t2oEKj6IGLHAr6LQ/view">Victor WIP port</a>
-        <div class="meta"><span>WIP</span></div>
-        <p class="note">"yet brokenly ported on".</p></div>
-    </div>
-
-    <div class="subhead">18+ (drive only)</div>
-    <div class="mods">
-      <div class="mod nsfx"><a class="name" href="https://drive.google.com/file/d/1D_b-FKBXDmTtv6M_2qrDTG72aReUPRMG/view">Lovander horse</a>
-        <div class="meta"><span class="badge-nsfw badge">nsfw</span></div></div>
-      <div class="mod nsfx"><a class="name" href="https://drive.google.com/file/d/1kBHBwtqhr8S7ucXr_tVy5MYkR5gMRIPb/view">Punisher Abrams</a>
-        <div class="meta"><span class="badge-nsfw badge">nsfw</span></div></div>
-      <div class="mod nsfx"><a class="name" href="https://drive.google.com/file/d/1Wui7DOba2ADWrLlGoCgSwQDoXyf1NcuG/view">Lovander Venator</a>
-        <div class="meta"><span class="badge-nsfw badge">nsfw</span></div></div>
-      <div class="mod nsfx"><a class="name" href="https://drive.google.com/file/d/1zH6yAvjqr4afdLVsB0z2N5TJzrCCHxqN/view">Lovander Haze (old)</a>
-        <div class="meta"><span class="badge-nsfw badge">nsfw</span></div></div>
+<section id="clicker">
+  <div class="wrap">
+    <h2 class="sec">The soul urn</h2>
+    <p class="sec-sub">A little shrine while you're here. Tap the urn, gather souls, put the roster to work. Saves in your browser; progress keeps while you're away (capped at 8 hours).</p>
+    <div class="game">
+      <div class="orb-zone" id="orbzone">
+        <svg id="orb" viewBox="0 0 200 200" role="button" tabindex="0" aria-label="tap to gain souls">
+          <defs>
+            <radialGradient id="og" cx="50%" cy="42%" r="62%">
+              <stop offset="0%" stop-color="#f4dd9b"/>
+              <stop offset="45%" stop-color="#d1a437"/>
+              <stop offset="100%" stop-color="#6b5010"/>
+            </radialGradient>
+          </defs>
+          <circle cx="100" cy="100" r="88" fill="url(#og)" stroke="#3a2c0e" stroke-width="6"/>
+          <ellipse cx="100" cy="100" rx="88" ry="88" fill="none" stroke="#9a7a29" stroke-width="2" stroke-dasharray="4 10" opacity=".8"/>
+          <path d="M62 108 q38 30 76 0" fill="none" stroke="#3a2c0e" stroke-width="5" opacity=".55"/>
+          <circle cx="82" cy="82" r="10" fill="#f8ecc9" opacity=".55"/>
+        </svg>
+        <div class="souls-read" id="souls">0</div>
+        <div class="souls-rate" id="rate">0 souls/s · tap +1</div>
+        <div class="frenzy-note" id="frenzy"></div>
+      </div>
+      <div>
+        <div class="gens" id="gens"></div>
+        <p class="game-foot">autosaves every 30s · offline progress on return · a rejuvenator wanders by now and then</p>
+      </div>
     </div>
   </div>
 </section>
 
 <section id="commissions">
   <div class="wrap">
-    <div class="sec-head"><span class="num">03</span><h2>Commissions</h2></div>
-    <p class="sec-sub">DM me on X or Discord with your idea. I quote based on the actual work, not a rate card. Pinned info lives on my <a href="https://x.com/alacripose/status/2022605472264777808">X commission post</a>.</p>
-
+    <h2 class="sec">Commissions</h2>
+    <p class="sec-sub">DM me on X or Discord with the idea. I quote on the actual work, not a rate card. Rates are pinned on my <a href="https://x.com/alacripose/status/2022605472264777808">X commission post</a>.</p>
     <div class="price-grid">
-      <div class="price-card">
-        <div class="price-kind">skin mods</div>
-        <div class="price">$60–120</div>
-        <p>Full custom hero skin. Price moves with how much of it is from scratch.</p>
-      </div>
-      <div class="price-card">
-        <div class="price-kind">ports</div>
-        <div class="price">quote</div>
-        <p>Old Deadlock mods or assets from other games, onto a Deadlock hero.</p>
-      </div>
-      <div class="price-card">
-        <div class="price-kind">ability &amp; script mods</div>
-        <div class="price">quote</div>
-        <p>Hero scripting and ability rework work.</p>
-      </div>
-      <div class="price-card">
-        <div class="price-kind">sound &amp; texture</div>
-        <div class="price">cheaper</div>
-        <p>Soundtrack swaps, sound mods, texture recolors.</p>
-      </div>
+      <div class="price-card"><div class="price-kind">skin mods</div><div class="price">$60–120</div><p>Custom hero skin. Price moves with how much is from scratch.</p></div>
+      <div class="price-card"><div class="price-kind">ports</div><div class="price">quote</div><p>Old Deadlock mods or assets from other games, onto a hero.</p></div>
+      <div class="price-card"><div class="price-kind">ability &amp; script mods</div><div class="price">quote</div><p>Hero scripting and ability reworks, scoped per job.</p></div>
+      <div class="price-card"><div class="price-kind">sound &amp; texture</div><div class="price">cheaper</div><p>Soundtrack swaps, sound mods, texture recolors.</p></div>
     </div>
-
     <div class="steps">
-      <div class="step"><div class="n">01</div><div class="t">DM</div><p>Hero or port source, references, budget if you have one.</p></div>
-      <div class="step"><div class="n">02</div><div class="t">Quote</div><p>Fixed price and timeline.</p></div>
-      <div class="step"><div class="n">03</div><div class="t">Deposit</div><p>50% via Stripe. Slot locked.</p></div>
-      <div class="step"><div class="n">04</div><div class="t">Previews</div><p>You see progress and shape it with me.</p></div>
-      <div class="step"><div class="n">05</div><div class="t">Delivery</div><p>Files + install help, then the balance.</p></div>
+      <div class="step"><div class="t">DM</div><p>Hero or port source, references, budget if you have one.</p></div>
+      <div class="step"><div class="t">Quote</div><p>Fixed price and timeline.</p></div>
+      <div class="step"><div class="t">Deposit</div><p>50% via Stripe. Slot locked.</p></div>
+      <div class="step"><div class="t">Previews</div><p>You see progress and shape it with me.</p></div>
+      <div class="step"><div class="t">Delivery</div><p>Files + install help, then the balance.</p></div>
     </div>
   </div>
 </section>
 
 <section id="support">
   <div class="wrap">
-    <div class="sec-head"><span class="num">04</span><h2>Support</h2></div>
+    <h2 class="sec">Support</h2>
     <p class="sec-sub">Everything above is free and stays free. These keep the machine running.</p>
     <div class="support-grid">
       <div class="sup">
-        <span class="kind">membership</span>
         <h3>Alacripose Productions</h3>
         <p>Patreon tiers run from early access up to full custom-skin commissions and platinum statues.</p>
-        <a class="go" href="https://www.patreon.com/cw/Alacripose">Patreon</a>
+        <a class="go" href="https://www.patreon.com/cw/Alacripose">Patreon<span class="material-icons" aria-hidden="true">north_east</span></a>
       </div>
       <div class="sup">
-        <span class="kind">community</span>
         <h3>OpenLock Discord</h3>
-        <p>Community projects, modding help, where commissions usually start.</p>
-        <a class="go" href="https://discord.gg/3DpnhQNsFk">Join</a>
+        <p>Community projects, modding help, and where most commissions actually start.</p>
+        <a class="go" href="https://discord.gg/3DpnhQNsFk">Join<span class="material-icons" aria-hidden="true">north_east</span></a>
       </div>
       <div class="sup">
-        <span class="kind">subscribe</span>
         <h3>GameBanana</h3>
-        <p>Subscribe for day-one drops; points support the catalog.</p>
-        <a class="go" href="https://gamebanana.com/members/4462562">Subscribe</a>
+        <p>Subscribe for day-one drops; points support the catalog directly.</p>
+        <a class="go" href="https://gamebanana.com/members/4462562">Subscribe<span class="material-icons" aria-hidden="true">north_east</span></a>
       </div>
     </div>
   </div>
@@ -415,13 +414,14 @@
 <section id="contact" style="border-bottom: none;">
   <div class="wrap">
     <div class="contact-box">
-      <h2>FIND ME</h2>
+      <h2>Find me</h2>
       <p>Commissions by DM. Work-in-progress on stream. Tutorials when something needs fixing.</p>
-      <div class="contact-links">
-        <a class="btn primary" href="https://x.com/alacripose" target="_blank" rel="noopener">X</a>
-        <a class="btn" href="https://www.twitch.tv/alacripose" target="_blank" rel="noopener">Twitch</a>
-        <a class="btn" href="https://www.youtube.com/@alacripose" target="_blank" rel="noopener">YouTube</a>
-        <a class="btn" href="https://www.tiktok.com/@alacripose" target="_blank" rel="noopener">TikTok</a>
+      <div class="social-grid">
+        <a class="soc" href="https://x.com/alacripose" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M18.9 1.2h3.7l-8.1 9.3L24 22.8h-7.5l-5.9-7.7-6.7 7.7H.2l8.7-9.9L0 1.2h7.7l5.3 7 5.9-7zm-1.3 19.4h2L6.6 3.3H4.4l13.2 17.3z"/></svg>X</a>
+        <a class="soc" href="https://www.twitch.tv/alacripose" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M4 2 2 6v14h5v3h3l3-3h5l4-4V2H4zm16 13-3 3h-6l-3 3v-3H5V4h15v11zM12 7h2v6h-2V7zm6 0h2v6h-2V7z"/></svg>Twitch</a>
+        <a class="soc" href="https://www.youtube.com/@alacripose" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M23 7.9c-.3-1-1-1.8-2-2C19.2 5.4 12 5.4 12 5.4s-7.2 0-9 .5c-1 .2-1.7 1-2 2C.5 9.7.5 12 .5 12s0 2.3.5 4.1c.3 1 1 1.8 2 2 1.8.5 9 .5 9 .5s7.2 0 9-.5c1-.2 1.7-1 2-2 .5-1.8.5-4.1.5-4.1s0-2.3-.5-4.1zM9.8 15.3V8.7l6 3.3-6 3.3z"/></svg>YouTube</a>
+        <a class="soc" href="https://www.tiktok.com/@alacripose" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M16.6 3c.4 2.1 1.8 3.6 3.9 3.9v3c-1.5 0-2.9-.5-3.9-1.2v6.6c0 3.9-2.8 6.7-6.4 6.7-3.4 0-6-2.6-6-5.9 0-3.5 3-6.2 6.7-5.9v3.1c-1.9-.3-3.6 1-3.6 2.8 0 1.6 1.3 2.9 2.9 2.9 1.8 0 3.2-1.4 3.2-3.4V3h3.2z"/></svg>TikTok</a>
+        <a class="soc" href="https://gamebanana.com/members/4462562" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M17 2H7a5 5 0 0 0-5 5v10a5 5 0 0 0 5 5h10a5 5 0 0 0 5-5V7a5 5 0 0 0-5-5zm-8.5 6h7v2h-7V8zm0 4h7v2h-7v-2zm0 4h4.5v2H8.5v-2z"/></svg>GameBanana</a>
       </div>
     </div>
   </div>
@@ -434,5 +434,349 @@
   </div>
 </footer>
 
+<div id="pop" role="tooltip" aria-hidden="true">
+  <span class="go"><span class="material-icons" aria-hidden="true">open_in_new</span></span>
+  <img id="pop-img" alt="">
+  <div class="pbody">
+    <div class="pname" id="pop-name"></div>
+    <div class="pdesc" id="pop-desc"></div>
+    <div class="prow" id="pop-meta"></div>
+    <div class="credit" id="pop-credit"></div>
+  </div>
+</div>
+
+<script>
+/* ── catalog data ─────────────────────────────────────────────── */
+const PUB = [
+  {n:"LeBron James Abrams", gb:594818, img:"594818", cat:"skin", dl:"144k", d:"Abrams, but LeBron.", hero:"Abrams"},
+  {n:"Kylo Ren BF2 Apollo", gb:653836, img:"653836", cat:"skin", dl:"35k", d:"Battlefront II Kylo on Apollo.", hero:"Apollo"},
+  {n:"Sancho Mod", gb:665822, img:"665822", cat:"skin", dl:"22k", d:"Sancho on Apollo.", hero:"Apollo"},
+  {n:"Ava-Headed Calico", gb:620626, img:"620626", cat:"skin", dl:"15k", d:"Ava from Gloink, on Calico.", hero:"Calico"},
+  {n:"Tec-9 bobbyakimbo Haze", gb:623942, img:"623942", cat:"skin", dl:"16k", d:"Bobbyakimbo's Tec-9 fit on Haze.", hero:"Haze"},
+  {n:"Labubu Soul Container", gb:619131, img:"619131", cat:"prop", dl:"12k", d:"A Labubu trapped in the soul container. Commission for LGTK.", hero:"—", badge:"commission"},
+  {n:"Lovander Haze skin", gb:641750, img:"641750", cat:"collab", dl:"6.7k", d:"MasterManki7777's Lovander model, rigged and shaded by me.", hero:"Haze", badge:"collab", credit:"model: MasterManki7777"},
+  {n:"2 BONUS Haze Colors — Rainbow Pack", gb:632290, img:"632290", cat:"skin", dl:"5.2k", d:"Two extra Haze colorways for the Rainbow Heroes pack.", hero:"Haze"},
+  {n:"Villince the Nargacuga as Apollo", gb:658752, img:"658752", cat:"skin", dl:"4k", d:"Nargacuga on Apollo.", hero:"Apollo"},
+  {n:"Sombra Wraith (Overwatch 2)", gb:695176, img:"695176", cat:"skin", dl:"2.8k", d:"OW2 Sombra on Wraith.", hero:"Wraith"},
+  {n:"Snicker's Community Hero Labs", gb:644930, img:"644930", cat:"collab", dl:"2.7k", d:"Community collab pack — Knives, Operative, Vandal, Kali, Wrecker.", hero:"pack", badge:"collab", credit:"community pack"},
+  {n:"Glowing Jungle Creeps recolor", gb:626307, img:"626307", cat:"prop", dl:"2.6k", d:"Glowing neutrals.", hero:"world"},
+  {n:"COD Zombies SoE Soundtrack", gb:"sounds/82432", img:null, cat:"sound", dl:"1.9k", d:"Round-timer cues at 2/5/6/8/10 minutes. Extended randomized version planned.", hero:"sound", badge:"collab", credit:"music: Jack Wall, Brian Tuey, Kevin Sherwood (BO3)"},
+  {n:"Ava Bee Costume", gb:632723, img:"632723", cat:"skin", dl:"1.4k", d:"Bee costume Ava.", hero:"world"},
+  {n:"Stars (OC) Minecraft Wrecker", gb:592991, img:"592991", cat:"skin", dl:"1.5k", d:"Stars OC, Minecraft-styled, on Wrecker.", hero:"Wrecker"},
+  {n:"Sly Haze", gb:687330, img:"687330", cat:"skin", dl:"1.2k", d:"Sly Cooper-flavored Haze.", hero:"Haze"},
+  {n:"Okina Matara Sinclair", gb:687431, img:null, cat:"skin", dl:"805", d:"Touhou Okina Matara on Sinclair.", hero:"Sinclair"},
+  {n:"Gamma Doppler Graves", gb:668772, img:"668772", cat:"skin", dl:"897", d:"CS2 gamma-doppler finish on Graves.", hero:"Graves"},
+  {n:"Gun Turret McGinnis V2", gb:619268, img:"619268", cat:"prop", dl:"811", d:"Her gun, as a turret.", hero:"McGinnis"},
+  {n:"(OUTDATED) Minified Shop HUD", gb:675565, img:null, cat:"hud", dl:"869", d:"Trims tabs, blur and size out of the shop.", hero:"HUD"},
+  {n:"Moa (Warframe) over Paradox", gb:698733, img:"698733", cat:"skin", dl:"617", d:"Warframe Moa, full port.", hero:"Paradox"},
+  {n:"Blazion (Mega Blaziken) Infernus", gb:697789, img:"697789", cat:"skin", dl:"684", d:"Commission build.", hero:"Infernus", badge:"commission"},
+  {n:"Cloakless Pocket", gb:696578, img:"696578", cat:"skin", dl:"372", d:"Two variants: with and without the scarf.", hero:"Pocket"},
+  {n:"Ivy MASSIVE wingspan", gb:692786, img:"692786", cat:"skin", dl:"288", d:"Ivy, but the wingspan.", hero:"Ivy"},
+  {n:"Light mode Frutiger Aero Haze", gb:701952, img:"701952", cat:"skin", dl:"213", d:"Frutiger Aero pastel Haze.", hero:"Haze"},
+  {n:"Dr Pepper Holliday barrel", gb:686138, img:"686138", cat:"prop", dl:"521", d:"It's a Dr Pepper can. On Holliday's barrel.", hero:"Holliday"},
+  {n:"EVIL A$$ DYLAN", gb:705887, img:"705887", cat:"skin", dl:"203", d:"NSFW Drifter.", hero:"Drifter", badge:"nsfwx"},
+  {n:"Remove Cover Red X UI", gb:null, img:null, cat:"hud", dl:"870", d:"Kills the crosshair red-X that shows up behind cover. Listed on DeadlockSkins under my name.", hero:"QoL"},
+  {n:"Noir Kodak Tri-X 400", gb:685208, img:null, cat:"hud", dl:"126", d:"The game, shot on expired black-and-white stock. Grain included.", hero:"post-fx"},
+  {n:"Neon Prime Overhaul", gb:624294, img:"624294", cat:"collab", dl:"2.3k", d:"Community HUD restoring the Neon Prime look. I made the NP coins — punchable coin bags, SFX and particles.", hero:"HUD", badge:"collab", credit:"lead: Space Bear · shop: Taski Maiden · icons: Ivanov"},
+];
+const DRIVE = [
+  {n:"Mayu over The Doorman", id:"11VUuTyj4_DcKWBxc7HgrAQmVr9-XYn9g", img:"mayu", d:"Full PMMM Mayu skin — cards, deagle, hoodie body.", hero:"The Doorman"},
+  {n:"Mayu v2", id:"1XIyL_L7TXyXtyGDq90gjT15d1dVHlu06", img:"mayu_2", d:"Second pass with updated portrait cards.", hero:"The Doorman"},
+  {n:"Mayu hoodie", id:"1TNal6zvD9xkIOsLz1K3A3lNiaH_vqac2", img:"mayu_hoodie", d:"Hoodie variant of the body.", hero:"The Doorman"},
+  {n:"Weiss over Apollo", id:"1VHRbA75zR8uiKTMCdpeEmJsBZemkxYGk", img:"weiss", d:"Weiss skin with portrait cards.", hero:"Apollo"},
+  {n:"Limbus Company over Apollo", id:"1DU_wU2p5ixOnAzYwx8gMU-kVr6QKK6mi", img:"limbus", d:"Limbus Company outfit.", hero:"Apollo"},
+  {n:"Villince over Apollo", id:"1szRtfsVvt8Hnee2W95QwmeUdJdrP5zdp", img:"villince", d:"Villince with fencer-card portraits.", hero:"Apollo"},
+  {n:"Graf soul container", id:"1xO9vetez0n97FlJK7kdfi535ghSL1spV", img:"graf", d:"Brown-fur cat accessory for the soul container.", hero:"prop"},
+  {n:"Moa (Warframe) over Paradox", id:"1lMP_r5eEN-GwvjtT8O75vfU4fDNEjnHx", img:"moa_chrono", d:"Older build of the GB release.", hero:"Paradox"},
+  {n:"Pit (Hades) over archer slot", id:"1WAtOqduTa90tDn2HzHtdNAUrBfGTcuCY", img:"pit_talon", d:"Pit on the unreleased archer staging slot.", hero:"archer*"},
+  {n:"Kinger (TADC) over Mirage", id:"1yPUKa6gJunaePFdBd8kZm9XKFawt-t9T", img:"kinger_mirage", d:"Kinger with queen-body material variants.", hero:"Mirage"},
+  {n:"Xenomorph over Drifter", id:"16Em3TBg-TAaATdY9tlGw0MGaZH579S0W", img:"xenomorph", d:"Model swap plus desperation VO lines.", hero:"Drifter"},
+  {n:"RTL unicorn (Celeste)", id:"1uqLnOsJUiirJ3zb4on75-9B10SngTIBB", img:"rtl_unicorn", d:"Scary-bear-based unicorn.", hero:"Celeste"},
+  {n:"Werewolf swap (Silver)", id:"1iAPd8V91HkGk09VyDeTnn81Z6RIskmvZ", img:null, d:"Werewolf + transform models.", hero:"Silver"},
+  {n:"Cowboy Bebop Bebop", id:"1UMDVM2VioPW0MxQh2JUM2AqUr56VR9Pb", img:"bebop_delivery_service_ahze", d:"Delivery-service clothing on the man himself.", hero:"Bebop"},
+  {n:"Gloink Queen over Vyper", id:"1WhROL9UkiY5vd0PDwlbvn6Io0rCbMh8b", img:"gloink_queen_viper", d:"Gloink Queen rig.", hero:"Vyper"},
+  {n:"Trunks (DBZ) over Rem", id:"1lgJr9ewEiG6WuxS3CBkhIuecfoE5EVir", img:"trunks_rem", d:"Trunks on the familiar slot.", hero:"Rem"},
+  {n:"Harlem Rose Ivy", id:"1LivG6I1Y2I0x53ZCZ9p4sWQEnmUvH3LJ", img:"harlem_rose_ivy", d:"With tengu portrait cards.", hero:"Ivy"},
+  {n:"Harrier du Bois over Lash", id:"1EuPKtSb4iyNfRNQ_GySC2bBJFLd3zIsg", img:"harrier_du_bois_lash", d:"Tequila-sunset materials.", hero:"Lash"},
+  {n:"Okina Matara over Sinclair", id:"17UrGoCqa_hEo_MXso-a3jEyM72amFOF-", img:"matara_magician", d:"Magician-card portraits included.", hero:"Sinclair"},
+  {n:"Bookworm CU (Paige)", id:"1hlM9CRD2_gySsNIk695wf-PjrbcRhVWI", img:"bookworm_cu", d:"Bookworm outfit on Paige.", hero:"Paige"},
+  {n:"Trans flag bookworm tassel", id:"1fNiFTZ_yuGrMrfpi_MREZ0Rl8ii93y5X", img:"trans_flag_bookworm_tassle", d:"Trans-flag tassel for Paige's books.", hero:"Paige"},
+  {n:"Face swap Drifter", id:"1HwIrHiAg0zQ05lLSZ6gPLJjtXXwpbobn", img:"face_drifter", d:"Face texture swap.", hero:"Drifter"},
+  {n:"Sly Haze creature variant", id:"1IOl9pTrgkmVX0OFaaxlF9YWLPiQXPBTm", img:null, d:"Model-only variant.", hero:"Haze"},
+  {n:"Atlas Detective Abrams ult", id:"1K9yIfhYRrsTUhMSm7DHz9sBzpuQRzO7T", img:null, d:"Ult animation clip set.", hero:"Abrams"},
+  {n:"Archer v2 model", id:"17PvsQlhWy6js10GXtc1bRpFdnZ19nB-h", img:null, d:"Bare model swap.", hero:"archer*"},
+  {n:"Old Deadlock Vindicta", id:"16wSSIjPunzFR2SSd8Gg6GWxKKIW4Gdqp", img:null, d:"hornet_v3-era model restore.", hero:"Vindicta"},
+  {n:"Old Deadlock modern Ivy", id:"1UEnyjN5VC3ojg6S2SvAg0LaR5wPP6w2D", img:"old_deadlock_modern_ivy", d:"Old-build Ivy with modern textures.", hero:"Ivy"},
+  {n:"Victor WIP port", id:"1O3oaimO2VC752xN3t2oEKj6IGLHAr6LQ", img:"victor_yet_brokenly_ported_on", d:"'yet brokenly ported on' — as the file says.", hero:"Victor"},
+];
+const NSFW = [
+  {n:"Lovander horse", id:"1D_b-FKBXDmTtv6M_2qrDTG72aReUPRMG", img:null, d:"NSFW.", hero:"—"},
+  {n:"Punisher Abrams", id:"1kBHBwtqhr8S7ucXr_tVy5MYkR5gMRIPb", img:null, d:"NSFW.", hero:"Abrams"},
+  {n:"Lovander Venator", id:"1Wui7DOba2ADWrLlGoCgSwQDoXyf1NcuG", img:null, d:"NSFW.", hero:"Venator"},
+  {n:"Lovander Haze (old)", id:"1zH6yAvjqr4afdLVsB0z2N5TJzrCCHxqN", img:null, d:"NSFW. Old build.", hero:"Haze"},
+];
+const THUMB = { /* drive thumb map filled below */ };
+</script>
+<script>
+/* thumbnail index (drive mods) — real files on disk */
+const THUMB = {
+  "ava_headed_calico": "ava_headed_calico-e78dfb60.webp",
+  "bebop_delivery_service_ahze": "bebop_delivery_service_ahze-f64d8da3.webp",
+  "bookworm_cu": "bookworm_cu-6062923b.webp",
+  "face_drifter": "face_drifter-4b8e02bc.webp",
+  "gloink_queen_viper": "gloink_queen_viper-8dca8ed3.webp",
+  "graf": "graf-da192229.webp",
+  "grungelock_lite": "grungelock_lite-e5d5f9c0.webp",
+  "harlem_rose_ivy": "harlem_rose_ivy-dbdc17f0.webp",
+  "harrier_du_bois_lash": "harrier_du_bois_lash-1c9e7dbe.webp",
+  "jungle_creep_haze": "jungle_creep_haze-030d2f9f.webp",
+  "kinger_mirage": "kinger_mirage-48442686.webp",
+  "limbus": "limbus-f7a891b5.webp",
+  "matara_magician": "matara_magician-a8cf9548.webp",
+  "mayu": "mayu-07c5bb82.webp",
+  "mayu_2": "mayu_2-d2513ef0.webp",
+  "mayu_hoodie": "mayu_hoodie-a94135a6.webp",
+  "minecraft_archmother": "minecraft_archmother-7acaf167.webp",
+  "moa_chrono": "moa_chrono-ce6cf212.webp",
+  "old_deadlock_modern_ivy": "old_deadlock_modern_ivy-0d68b2a7.webp",
+  "pit_talon": "pit_talon-67f4726d.webp",
+  "rtl_unicorn": "rtl_unicorn-a60311ce.webp",
+  "tec-9_bobbyakimbo_haze": "tec-9_bobbyakimbo_haze-14762427.webp",
+  "trans_flag_bookworm_tassle": "trans_flag_bookworm_tassle-3b242aef.webp",
+  "trunks_rem": "trunks_rem-1591dc54.webp",
+  "victor_yet_brokenly_ported_on": "victor_yet_brokenly_ported_on-30c9be69.webp",
+  "villince": "villince-3688bc18.webp",
+  "weiss": "weiss-421a990b.webp",
+  "xenomorph": "xenomorph-8592d268.webp"
+};
+const THUMBFILE = d => d && THUMB[d] ? `assets/thumbs/${THUMB[d]}` : null;
+</script>
+<script>
+/* ── render the grids ─────────────────────────────────────────── */
+function card(m, kind) {
+  const gbUrl = m.gb ? `https://gamebanana.com/${typeof m.gb === "string" && m.gb.includes("/") ? m.gb : "mods/" + m.gb}` : null;
+  const drvUrl = m.id ? `https://drive.google.com/file/d/${m.id}/view` : null;
+  const url = gbUrl || drvUrl;
+  let img = null;
+  if (kind === "pub") img = m.img ? `assets/gbthumbs/${m.img}.webp` : null;
+  else img = THUMBFILE(m.img);
+  const badges = [];
+  if (m.badge === "collab") badges.push(`<span class="badge collab">collab</span>`);
+  if (m.badge === "commission") badges.push(`<span class="badge commission">commission</span>`);
+  if (m.badge === "nsfw" || kind === "nsfw") badges.push(`<span class="badge nsfw">18+</span>`);
+  const card = document.createElement("article");
+  card.className = "mod-card";
+  card.tabIndex = 0;
+  card.dataset.cat = m.cat || "skin";
+  card.dataset.pop = JSON.stringify({n:m.n, d:m.d, dl:m.dl||"", hero:m.hero||"", credit:m.credit||"", url, img});
+  card.innerHTML = `
+    ${badges.length ? `<div class="badges">${badges.join("")}</div>` : ""}
+    ${img ? `<img class="thumb" src="${img}" alt="${m.n} preview" loading="lazy">`
+           : `<div class="noimg">no preview</div>`}
+    <div class="cardbody">
+      <div class="mname">${m.n}</div>
+      <div class="mmeta">${m.dl ? `<span class="dl">${m.dl} dl</span>` : ""}<span>${m.hero}</span></div>
+    </div>`;
+  card.addEventListener("click", e => { if (url && !e.target.closest(".badge")) window.open(url, "_blank", "noopener"); });
+  return card;
+}
+const pubgrid = document.getElementById("pubgrid");
+PUB.forEach(m => { if (m.badge !== "nsfwx") pubgrid.appendChild(card(m, "pub")); });
+document.getElementById("drivegrid") && DRIVE.forEach(m => document.getElementById("drivegrid").appendChild(card(m, "drive")));
+document.getElementById("nsfwgrid") && NSFW.forEach(m => document.getElementById("nsfwgrid").appendChild(card(m, "nsfw")));
+
+/* filters */
+document.querySelectorAll(".chip").forEach(chip => {
+  chip.addEventListener("click", () => {
+    document.querySelectorAll(".chip").forEach(c => c.setAttribute("aria-pressed", "false"));
+    chip.setAttribute("aria-pressed", "true");
+    const f = chip.dataset.filter;
+    document.querySelectorAll("#pubgrid .mod-card").forEach(c => {
+      c.style.display = (f === "all" || c.dataset.cat === f) ? "" : "none";
+    });
+  });
+});
+
+/* ── preview popover ──────────────────────────────────────────── */
+const pop = document.getElementById("pop");
+const popImg = document.getElementById("pop-img");
+const popName = document.getElementById("pop-name");
+const popDesc = document.getElementById("pop-desc");
+const popMeta = document.getElementById("pop-meta");
+const popCredit = document.getElementById("pop-credit");
+let popPin = null;
+
+function showPop(el) {
+  const d = JSON.parse(el.dataset.pop);
+  popName.textContent = d.n;
+  popDesc.textContent = d.d;
+  popMeta.innerHTML = `${d.dl ? `<span>downloads <b>${d.dl}</b></span>` : ""}${d.hero ? `<span>slot <b>${d.hero}</b></span>` : ""}`;
+  popCredit.textContent = d.credit || "";
+  if (d.img) { popImg.src = d.img; popImg.style.display = ""; popImg.alt = d.n + " preview"; }
+  else popImg.style.display = "none";
+  pop.style.display = "block";
+  pop.setAttribute("aria-hidden", "false");
+  const r = el.getBoundingClientRect();
+  const pw = pop.offsetWidth, ph = pop.offsetHeight;
+  let x = r.left + r.width / 2 - pw / 2;
+  x = Math.max(10, Math.min(x, innerWidth - pw - 10));
+  let y = r.bottom + 10;
+  if (y + ph > innerHeight - 10) y = Math.max(10, r.top - ph - 10);
+  pop.style.left = x + "px";
+  pop.style.top = y + "px";
+  popPin = el;
+}
+function hidePop() { pop.style.display = "none"; pop.setAttribute("aria-hidden", "true"); popPin = null; }
+document.addEventListener("mouseover", e => {
+  const c = e.target.closest(".mod-card");
+  if (c && !c.closest(".blurred")) showPop(c);
+  else if (!e.target.closest("#pop") && popPin) hidePop();
+});
+document.addEventListener("focusin", e => {
+  const c = e.target.closest(".mod-card");
+  if (c && !c.closest(".blurred")) showPop(c);
+});
+document.addEventListener("scroll", hidePop, { passive: true });
+window.addEventListener("resize", hidePop);
+
+/* ── 18+ gate ──────────────────────────────────────────────────── */
+const gate = document.getElementById("nsfw-gate");
+const nsfwgrid = document.getElementById("nsfwgrid");
+if (localStorage.getItem("ageOk") === "1") revealNsfw();
+document.getElementById("nsfw-ok").addEventListener("click", revealNsfw);
+function revealNsfw() {
+  localStorage.setItem("ageOk", "1");
+  gate.style.display = "none";
+  nsfwgrid.classList.remove("blurred");
+  nsfwgrid.setAttribute("aria-hidden", "false");
+}
+
+/* ── soul urn clicker ───────────────────────────────────────────── */
+const GEN_DEFS = [
+  {k:"haze",      n:"Haze",          sub:"quietly farms souls",        cost:15,    rate:0.1},
+  {k:"bebop",     n:"Bebop",        sub:"bombs souls loose",         cost:100,   rate:1},
+  {k:"abrams",    n:"Abrams",       sub:"shoulder-checks for souls", cost:1100,  rate:8},
+  {k:"ivy",       n:"Ivy",          sub:"grows a soul garden",       cost:12000, rate:47},
+  {k:"krill",     n:"Mo & Krill",   sub:"burrow for buried souls",   cost:130000,rate:260},
+  {k:"kelvin",    n:"Kelvin",       sub:"freezes souls fresh",       cost:1400000,rate:1400},
+  {k:"vindicta",  n:"Vindicta",     sub:"snipes souls from range",   cost:20000000,rate:7800},
+  {k:"pocket",    n:"Pocket",       sub:"bags souls in his coat",    cost:330000000,rate:44000},
+  {k:"warden",    n:"Warden",       sub:"guards the soul vault",     cost:5100000000,rate:260000},
+  {k:"greytalon", n:"Grey Talon",   sub:"ascends beyond counting",   cost:75000000000,rate:1600000},
+];
+const SUFFIX = ["", "K", "M", "B", "T", "Qa", "Qi", "Sx", "Sp", "Oc", "No", "Dc"];
+const fmt = n => {
+  if (n < 1000) return Math.floor(n).toString();
+  let t = Math.floor(Math.log10(n) / 3);
+  t = Math.min(t, SUFFIX.length - 1);
+  const v = n / Math.pow(10, t * 3);
+  return (v >= 100 ? v.toFixed(0) : v.toFixed(1)) + SUFFIX[t];
+};
+const SAVE_KEY = "soulurn.v1";
+let S = { souls: 0, tap: 1, owned: {}, frenzyUntil: 0, lastSave: Date.now() };
+try {
+  const raw = localStorage.getItem(SAVE_KEY);
+  if (raw) {
+    const parsed = JSON.parse(raw);
+    Object.assign(S, parsed);
+    // offline progress, capped 8h
+    const away = Math.min((Date.now() - (parsed.lastSave || Date.now())) / 1000, 8 * 3600);
+    if (away > 5) S.souls += totalRate() * away;
+  }
+} catch (e) { /* fresh start */ }
+function totalRate() {
+  let r = 0;
+  GEN_DEFS.forEach(g => { r += (S.owned[g.k] || 0) * g.rate; });
+  return r;
+}
+function genCost(g) { return Math.ceil(g.cost * Math.pow(1.15, S.owned[g.k] || 0)); }
+const orbEl = document.getElementById("orb");
+const soulsEl = document.getElementById("souls");
+const rateEl = document.getElementById("rate");
+const frenzyEl = document.getElementById("frenzy");
+const gensEl = document.getElementById("gens");
+const zone = document.getElementById("orbzone");
+const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+function tapOrb(e) {
+  const gain = S.tap * (Date.now() < S.frenzyUntil ? 7 : 1);
+  S.souls += gain;
+  if (!reduceMotion) {
+    const fl = document.createElement("span");
+    fl.className = "float-n";
+    fl.textContent = "+" + fmt(gain);
+    const zr = zone.getBoundingClientRect();
+    fl.style.left = ((e && e.clientX ? e.clientX - zr.left : zr.width / 2) - 10) + "px";
+    fl.style.top = ((e && e.clientY ? e.clientY - zr.top : zr.height / 3)) + "px";
+    zone.appendChild(fl);
+    setTimeout(() => fl.remove(), 200);
+  }
+  render();
+}
+orbEl.addEventListener("click", tapOrb);
+orbEl.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); tapOrb(e); } });
+
+function buildGens() {
+  gensEl.innerHTML = "";
+  GEN_DEFS.forEach(g => {
+    const b = document.createElement("button");
+    b.className = "gen";
+    b.dataset.k = g.k;
+    b.innerHTML = `
+      <span><span class="gname">${g.n}</span><br><span class="gsub">${g.sub} · ${fmt(g.rate)}/s each</span></span>
+      <span><span class="gcost"></span><br><span class="gcount"></span></span>`;
+    b.addEventListener("click", () => {
+      const c = genCost(g);
+      if (S.souls >= c) { S.souls -= c; S.owned[g.k] = (S.owned[g.k] || 0) + 1; render(); }
+    });
+    gensEl.appendChild(b);
+  });
+}
+function render() {
+  soulsEl.textContent = fmt(S.souls);
+  const fr = Date.now() < S.frenzyUntil;
+  rateEl.textContent = fmt(totalRate() * (fr ? 7 : 1)) + " souls/s · tap +" + fmt(S.tap * (fr ? 7 : 1));
+  frenzyEl.textContent = fr ? "SOUL FRENZY ×7" : "";
+  document.querySelectorAll(".gen").forEach(b => {
+    const g = GEN_DEFS.find(x => x.k === b.dataset.k);
+    const c = genCost(g);
+    const afford = S.souls >= c;
+    b.disabled = !afford;
+    b.querySelector(".gcost").textContent = fmt(c);
+    b.querySelector(".gcost").className = "gcost" + (afford ? "" : " cant");
+    b.querySelector(".gcount").textContent = (S.owned[g.k] || 0) + " owned";
+  });
+}
+buildGens();
+render();
+setInterval(render, 200);
+setInterval(() => { localStorage.setItem(SAVE_KEY, JSON.stringify({...S, lastSave: Date.now()})); }, 30000);
+addEventListener("beforeunload", () => localStorage.setItem(SAVE_KEY, JSON.stringify({...S, lastSave: Date.now()})));
+
+/* wandering rejuvenator (golden-cookie class) */
+let rejuvTimer = null;
+function scheduleRejuv() {
+  clearTimeout(rejuvTimer);
+  rejuvTimer = setTimeout(spawnRejuv, 60000 + Math.random() * 120000);
+}
+function spawnRejuv() {
+  const r = document.createElement("img");
+  r.src = "data:image/svg+xml," + encodeURIComponent(`<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'><circle cx='20' cy='20' r='17' fill='#8fbdb0' stroke='#0e0c09' stroke-width='3'/><circle cx='15' cy='15' r='4' fill='#d6efe8'/></svg>`);
+  r.className = "rejuv";
+  r.alt = "rejuvenator — tap for a bonus";
+  r.style.left = (8 + Math.random() * 70) + "%";
+  r.style.top = (8 + Math.random() * 70) + "%";
+  r.tabIndex = 0;
+  r.addEventListener("click", () => {
+    if (Math.random() < 0.5) S.frenzyUntil = Date.now() + 25000;
+    else S.souls += Math.max(13, totalRate() * 40);
+    r.remove(); render(); scheduleRejuv();
+  });
+  zone.appendChild(r);
+  setTimeout(() => { r.remove(); }, 13000);
+  scheduleRejuv();
+}
+scheduleRejuv();
+</script>
 </body>
 </html>

@@ -1,0 +1,225 @@
+{
+ "archerv2.vpk": {
+  "cards": []
+ },
+ "atlas_detective_ult.vpk": {
+  "cards": []
+ },
+ "bebop_delivery_service_ahze.vpk": {
+  "cards": [
+   "previews/bebop_delivery_service_ahze/models/heroes_staging/bebop/materials/bebop_clothing_basecolor_png_f56cb1c5.png",
+   "previews/bebop_delivery_service_ahze/models/heroes_staging/bebop/materials/bebop_clothing_basecolor_png_f56cb1c5_png_b309fd4b.png",
+   "previews/bebop_delivery_service_ahze/models/heroes_staging/bebop/materials/bebop_clothing_vmat_g_tnprtransmissivecolor_ffc09775.png"
+  ]
+ },
+ "bookworm_cu.vpk": {
+  "cards": [
+   "previews/bookworm_cu/models/heroes_wip/bookworm/materials/bookworm_books_ao.png",
+   "previews/bookworm_cu/models/heroes_wip/bookworm/materials/bookworm_books_ao_png_617cc614.png",
+   "previews/bookworm_cu/models/heroes_wip/bookworm/materials/boomworm_trans_books_b.png"
+  ]
+ },
+ "face_drifter.vpk": {
+  "cards": [
+   "previews/face_drifter/models/heroes_wip/drifter/materials/face_color.png",
+   "previews/face_drifter/models/heroes_wip/drifter/materials/face_color_jpg_2532170e.png",
+   "previews/face_drifter/models/heroes_wip/drifter/materials/face_color_jpg_41c412.png"
+  ]
+ },
+ "flipped.vpk": {
+  "cards": []
+ },
+ "graf.vpk": {
+  "cards": [
+   "previews/graf/models/props_gameplay/soul_container/materials/ears.png",
+   "previews/graf/models/props_gameplay/soul_container/materials/ears_png_b2201f29.png",
+   "previews/graf/models/props_gameplay/soul_container/materials/yellow_fur.png"
+  ]
+ },
+ "gloink_queen_viper.vpk": {
+  "cards": [
+   "previews/gloink_queen_viper/models/heroes_staging/viper/materials/gloinkqueen_color_base_color.png",
+   "previews/gloink_queen_viper/models/heroes_staging/viper/materials/gloinkqueen_color_base_color_png_429d49d0.png",
+   "previews/gloink_queen_viper/models/heroes_staging/viper/materials/gloinkqueen_color_base_color_png_f1366aaa.png"
+  ]
+ },
+ "harlem_rose_ivy.vpk": {
+  "cards": [
+   "tengu_card_psd.png",
+   "tengu_card_psd.vtex",
+   "tengu_vertical_psd.png"
+  ]
+ },
+ "harrier_du_bois_lash.vpk": {
+  "cards": [
+   "previews/harrier_du_bois_lash/models/heroes_custom/pk_runner/materials/tequila_sunset_body_vmat_g_tnprtransmissivecolor_ffc09775.png",
+   "previews/harrier_du_bois_lash/models/heroes_custom/pk_runner/materials/tequila_sunset_body.png",
+   "previews/harrier_du_bois_lash/models/heroes_custom/pk_runner/materials/tequila_sunset_body_png_3b8e462a.png"
+  ]
+ },
+ "kinger_mirage.vpk": {
+  "cards": [
+   "previews/kinger_mirage/models/heroes_staging/mirage_v2/materials/body_queen_vmat_g_tcolor_2c43f492.png",
+   "previews/kinger_mirage/models/heroes_staging/mirage_v2/materials/body_queen_vmat_g_tcolor_e06d65e2.png",
+   "previews/kinger_mirage/models/heroes_staging/mirage_v2/materials/body_queen_vmat_g_tnprtransmissivecolor_16b5b15c.png"
+  ]
+ },
+ "limbus.vpk": {
+  "cards": [
+   "previews/limbus/models/heroes_wip/fencer/materials/limbus_body_vmat_g_tnprtransmissivecolor_ffc09775.png",
+   "previews/limbus/models/heroes_wip/fencer/materials/limbus_body_png_9739cc78_png_1545da8b.png",
+   "previews/limbus/models/heroes_wip/fencer/materials/limbus_body_png_9739cc78_png_94cf81b7.png"
+  ]
+ },
+ "matara_magician.vpk": {
+  "cards": [
+   "magician_card_psd.png",
+   "magician_vertical_psd.png"
+  ]
+ },
+ "mayu.vpk": {
+  "cards": [
+   "previews/mayu/models/heroes_wip/doorman_v2/materials/body_base_color_1001.png",
+   "previews/mayu/models/heroes_wip/doorman_v2/materials/body_base_color_1001_png_492c8d0a.png",
+   "previews/mayu/models/heroes_wip/doorman_v2/materials/body_base_color_1001_png_64ac4b0.png"
+  ]
+ },
+ "mayu_2.vpk": {
+  "cards": [
+   "doorman_card_psd.png",
+   "doorman_vertical_psd.png"
+  ]
+ },
+ "mayu_hoodie.vpk": {
+  "cards": [
+   "previews/mayu_hoodie/models/heroes_wip/doorman_v2/materials/body_base_color_1001.png",
+   "previews/mayu_hoodie/models/heroes_wip/doorman_v2/materials/body_base_color_1001_png_492c8d0a.png",
+   "previews/mayu_hoodie/models/heroes_wip/doorman_v2/materials/body_base_color_1001_png_64ac4b0.png"
+  ]
+ },
+ "moa_chrono.vpk": {
+  "cards": [
+   "previews/moa_chrono/models/heroes_staging/chrono/materials/moabody_n.png",
+   "previews/moa_chrono/models/heroes_staging/chrono/materials/moabody_n_png_57f52837.png",
+   "previews/moa_chrono/models/heroes_staging/chrono/materials/moabody_d.png"
+  ]
+ },
+ "pit_talon.vpk": {
+  "cards": [
+   "previews/pit_talon/models/heroes_staging/archer/materials/def_pit_001_col_png_d30c4b88.png",
+   "previews/pit_talon/models/heroes_staging/archer/materials/def_pit_001_col_png_ad444a6f.png",
+   "previews/pit_talon/models/heroes_staging/archer/materials/def_pit_002_col_png_5d2e772b.png"
+  ]
+ },
+ "rtl_unicorn.vpk": {
+  "cards": [
+   "previews/rtl_unicorn/models/heroes_wip/unicorn/materials/t_f_med_scareybeary_body_d.png",
+   "previews/rtl_unicorn/models/heroes_wip/unicorn/materials/t_f_med_scareybeary_body_d_png_4ae441d8.png",
+   "previews/rtl_unicorn/models/heroes_wip/unicorn/materials/t_f_med_scareybeary_body_d_png_6168cfda.png"
+  ]
+ },
+ "sly_haze.vpk": {
+  "cards": []
+ },
+ "sly_haze_creature.vpk": {
+  "cards": []
+ },
+ "weiss.vpk": {
+  "cards": [
+   "previews/weiss/models/heroes_wip/fencer/materials/weiss_body_png_69cce0da.png",
+   "previews/weiss/models/heroes_wip/fencer/materials/weiss_body_png_f16ad2cb.png",
+   "previews/weiss/models/heroes_wip/fencer/materials/weiss_body_png_665cf754.png"
+  ]
+ },
+ "xenomorph.vpk": {
+  "cards": [
+   "previews/xenomorph/models/heroes_wip/drifter/materials/body_vmat_g_tnprtransmissivecolor_ffc09775.png",
+   "previews/xenomorph/models/heroes_wip/drifter/materials/t_m_med_kepler_body_d_png_4e3a1c0b.png",
+   "previews/xenomorph/models/heroes_wip/drifter/materials/t_m_med_kepler_body_d_png_5cde7e5f.png"
+  ]
+ },
+ "old_vindicta.vpk": {
+  "cards": []
+ },
+ "old_deadlock_modern_ivy.vpk": {
+  "cards": [
+   "previews/old_deadlock_modern_ivy/models/heroes_staging/tengu/tengu_v2/materials/ivy_bodyv3_color.png",
+   "previews/old_deadlock_modern_ivy/models/heroes_staging/tengu/tengu_v2/materials/ivy_body_color.png",
+   "previews/old_deadlock_modern_ivy/models/heroes_staging/tengu/tengu_v2/materials/ivy_body_color_png_128ce3a5.png"
+  ]
+ },
+ "trunks_rem.vpk": {
+  "cards": [
+   "previews/trunks_rem/models/heroes_wip/familiar/materials/eyebrows_vmat_g_tcolor_c4f034d.png",
+   "previews/trunks_rem/models/heroes_wip/familiar/materials/eyebrows_vmat_g_tnprtransmissivecolor_d61dcbff.png",
+   "previews/trunks_rem/models/heroes_wip/familiar/materials/eyes_1_vmat_g_tnprtransmissivecolor_7a366fba.png"
+  ]
+ },
+ "victor_yet_brokenly_ported_on.vpk": {
+  "cards": [
+   "frank_card_psd.png",
+   "frank_card_psd.vtex",
+   "frank_vertical_psd.png"
+  ]
+ },
+ "villince.vpk": {
+  "cards": [
+   "fencer_card_psd.png",
+   "fencer_vertical_psd.png"
+  ]
+ },
+ "noir-kodak-trix-400.vpk": {
+  "cards": []
+ },
+ "grungelock_lite.vpk": {
+  "cards": [
+   "previews/grungelock_lite/materials/asphalt/asphalt_road_01b_color.png",
+   "previews/grungelock_lite/materials/asphalt/asphalt_road_01b_color_png_3558acb9.png",
+   "previews/grungelock_lite/materials/asphalt/asphalt_road_01b_color_png_d1db4f08.png"
+  ]
+ },
+ "minecraft_archmother.vpk": {
+  "cards": [
+   "previews/minecraft_archmother/models/npc/patron_sapphire/materials/dark_prismarine_vmat_g_tcolor_7a77ebf.png",
+   "previews/minecraft_archmother/models/npc/patron_sapphire/materials/blackstone_top_vmat_g_tnprtransmissivecolor_ffc09775.png",
+   "previews/minecraft_archmother/models/npc/patron_sapphire/materials/blackstone_vmat_g_tnprtransmissivecolor_ffc09775.png"
+  ]
+ },
+ "gun_turret_mcginnis_v2.vpk": {
+  "cards": []
+ },
+ "jungle_creep_haze.vpk": {
+  "cards": [
+   "previews/jungle_creep_haze/models/heroes_staging/haze/materials/drain_neutral_01_color.png",
+   "previews/jungle_creep_haze/models/heroes_staging/haze/materials/drain_neutral_01_color_png_33222715.png",
+   "previews/jungle_creep_haze/models/heroes_staging/haze/materials/drain_neutral_01_color_png_338539f7.png"
+  ]
+ },
+ "trans_flag_bookworm_tassle.vpk": {
+  "cards": [
+   "previews/trans_flag_bookworm_tassle/models/heroes_wip/bookworm/materials/bookworm_books_ao.png",
+   "previews/trans_flag_bookworm_tassle/models/heroes_wip/bookworm/materials/bookworm_books_ao_png_617cc614.png",
+   "previews/trans_flag_bookworm_tassle/models/heroes_wip/bookworm/materials/boomworm_trans_books_b.png"
+  ]
+ },
+ "tec-9_bobbyakimbo_haze.vpk": {
+  "cards": [
+   "previews/tec-9_bobbyakimbo_haze/models/heroes_staging/haze/materials/tec9_vmat_g_tcolor_14ebb63c.png",
+   "previews/tec-9_bobbyakimbo_haze/models/heroes_staging/haze/materials/tec9_vmat_g_tnprtransmissivecolor_ffc09775.png",
+   "previews/tec-9_bobbyakimbo_haze/models/heroes_staging/haze/materials/tec9_vmat_g_tambientocclusion_9782fd5c.png"
+  ]
+ },
+ "cloakless_pocket_no_scarf.vpk": {
+  "cards": []
+ },
+ "cloakless_pocket_with_scarf.vpk": {
+  "cards": []
+ },
+ "ava_headed_calico.vpk": {
+  "cards": [
+   "nano_card_psd.png",
+   "nano_card_psd.vtex",
+   "nano_vertical_psd.png"
+  ]
+ }
+}
