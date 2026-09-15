@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>alacripose — Deadlock mods</title>
+<meta name="description" content="Deadlock skins, ports, HUD and sound mods by alacripose. 30 published, 28 more on Drive. Commissions open.">
+<meta property="og:title" content="alacripose — Deadlock mods">
+<meta property="og:description" content="Deadlock skins, ports, HUD and sound mods. Commissions open.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='14' fill='%23120f0b' stroke='%23d1a437' stroke-width='2'/%3E%3Ccircle cx='16' cy='16' r='5' fill='%23d1a437'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Limelight&family=Bitter:wght@300;400;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0e0c09; --bg2: #14110c;
+    --card: #1a150e; --card2: #211a11;
+    --paper: #eadfc4; --paper-dim: #c9bb9a; --paper-faint: #8f8367;
+    --brass: #d1a437; --brass-dim: #9a7a29;
+    --teal: #8fbdb0; --red: #c25b4e;
+    --line: rgba(209, 164, 55, .28); --line-faint: rgba(209, 164, 55, .14);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    * { animation: none !important; transition: none !important; }
+  }
+  body {
+    background: var(--bg); color: var(--paper);
+    font-family: "Bitter", Georgia, serif; font-size: 17px; line-height: 1.6;
+  }
+  ::selection { background: var(--brass); color: var(--bg); }
+  .wrap { max-width: 1060px; margin: 0 auto; padding: 0 24px; }
+  .mono { font-family: "IBM Plex Mono", monospace; }
+
+  .topbar {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(14,12,9,.93); backdrop-filter: blur(6px);
+    border-bottom: 1px solid var(--line-faint);
+  }
+  .topbar .wrap { display: flex; align-items: center; justify-content: space-between; height: 58px; }
+  .wordmark { font-family: "Limelight", serif; color: var(--brass); letter-spacing: .18em; font-size: 17px; }
+  nav { display: flex; gap: 26px; }
+  nav a { font-family: "IBM Plex Mono", monospace; font-size: 12.5px; letter-spacing: .14em; text-transform: uppercase; color: var(--paper-dim); }
+  nav a:hover { color: var(--brass); }
+  @media (max-width: 640px) { nav { display: none; } }
+
+  header.hero { padding: 80px 0 60px; border-bottom: 1px solid var(--line-faint);
+    background: radial-gradient(ellipse 80% 60% at 50% -10%, rgba(209,164,55,.09), transparent), linear-gradient(180deg, var(--bg2), var(--bg)); }
+  .stamp { display: inline-block; font-family: "IBM Plex Mono", monospace; font-size: 11px; letter-spacing: .22em; text-transform: uppercase; color: var(--brass); border: 1px solid var(--line); padding: 7px 14px; transform: rotate(-1.2deg); }
+  h1 { font-family: "Limelight", serif; font-size: clamp(48px, 9vw, 88px); letter-spacing: .06em; line-height: 1.05; margin: 24px 0 8px; text-shadow: 0 2px 0 rgba(0,0,0,.6); }
+  h1 em { font-style: normal; color: var(--brass); }
+  .tag { color: var(--paper-dim); font-family: "IBM Plex Mono", monospace; font-size: 13.5px; }
+  .pitch { max-width: 580px; margin: 24px 0 30px; font-size: 20px; font-weight: 300; }
+  .pitch strong { color: var(--brass); font-weight: 600; }
+  .cta-row { display: flex; flex-wrap: wrap; gap: 14px; }
+  .btn { display: inline-flex; align-items: center; gap: 10px; font-family: "IBM Plex Mono", monospace; font-size: 13px; letter-spacing: .12em; text-transform: uppercase; padding: 15px 26px; border: 1px solid var(--brass); color: var(--brass); position: relative; }
+  .btn.primary { background: var(--brass); color: #14110c; }
+  .btn.primary:hover { background: var(--paper); border-color: var(--paper); }
+  .btn:not(.primary):hover { background: rgba(209,164,55,.12); }
+  .hero-stats { margin-top: 48px; display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1px; background: var(--line-faint); border: 1px solid var(--line-faint); }
+  .hero-stats > div { background: var(--bg); padding: 18px 20px; }
+  .hero-stats .num { font-family: "Limelight", serif; font-size: 30px; color: var(--brass); }
+  .hero-stats .lbl { font-family: "IBM Plex Mono", monospace; font-size: 10.5px; letter-spacing: .18em; text-transform: uppercase; color: var(--paper-faint); margin-top: 4px; }
+
+  section { padding: 72px 0; border-bottom: 1px solid var(--line-faint); }
+  .sec-head { display: flex; align-items: baseline; gap: 18px; margin-bottom: 10px; }
+  .sec-head h2 { font-family: "Limelight", serif; font-size: clamp(28px, 4.5vw, 42px); letter-spacing: .08em; }
+  .sec-head .num { font-family: "IBM Plex Mono", monospace; color: var(--brass-dim); font-size: 14px; }
+  .sec-sub { color: var(--paper-dim); max-width: 640px; margin-bottom: 36px; font-size: 16px; }
+  a { color: var(--teal); text-decoration: none; }
+  a:hover { color: var(--brass); }
+
+  /* catalog table — dense, real links */
+  .mods { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 12px; }
+  .mod { display: flex; flex-direction: column; gap: 4px; background: var(--card); border: 1px solid var(--line-faint); padding: 16px 18px 14px; }
+  .mod:hover { border-color: var(--line); }
+  .mod a.name { font-family: "Limelight", serif; font-size: 17px; color: var(--paper); letter-spacing: .02em; }
+  .mod a.name:hover { color: var(--brass); }
+  .mod .meta { font-family: "IBM Plex Mono", monospace; font-size: 11.5px; color: var(--paper-faint); display: flex; gap: 12px; flex-wrap: wrap; }
+  .mod .meta .dl { color: var(--brass); }
+  .mod .note { font-size: 13.5px; color: var(--paper-dim); }
+  .mod.nsfx { border-color: rgba(194, 91, 78, .25); }
+  .mod.nsfx .badge-nsfw { color: var(--red); border-color: rgba(194,91,78,.4); }
+
+  .badge { display: inline-block; padding: 2px 8px; border: 1px solid var(--line); color: var(--brass-dim); font-size: 10px; letter-spacing: .14em; text-transform: uppercase; font-family: "IBM Plex Mono", monospace; }
+
+  .subhead { font-family: "IBM Plex Mono", monospace; font-size: 12px; letter-spacing: .2em; text-transform: uppercase; color: var(--brass); margin: 40px 0 16px; }
+  .subhead:first-child { margin-top: 0; }
+
+  /* pricing */
+  .price-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 14px; }
+  .price-card { background: var(--card); border: 1px solid var(--line-faint); padding: 26px 22px; }
+  .price-kind { font-family: "IBM Plex Mono", monospace; font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: var(--teal); margin-bottom: 12px; }
+  .price { font-family: "Limelight", serif; font-size: 36px; color: var(--brass); letter-spacing: .04em; }
+  .price small { font-size: 15px; color: var(--paper-faint); font-family: "IBM Plex Mono", monospace; }
+  .price-card p { font-size: 13.5px; color: var(--paper-dim); margin-top: 10px; }
+
+  .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 0; border: 1px solid var(--line-faint); margin-top: 36px; }
+  .step { padding: 20px 20px 18px; border-right: 1px solid var(--line-faint); }
+  .step:last-child { border-right: none; }
+  .step .n { font-family: "Limelight", serif; color: var(--brass-dim); font-size: 14px; margin-bottom: 6px; }
+  .step .t { color: var(--paper); font-weight: 600; font-size: 14.5px; margin-bottom: 4px; }
+  .step p { font-size: 13px; color: var(--paper-dim); }
+
+  /* support + contact */
+  .support-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 14px; }
+  .sup { background: var(--card); border: 1px solid var(--line-faint); padding: 26px 24px; display: flex; flex-direction: column; gap: 8px; }
+  .sup h3 { font-family: "Limelight", serif; font-size: 19px; letter-spacing: .05em; }
+  .sup .kind { font-family: "IBM Plex Mono", monospace; font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: var(--teal); }
+  .sup p { font-size: 14px; color: var(--paper-dim); flex: 1; }
+  .sup .go { font-family: "IBM Plex Mono", monospace; font-size: 12.5px; letter-spacing: .14em; text-transform: uppercase; color: var(--brass); }
+  .sup .go::after { content: " →"; }
+
+  .contact-box { text-align: center; max-width: 620px; margin: 0 auto; }
+  .contact-box h2 { font-family: "Limelight", serif; font-size: clamp(28px, 5vw, 44px); letter-spacing: .08em; margin-bottom: 12px; }
+  .contact-box p { color: var(--paper-dim); margin-bottom: 30px; }
+  .contact-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 14px; }
+
+  footer { padding: 48px 0 60px; text-align: center; color: var(--paper-faint); font-family: "IBM Plex Mono", monospace; font-size: 12px; letter-spacing: .08em; }
+  footer .sig { color: var(--brass-dim); margin-top: 6px; }
+</style>
+</head>
+<body id="top">
+
+<div class="topbar">
+  <div class="wrap">
+    <a class="wordmark" href="#top">ALACRIPOSE</a>
+    <nav>
+      <a href="#published">Published</a>
+      <a href="#drive">Drive-only</a>
+      <a href="#commissions">Commissions</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</div>
+
+<header class="hero">
+  <div class="wrap">
+    <span class="stamp">Deadlock modder — commissions open</span>
+    <h1>ALA<em>CRIOSE</em></h1>
+    <p class="tag mono">deadlock modder · anomalous entity · loves warm hugs</p>
+    <p class="pitch">
+      I make <strong>Deadlock skins, ports, HUD edits and sound mods</strong>.
+      Made in Blender, published free. 400k+ downloads across the catalog.
+    </p>
+    <div class="cta-row">
+      <a class="btn primary" href="#commissions">Commission a mod</a>
+      <a class="btn" href="#published">Published mods</a>
+      <a class="btn" href="#drive">Drive-only drops</a>
+    </div>
+    <div class="hero-stats">
+      <div><div class="num">30</div><div class="lbl">published mods</div></div>
+      <div><div class="num">28</div><div class="lbl">drive-only releases</div></div>
+      <div><div class="num">400k+</div><div class="lbl">total downloads</div></div>
+      <div><div class="num">$60+</div><div class="lbl">commission from</div></div>
+    </div>
+  </div>
+</header>
+
+<section id="published">
+  <div class="wrap">
+    <div class="sec-head"><span class="num">01</span><h2>Published</h2></div>
+    <p class="sec-sub">On GameBanana, mirrored on DeadlockSkins and installable via Deadlock Mod Manager. Every link goes to the real mod page.</p>
+
+    <div class="subhead">most downloaded</div>
+    <div class="mods">
+      <div class="mod">
+        <a class="name" href="https://gamebanana.com/mods/594818">LeBron James Abrams</a>
+        <div class="meta"><span class="dl">144k downloads</span><span>hero skin</span></div>
+        <p class="note">Abrams, but LeBron.</p>
+      </div>
+      <div class="mod">
+        <a class="name" href="https://gamebanana.com/mods/653836">Kylo Ren BF2 Apollo</a>
+        <div class="meta"><span class="dl">35k downloads</span><span>hero skin</span></div>
+        <p class="note">Battlefront II Kylo on Apollo.</p>
+      </div>
+      <div class="mod">
+        <a class="name" href="https://gamebanana.com/mods/665822">Sancho Mod (Apollo)</a>
+        <div class="meta"><span class="dl">22k downloads</span><span>hero skin</span></div>
+      </div>
+      <div class="mod">
+        <a class="name" href="https://gamebanana.com/mods/620626">Ava-Headed Calico</a>
+        <div class="meta"><span class="dl">15k downloads</span><span>hero skin</span></div>
+        <p class="note">Ava from Gloink, on Calico.</p>
+      </div>
+      <div class="mod">
+        <a class="name" href="https://gamebanana.com/mods/623942">Tec-9 bobbyakimbo Haze Refreshed</a>
+        <div class="meta"><span class="dl">16k downloads</span><span>hero skin</span></div>
+      </div>
+      <div class="mod">
+        <a class="name" href="https://gamebanana.com/mods/619131">Labubu Soul Container</a>
+        <div class="meta"><span class="dl">12k downloads</span><span>prop</span></div>
+        <p class="note">Commission for LGTK.</p>
+      </div>
+    </div>
+
+    <div class="subhead">skins &amp; ports</div>
+    <div class="mods">
+      <div class="mod"><a class="name" href="https://gamebanana.com/mods/641750">Lovander Haze skin</a>
+        <div class="meta"><span class="dl">6.7k</span><span>hero skin</span></div>
+        <p class="note">MasterManki7777's Lovander.</p></div>
+      <div class="mod"><a class="name" href="https://gamebanana.com/mods/632290">2 BONUS Haze Colors — Rainbow Pack</a>
+        <div class="meta"><span class="dl">5.2k</span><span>skin pack</span></div></div>
+      <div class="mod"><a class="name" href="https://gamebanana.com/mods/658752">Villince the Nargacuga as Apollo</a>
+        <div class="meta"><span class="dl">4k</span><span>hero skin</span></div></div>
+      <div class="mod"><a class="name" href="https://gamebanana.com/mods/695176">Sombra Wraith (Overwatch 2)</a>
+        <div class="meta"><span class="dl">2.8k</span><span>hero skin</span></div></div>
+      <div class="mod"><a class="name" href="https://gamebanana.com/mods/644930">Snicker's Community Hero Labs</a>
+        <div class="meta"><span class="dl">2.7k</span><span>skin pack</span></div></div>
+      <div class="mod"><a class="name" href="https://gamebanana.com/mods/626307">Glowing Jungle Creeps recolor</a>
+        <div class="meta"><span class="dl">2.6k</span><span>world</span></div></div>
+      <div class="mod"><a class="name" href="https://gamebanana.com/mods/632723">Ava Bee Costume</a>
+        <div class="meta"><span class="dl">1.4k</span><span>hero skin</span></div></div>
+      <div class="mod"><a class="name" href="https://gamebanana.com/mods/592991">Stars (OC) Minecraft Wrecker</a>
+        <div class="meta"><span class="dl">1.5k</span><span>hero skin</span></div></div>
+      <div class="mod"><a class="name" href="https://gamebanana.com/mods/687330">Sly Haze</a>
+        <div class="meta"><span class="dl">1.2k</span><span>hero skin</span></div></div>
+      <div class="mod"><a class="name" href="https://gamebanana.com/sounds/82432">COD Zombies SoE Soundtrack</a>
+        <div class="meta"><span class="dl">1.9k</span><span>sound</span></div>
+        <p class="note">Round-timer cues; BO3 composers credited.</p></div>
+      <div class="mod"><a class="name" href="https://gamebanana.com/mods/698733">Moa (Warframe) over Paradox</a>
+        <div class="meta"><span class="dl">617</span><span>hero skin</span></div></div>
+      <div class="mod"><a class="name" href="https://gamebanana.com/mods/697789">Blazion (Mega Blaziken) Infernus</a>
+        <div class="meta"><span class="dl">684</span><span>commission</span></div></div>
+      <div class="mod"><a class="name" href="https://gamebanana.com/mods/687431">Okina Matara Sinclair</a>
+        <div class="meta"><span class="dl">805</span><span>hero skin</span></div></div>
+      <div class="mod"><a class="name" href="https://gamebanana.com/mods/668772">Gamma Doppler Graves</a>
+        <div class="meta"><span class="dl">897</span><span>hero skin</span></div></div>
+      <div class="mod"><a class="name" href="https://gamebanana.com/mods/696578">Cloakless Pocket</a>
+        <div class="meta"><span class="dl">372</span><span>hero skin</span></div>
+        <p class="note">With/without scarf variants.</p></div>
+      <div class="mod"><a class="name" href="https://gamebanana.com/mods/692786">Ivy MASSIVE wingspan</a>
+        <div class="meta"><span class="dl">288</span><span>hero skin</span></div></div>
+      <div class="mod"><a class="name" href="https://gamebanana.com/mods/701952">Light mode Frutiger Aero Haze</a>
+        <div class="meta"><span class="dl">213</span><span>hero skin</span></div></div>
+    </div>
+
+    <div class="subhead">HUD · props · QoL · collabs</div>
+    <div class="mods">
+      <div class="mod"><a class="name" href="https://gamebanana.com/mods/675565">(OUTDATED) Minified Shop HUD</a>
+        <div class="meta"><span class="dl">869</span><span>HUD</span></div></div>
+      <div class="mod"><a class="name" href="https://gamebanana.com/mods/619268">Gun Turret McGinnis V2</a>
+        <div class="meta"><span class="dl">811</span><span>prop</span></div></div>
+      <div class="mod"><a class="name" href="https://gamebanana.com/mods/658752">Remove Cover Red X UI</a>
+        <div class="meta"><span class="dl">870</span><span>QoL</span></div></div>
+      <div class="mod"><a class="name" href="https://gamebanana.com/mods/686138">Dr Pepper Holliday barrel</a>
+        <div class="meta"><span class="dl">521</span><span>prop</span></div></div>
+      <div class="mod"><a class="name" href="https://gamebanana.com/mods/685208">Noir Kodak Tri-X 400</a>
+        <div class="meta"><span class="dl">126</span><span>post-fx</span></div></div>
+      <div class="mod"><a class="name" href="https://gamebanana.com/mods/624294">Neon Prime Overhaul</a>
+        <div class="meta"><span class="dl">2.3k</span><span>collab</span></div>
+        <p class="note">Community HUD. I did the NP coins.</p></div>
+      <div class="mod nsfx"><a class="name" href="https://gamebanana.com/mods/705887">EVIL A$$ DYLAN</a>
+        <div class="meta"><span class="dl">203</span><span class="badge-nsfw badge">nsfw</span></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="drive">
+  <div class="wrap">
+    <div class="sec-head"><span class="num">02</span><h2>Drive-only drops</h2></div>
+    <p class="sec-sub">Mods announced on X but never uploaded to GameBanana. Straight from my releases folder — each link opens the Drive file. Same VPKs I hand to clients.</p>
+
+    <div class="subhead">hero skins</div>
+    <div class="mods">
+      <div class="mod"><a class="name" href="https://drive.google.com/file/d/11VUuTyj4_DcKWBxc7HgrAQmVr9-XYn9g/view">Mayu over The Doorman</a>
+        <div class="meta"><span>hero skin</span><span>42 files</span></div>
+        <p class="note">Full skin, cards, deagle.</p></div>
+      <div class="mod"><a class="name" href="https://drive.google.com/file/d/1XIyL_L7TXyXtyGDq90gjT15d1dVHlu06/view">Mayu v2</a>
+        <div class="meta"><span>hero skin</span><span>86 files</span></div></div>
+      <div class="mod"><a class="name" href="https://drive.google.com/file/d/1TNal6zvD9xkIOsLz1K3A3lNiaH_vqac2/view">Mayu hoodie</a>
+        <div class="meta"><span>hero skin</span></div></div>
+      <div class="mod"><a class="name" href="https://drive.google.com/file/d/1VHRbA75zR8uiKTMCdpeEmJsBZemkxYGk/view">Weiss over Apollo</a>
+        <div class="meta"><span>hero skin</span><span>43 files</span></div></div>
+      <div class="mod"><a class="name" href="https://drive.google.com/file/d/1DU_wU2p5ixOnAzYwx8gMU-kVr6QKK6mi/view">Limbus Company over Apollo</a>
+        <div class="meta"><span>hero skin</span><span>39 files</span></div></div>
+      <div class="mod"><a class="name" href="https://drive.google.com/file/d/1lMP_r5eEN-GwvjtT8O75vfU4fDNEjnHx/view">Moa (Warframe) over Paradox</a>
+        <div class="meta"><span>hero skin</span></div>
+        <p class="note">Older build of the GB release.</p></div>
+      <div class="mod"><a class="name" href="https://drive.google.com/file/d/1WAtOqduTa90tDn2HzHtdNAUrBfGTcuCY/view">Pit (Hades) over archer slot</a>
+        <div class="meta"><span>hero skin</span><span>106 files</span></div></div>
+      <div class="mod"><a class="name" href="https://drive.google.com/file/d/1yPUKa6gJunaePFdBd8kZm9XKFawt-t9T/view">Kinger (TADC) over Mirage</a>
+        <div class="meta"><span>hero skin</span></div></div>
+      <div class="mod"><a class="name" href="https://drive.google.com/file/d/16Em3TBg-TAaATdY9tlGw0MGaZH579S0W/view">Xenomorph over Drifter</a>
+        <div class="meta"><span>hero skin</span></div>
+        <p class="note">Model + desperation VO.</p></div>
+      <div class="mod"><a class="name" href="https://drive.google.com/file/d/1uqLnOsJUiirJ3zb4on75-9B10SngTIBB/view">RTL unicorn (Celeste)</a>
+        <div class="meta"><span>hero skin</span></div></div>
+      <div class="mod"><a class="name" href="https://drive.google.com/file/d/1iAPd8V91HkGk09VyDeTnn81Z6RIskmvZ/view">Werewolf swap (Silver)</a>
+        <div class="meta"><span>hero skin</span></div>
+        <p class="note">werewolf + transform models.</p></div>
+      <div class="mod"><a class="name" href="https://drive.google.com/file/d/1UMDVM2VioPW0MxQh2JUM2AqUr56VR9Pb/view">Cowboy Bebop Bebop</a>
+        <div class="meta"><span>hero skin</span></div></div>
+      <div class="mod"><a class="name" href="https://drive.google.com/file/d/1WhROL9UkiY5vd0PDwlbvn6Io0rCbMh8b/view">Gloink Queen over Viper</a>
+        <div class="meta"><span>hero skin</span><span>44 files</span></div></div>
+      <div class="mod"><a class="name" href="https://drive.google.com/file/d/1lgJr9ewEiG6WuxS3CBkhIuecfoE5EVir/view">Trunks (DBZ) over Rem</a>
+        <div class="meta"><span>hero skin</span><span>118 files</span></div></div>
+      <div class="mod"><a class="name" href="https://drive.google.com/file/d/1LivG6I1Y2I0x53ZCZ9p4sWQEnmUvH3LJ/view">Harlem Rose Ivy</a>
+        <div class="meta"><span>hero skin</span></div></div>
+      <div class="mod"><a class="name" href="https://drive.google.com/file/d/1EuPKtSb4iyNfRNQ_GySC2bBJFLd3zIsg/view">Harrier du Bois over Lash</a>
+        <div class="meta"><span>hero skin</span></div></div>
+      <div class="mod"><a class="name" href="https://drive.google.com/file/d/17UrGoCqa_hEo_MXso-a3jEyM72amFOF-/view">Okina Matara over Sinclair</a>
+        <div class="meta"><span>hero skin</span></div></div>
+      <div class="mod"><a class="name" href="https://drive.google.com/file/d/1szRtfsVvt8Hnee2W95QwmeUdJdrP5zdp/view">Villince over Apollo</a>
+        <div class="meta"><span>hero skin</span></div></div>
+      <div class="mod"><a class="name" href="https://drive.google.com/file/d/1hlM9CRD2_gySsNIk695wf-PjrbcRhVWI/view">Bookworm CU (Paige)</a>
+        <div class="meta"><span>hero skin</span></div></div>
+      <div class="mod"><a class="name" href="https://drive.google.com/file/d/1fNiFTZ_yuGrMrfpi_MREZ0Rl8ii93y5X/view">Trans flag bookworm tassel (Paige)</a>
+        <div class="meta"><span>hero skin</span></div></div>
+      <div class="mod"><a class="name" href="https://drive.google.com/file/d/1HwIrHiAg0zQ05lLSZ6gPLJjtXXwpbobn/view">Face swap Drifter</a>
+        <div class="meta"><span>hero skin</span></div></div>
+      <div class="mod"><a class="name" href="https://drive.google.com/file/d/1IOl9pTrgkmVX0OFaaxlF9YWLPiQXPBTm/view">Sly Haze creature variant</a>
+        <div class="meta"><span>hero skin</span></div></div>
+    </div>
+
+    <div class="subhead">props · models · WIP</div>
+    <div class="mods">
+      <div class="mod"><a class="name" href="https://drive.google.com/file/d/1xO9vetez0n97FlJK7kdfi535ghSL1spV/view">Graf soul container</a>
+        <div class="meta"><span>prop</span></div>
+        <p class="note">Brown-fur cat accessory.</p></div>
+      <div class="mod"><a class="name" href="https://drive.google.com/file/d/1K9yIfhYRrsTUhMSm7DHz9sBzpuQRzO7T/view">Atlas Detective Abrams ult anim</a>
+        <div class="meta"><span>animation</span></div></div>
+      <div class="mod"><a class="name" href="https://drive.google.com/file/d/17PvsQlhWy6js10GXtc1bRpFdnZ19nB-h/view">Archer v2 model</a>
+        <div class="meta"><span>model</span></div></div>
+      <div class="mod"><a class="name" href="https://drive.google.com/file/d/16wSSIjPunzFR2SSd8Gg6GWxKKIW4Gdqp/view">Old Deadlock Vindicta</a>
+        <div class="meta"><span>restore</span></div></div>
+      <div class="mod"><a class="name" href="https://drive.google.com/file/d/1UEnyjN5VC3ojg6S2SvAg0LaR5wPP6w2D/view">Old Deadlock modern Ivy</a>
+        <div class="meta"><span>restore</span></div></div>
+      <div class="mod"><a class="name" href="https://drive.google.com/file/d/1O3oaimO2VC752xN3t2oEKj6IGLHAr6LQ/view">Victor WIP port</a>
+        <div class="meta"><span>WIP</span></div>
+        <p class="note">"yet brokenly ported on".</p></div>
+    </div>
+
+    <div class="subhead">18+ (drive only)</div>
+    <div class="mods">
+      <div class="mod nsfx"><a class="name" href="https://drive.google.com/file/d/1D_b-FKBXDmTtv6M_2qrDTG72aReUPRMG/view">Lovander horse</a>
+        <div class="meta"><span class="badge-nsfw badge">nsfw</span></div></div>
+      <div class="mod nsfx"><a class="name" href="https://drive.google.com/file/d/1kBHBwtqhr8S7ucXr_tVy5MYkR5gMRIPb/view">Punisher Abrams</a>
+        <div class="meta"><span class="badge-nsfw badge">nsfw</span></div></div>
+      <div class="mod nsfx"><a class="name" href="https://drive.google.com/file/d/1Wui7DOba2ADWrLlGoCgSwQDoXyf1NcuG/view">Lovander Venator</a>
+        <div class="meta"><span class="badge-nsfw badge">nsfw</span></div></div>
+      <div class="mod nsfx"><a class="name" href="https://drive.google.com/file/d/1zH6yAvjqr4afdLVsB0z2N5TJzrCCHxqN/view">Lovander Haze (old)</a>
+        <div class="meta"><span class="badge-nsfw badge">nsfw</span></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="commissions">
+  <div class="wrap">
+    <div class="sec-head"><span class="num">03</span><h2>Commissions</h2></div>
+    <p class="sec-sub">DM me on X or Discord with your idea. I quote based on the actual work, not a rate card. Pinned info lives on my <a href="https://x.com/alacripose/status/2022605472264777808">X commission post</a>.</p>
+
+    <div class="price-grid">
+      <div class="price-card">
+        <div class="price-kind">skin mods</div>
+        <div class="price">$60–120</div>
+        <p>Full custom hero skin. Price moves with how much of it is from scratch.</p>
+      </div>
+      <div class="price-card">
+        <div class="price-kind">ports</div>
+        <div class="price">quote</div>
+        <p>Old Deadlock mods or assets from other games, onto a Deadlock hero.</p>
+      </div>
+      <div class="price-card">
+        <div class="price-kind">ability &amp; script mods</div>
+        <div class="price">quote</div>
+        <p>Hero scripting and ability rework work.</p>
+      </div>
+      <div class="price-card">
+        <div class="price-kind">sound &amp; texture</div>
+        <div class="price">cheaper</div>
+        <p>Soundtrack swaps, sound mods, texture recolors.</p>
+      </div>
+    </div>
+
+    <div class="steps">
+      <div class="step"><div class="n">01</div><div class="t">DM</div><p>Hero or port source, references, budget if you have one.</p></div>
+      <div class="step"><div class="n">02</div><div class="t">Quote</div><p>Fixed price and timeline.</p></div>
+      <div class="step"><div class="n">03</div><div class="t">Deposit</div><p>50% via Stripe. Slot locked.</p></div>
+      <div class="step"><div class="n">04</div><div class="t">Previews</div><p>You see progress and shape it with me.</p></div>
+      <div class="step"><div class="n">05</div><div class="t">Delivery</div><p>Files + install help, then the balance.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="support">
+  <div class="wrap">
+    <div class="sec-head"><span class="num">04</span><h2>Support</h2></div>
+    <p class="sec-sub">Everything above is free and stays free. These keep the machine running.</p>
+    <div class="support-grid">
+      <div class="sup">
+        <span class="kind">membership</span>
+        <h3>Alacripose Productions</h3>
+        <p>Patreon tiers run from early access up to full custom-skin commissions and platinum statues.</p>
+        <a class="go" href="https://www.patreon.com/cw/Alacripose">Patreon</a>
+      </div>
+      <div class="sup">
+        <span class="kind">community</span>
+        <h3>OpenLock Discord</h3>
+        <p>Community projects, modding help, where commissions usually start.</p>
+        <a class="go" href="https://discord.gg/3DpnhQNsFk">Join</a>
+      </div>
+      <div class="sup">
+        <span class="kind">subscribe</span>
+        <h3>GameBanana</h3>
+        <p>Subscribe for day-one drops; points support the catalog.</p>
+        <a class="go" href="https://gamebanana.com/members/4462562">Subscribe</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact" style="border-bottom: none;">
+  <div class="wrap">
+    <div class="contact-box">
+      <h2>FIND ME</h2>
+      <p>Commissions by DM. Work-in-progress on stream. Tutorials when something needs fixing.</p>
+      <div class="contact-links">
+        <a class="btn primary" href="https://x.com/alacripose" target="_blank" rel="noopener">X</a>
+        <a class="btn" href="https://www.twitch.tv/alacripose" target="_blank" rel="noopener">Twitch</a>
+        <a class="btn" href="https://www.youtube.com/@alacripose" target="_blank" rel="noopener">YouTube</a>
+        <a class="btn" href="https://www.tiktok.com/@alacripose" target="_blank" rel="noopener">TikTok</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div>ALACRIPOSE — DEADLOCK MODS</div>
+    <div class="sig">anomalous entity · loves warm hugs</div>
+  </div>
+</footer>
+
+</body>
+</html>
