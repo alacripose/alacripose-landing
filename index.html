@@ -274,7 +274,7 @@
   <div class="wrap">
     <div class="hero-grid">
       <div>
-        <h1>ALA<em>CRIOSE</em></h1>
+        <h1>ALA<em>CRIPOSE</em></h1>
         <p class="tag mono">deadlock modder · anomalous entity · loves warm hugs</p>
         <p class="pitch">Deadlock <strong>skins, ports, HUD edits and sound mods</strong> — built in Blender, published free, 400k+ downloads. Most of my work comes word-of-mouth; this page is the direct route.</p>
         <div class="cta-row">
@@ -515,10 +515,6 @@ const NSFW = [
   {n:"Lovander Venator", id:"1Wui7DOba2ADWrLlGoCgSwQDoXyf1NcuG", img:null, d:"NSFW.", hero:"Venator"},
   {n:"Lovander Haze (old)", id:"1zH6yAvjqr4afdLVsB0z2N5TJzrCCHxqN", img:null, d:"NSFW. Old build.", hero:"Haze"},
 ];
-const THUMB = { /* drive thumb map filled below */ };
-</script>
-<script>
-/* thumbnail index (drive mods) — real files on disk */
 const THUMB = {
   "ava_headed_calico": "ava_headed_calico-e78dfb60.webp",
   "bebop_delivery_service_ahze": "bebop_delivery_service_ahze-f64d8da3.webp",
@@ -547,10 +543,11 @@ const THUMB = {
   "victor_yet_brokenly_ported_on": "victor_yet_brokenly_ported_on-30c9be69.webp",
   "villince": "villince-3688bc18.webp",
   "weiss": "weiss-421a990b.webp",
-  "xenomorph": "xenomorph-8592d268.webp"
+  "xenomorph": "xenomorph-8592d268.webp",
 };
 const THUMBFILE = d => d && THUMB[d] ? `assets/thumbs/${THUMB[d]}` : null;
 </script>
+
 <script>
 /* ── render the grids ─────────────────────────────────────────── */
 function card(m, kind) {
