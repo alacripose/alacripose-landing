@@ -151,8 +151,7 @@
   }
   .badge.collab { color: var(--teal); border-color: var(--teal); }
   .badge.nsfw { color: var(--red); border-color: var(--red); }
-  .badge.commission { color: var(--ink70); border-color: var(--divider); }
-
+ 
   /* hover / focus preview popover (8dp) */
   #pop {
     position: fixed; z-index: 90; width: 340px; max-width: calc(100vw - 28px);
@@ -426,8 +425,8 @@ const PUB = [
   {n:"Kylo Ren BF2 Apollo", gb:653836, img:"653836", cat:"skin", dl:"35k", d:"Battlefront II Kylo on Apollo.", hero:"Apollo"},
   {n:"Sancho Mod", gb:665822, img:"665822", cat:"skin", dl:"22k", d:"Sancho on Apollo.", hero:"Apollo"},
   {n:"Ava-Headed Calico", gb:620626, img:"620626", previewId:"ava-headed-calico", cat:"skin", dl:"15k", d:"Ava from Gloink, on Calico.", hero:"Calico"},
-  {n:"Tec-9 bobbyakimbo Haze", gb:623942, img:"623942", cat:"skin", dl:"16k", d:"Bobbyakimbo's Tec-9 fit on Haze.", hero:"Haze"},
-  {n:"Labubu Soul Container", gb:619131, img:"619131", cat:"prop", dl:"12k", d:"A Labubu trapped in the soul container. Commission for LGTK.", hero:"—", badge:"commission"},
+  {n:"Tec-9 bobbyakimbo Haze", gb:623942, img:"623942", cat:"skin", dl:"16k", d:"Bobbyakimbo's Tec-9 fit on Haze.", hero:"Haze", badge:"collab", credit:"model: bobbyakimbo"},
+  {n:"Labubu Soul Container", gb:619131, img:"619131", cat:"prop", dl:"12k", d:"A Labubu trapped in the soul container. Commission for LGTK.", hero:"—"},
   {n:"Lovander Haze skin", gb:641750, img:"641750", cat:"collab", dl:"6.7k", d:"MasterManki7777's Lovander model, rigged and shaded by me.", hero:"Haze", badge:"collab", credit:"model: MasterManki7777"},
   {n:"2 BONUS Haze Colors — Rainbow Pack", gb:632290, img:"632290", cat:"skin", dl:"5.2k", d:"Two extra Haze colorways for the Rainbow Heroes pack.", hero:"Haze"},
   {n:"Villince the Nargacuga as Apollo", gb:658752, img:"658752", cat:"skin", dl:"4k", d:"Nargacuga on Apollo.", hero:"Apollo"},
@@ -443,7 +442,7 @@ const PUB = [
   {n:"Gun Turret McGinnis V2", gb:619268, img:"619268", cat:"prop", dl:"811", d:"Her gun, as a turret.", hero:"McGinnis"},
   {n:"(OUTDATED) Minified Shop HUD", gb:675565, img:null, cat:"hud", dl:"869", d:"Trims tabs, blur and size out of the shop.", hero:"HUD"},
   {n:"Moa (Warframe) over Paradox", gb:698733, img:"698733", cat:"skin", dl:"617", d:"Warframe Moa, full port.", hero:"Paradox"},
-  {n:"Blazion (Mega Blaziken) Infernus", gb:697789, img:"697789", cat:"skin", dl:"684", d:"Commission build.", hero:"Infernus", badge:"commission"},
+  {n:"Blazion (Mega Blaziken) Infernus", gb:697789, img:"697789", cat:"skin", dl:"684", d:"Commission build.", hero:"Infernus"},
   {n:"Cloakless Pocket", gb:696578, img:"696578", cat:"skin", dl:"372", d:"Two variants: with and without the scarf.", hero:"Pocket"},
   {n:"Ivy MASSIVE wingspan", gb:692786, img:"692786", cat:"skin", dl:"288", d:"Ivy, but the wingspan.", hero:"Ivy"},
   {n:"Light mode Frutiger Aero Haze", gb:701952, img:"701952", cat:"skin", dl:"213", d:"Frutiger Aero pastel Haze.", hero:"Haze"},
@@ -537,11 +536,11 @@ function card(m, kind) {
   let img = null;
   if (kind === "pub") img = m.img ? `assets/gbthumbs/${m.img}.webp` : null;
   else img = THUMBFILE(m.img);
+  const badgeList = Array.isArray(m.badge) ? m.badge : (m.badge ? [m.badge] : []);
   const badges = [];
-  if (m.badge === "collab") badges.push(`<span class="badge collab">collab</span>`);
-  if (m.badge === "commission") badges.push(`<span class="badge commission">commission</span>`);
-  if (m.badge === "nsfw" || kind === "nsfw") badges.push(`<span class="badge nsfw">18+</span>`);
-  const previewId = m.previewId || (kind === "drive" ? `drive:${m.id}` : null);
+  if (badgeList.includes("collab")) badges.push(`<span class="badge collab">collab</span>`);
+  if (badgeList.includes("nsfw") || kind === "nsfw") badges.push(`<span class="badge nsfw">18+</span>`);
+  const previewId = m.previewId || (m.id ? `drive:${m.id}` : (m.gb != null ? `pub:${m.gb}` : `mod:${m.n}`));
   const card = document.createElement("article");
   card.className = "mod-card";
   card.tabIndex = 0;
@@ -555,7 +554,7 @@ function card(m, kind) {
     <div class="cardbody">
       <div class="mname">${m.n}</div>
       <div class="mmeta">${m.dl ? `<span class="dl">${m.dl} dl</span>` : ""}<span>${m.hero}</span></div>
-      ${previewId ? `<button class="preview-btn" type="button" data-preview-id="${previewId}">View source preview</button>` : ""}
+      <button class="preview-btn" type="button" data-preview-id="${previewId}">View source preview</button>
     </div>`;
   const previewButton = card.querySelector(".preview-btn");
   if (previewButton) previewButton.onclick = e => {
@@ -579,7 +578,7 @@ function openModelPreview(id, fallbackImg, fallbackTitle) {
   modelPreviewTitle.textContent = item ? item.label : fallbackTitle;
   const modelCanvas = document.getElementById("model-preview-canvas");
   modelCanvas.hidden = true;
-  modelPreviewImage.style.display = "";
+  modelPreviewImage.style.display = fallbackImg ? "" : "none";
   modelPreviewImage.src = fallbackImg || "";
   modelPreviewImage.alt = (item ? item.label : fallbackTitle) + " texture fallback";
   modelPreviewStatus.textContent = item ? "Source 2 model source · texture fallback" : "Texture preview";
@@ -600,7 +599,7 @@ function openModelPreview(id, fallbackImg, fallbackTitle) {
   const files = item && Array.isArray(item.files) ? item.files : (item ? [item.model, item.materials, ...item.featureMaps.map(x => `material-map:${x}`)].filter(Boolean) : []);
   modelPreviewFiles.innerHTML = files.length
     ? files.map(file => `<li><span class="material-icons" aria-hidden="true">description</span><span>${file}</span></li>`).join("")
-    : `<li class="empty"><span class="material-icons" aria-hidden="true">hourglass_empty</span><span>The Drive sync has not indexed this VPK yet.</span></li>`;
+    : `<li class="empty"><span class="material-icons" aria-hidden="true">hourglass_empty</span><span>No compiled model files are indexed for this drop yet.</span></li>`;
   modelPreview.hidden = false;
   document.getElementById("model-preview-close").focus();
 }
