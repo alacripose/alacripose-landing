@@ -1,0 +1,37 @@
+---------------
+Parent file: C:\Users\ala\AppData\Local\Temp\awa3d-vpks\harrier_du_bois_lash.vpk
+File: models\heroes_wip\lash\lash.vmdl_c
+Exception: System.IO.InvalidDataException: File size (5693445) does not match size specified in file (184893) (Model).
+   at ValveResourceFormat.Resource.Read(Stream input, Boolean verifyFileSize, Boolean leaveOpen) in /_/ValveResourceFormat/Resource/Resource.cs:line 355
+   at CLI.Decompiler.ProcessVPKEntries(String parentPath, Package package, IFileLoader fileLoader, String type, Dictionary`2 manifestData, Boolean useOutputAsDirectory) in /_/CLI/Decompiler.cs:line 1358
+
+---------------
+Parent file: C:\Users\ala\AppData\Local\Temp\awa3d-vpks\limbus.vpk
+File: models\heroes_wip\fencer\fencer.vmdl_c
+Exception: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at ValveResourceFormat.IO.ModelExtract.ProcessBoneConstraintChildren(KVObject boneConstraint, KVObject node) in /_/ValveResourceFormat/IO/ModelExtract.ValveModel.cs:line 116
+   at ValveResourceFormat.IO.ModelExtract.ProcessBoneConstraint(KVObject boneConstraint) in /_/ValveResourceFormat/IO/ModelExtract.ValveModel.cs:line 175
+   at ValveResourceFormat.IO.ModelExtract.ExtractBoneConstraints(IReadOnlyList`1 boneConstraintsList) in /_/ValveResourceFormat/IO/ModelExtract.ValveModel.cs:line 210
+   at ValveResourceFormat.IO.ModelExtract.<>c__DisplayClass113_0.<ToValveModel>g__ExtractModelKeyValues|7(KVObject rootNode) in /_/ValveResourceFormat/IO/ModelExtract.ValveModel.cs:line 1112
+   at ValveResourceFormat.IO.ModelExtract.ToValveModel() in /_/ValveResourceFormat/IO/ModelExtract.ValveModel.cs:line 823
+   at ValveResourceFormat.IO.ModelExtract.ToContentFile() in /_/ValveResourceFormat/IO/ModelExtract.cs:line 113
+   at ValveResourceFormat.IO.FileExtract.Extract(Resource resource, IFileLoader fileLoader, IProgress`1 progress) in /_/ValveResourceFormat/IO/FileExtract.cs:line 182
+   at CLI.Decompiler.DecompileResource(Resource resource, IFileLoader fileLoader) in /_/CLI/Decompiler.cs:line 791
+   at CLI.Decompiler.ProcessVPKEntries(String parentPath, Package package, IFileLoader fileLoader, String type, Dictionary`2 manifestData, Boolean useOutputAsDirectory) in /_/CLI/Decompiler.cs:line 1381
+
+---------------
+Parent file: C:\Users\ala\AppData\Local\Temp\awa3d-vpks\weiss.vpk
+File: models\heroes_wip\fencer\fencer.vmdl_c
+Exception: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at ValveResourceFormat.IO.ModelExtract.ProcessBoneConstraintChildren(KVObject boneConstraint, KVObject node) in /_/ValveResourceFormat/IO/ModelExtract.ValveModel.cs:line 116
+   at ValveResourceFormat.IO.ModelExtract.ProcessBoneConstraint(KVObject boneConstraint) in /_/ValveResourceFormat/IO/ModelExtract.ValveModel.cs:line 175
+   at ValveResourceFormat.IO.ModelExtract.ExtractBoneConstraints(IReadOnlyList`1 boneConstraintsList) in /_/ValveResourceFormat/IO/ModelExtract.ValveModel.cs:line 210
+   at ValveResourceFormat.IO.ModelExtract.<>c__DisplayClass113_0.<ToValveModel>g__ExtractModelKeyValues|7(KVObject rootNode) in /_/ValveResourceFormat/IO/ModelExtract.ValveModel.cs:line 1112
+   at ValveResourceFormat.IO.ModelExtract.ToValveModel() in /_/ValveResourceFormat/IO/ModelExtract.ValveModel.cs:line 823
+   at ValveResourceFormat.IO.ModelExtract.ToContentFile() in /_/ValveResourceFormat/IO/ModelExtract.cs:line 113
+   at ValveResourceFormat.IO.FileExtract.Extract(Resource resource, IFileLoader fileLoader, IProgress`1 progress) in /_/ValveResourceFormat/IO/FileExtract.cs:line 182
+   at CLI.Decompiler.DecompileResource(Resource resource, IFileLoader fileLoader) in /_/CLI/Decompiler.cs:line 791
+   at CLI.Decompiler.ProcessVPKEntries(String parentPath, Package package, IFileLoader fileLoader, String type, Dictionary`2 manifestData, Boolean useOutputAsDirectory) in /_/CLI/Decompiler.cs:line 1381
+

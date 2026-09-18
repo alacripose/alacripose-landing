@@ -53,6 +53,8 @@ def vpk_summary(path: str) -> dict:
         p = vpk.open(path)
         entries = list(p)  # this vpk lib iterates as strings already
         out["n_entries"] = len(entries)
+        # Keep the complete path index lightweight; the landing page can show it without downloading the VPK.
+        out["files"] = entries
         # hero/model hints from paths
         models = [e for e in entries if "models/heroes" in e or "heroes" in e]
         mats = [e for e in entries if e.endswith("_c.vmat")]

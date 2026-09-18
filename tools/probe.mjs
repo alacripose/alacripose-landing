@@ -79,14 +79,23 @@ async function main() {
     pub: document.querySelectorAll('#pubgrid .mod-card').length,
     drive: document.querySelectorAll('#drivegrid .mod-card').length,
     nsfw: document.querySelectorAll('#nsfwgrid .mod-card').length,
-    gens: document.querySelectorAll('.gen').length,
     imgs: [...document.images].filter(i => i.complete && i.naturalWidth > 0).length,
     imgTotal: document.images.length,
   })`));
   check("published cards render", c.pub >= 27, `pub=${c.pub}`);
   check("drive cards render", c.drive >= 25, `drive=${c.drive}`);
   check("nsfw cards render", c.nsfw === 4, `nsfw=${c.nsfw}`);
-  check("generators render", c.gens === 10, `gens=${c.gens}`);
+  const previewButtons = await val(`document.querySelectorAll('.preview-btn').length`);
+  const drivePreviewButtons = await val(`document.querySelectorAll('#drivegrid .preview-btn').length`);
+  check("source preview controls render", previewButtons >= 3, `preview buttons=${previewButtons}`);
+  check("all Drive cards have preview controls", drivePreviewButtons === c.drive, `drive previews=${drivePreviewButtons}/${c.drive}`);
+  await val(`document.querySelector('.preview-btn').click()`);
+  await sleep(200);
+  const previewState = JSON.parse(await val(`JSON.stringify({hidden: document.getElementById('model-preview').hidden, title: document.getElementById('model-preview-title').textContent, status: document.getElementById('model-preview-status').textContent})`));
+  check("source preview fallback opens", !previewState.hidden && /Ava|Mayu|Weiss/.test(previewState.title) && /fallback/.test(previewState.status), JSON.stringify(previewState));
+  await val(`document.getElementById('model-preview-close').click()`);
+  const okinaControl = await val(`Boolean(document.querySelector('[data-preview-id="okina-matara"]'))`);
+  check("Okina preview control renders", okinaControl === true);
   // trigger lazy loads: scroll to bottom in steps
   await val(`(() => { return new Promise(res => { let y = 0; const step = () => { y += 600; window.scrollTo(0, y); if (y < document.body.scrollHeight) setTimeout(step, 120); else res(); }; step(); }); })()`);
   await sleep(1500);
@@ -132,29 +141,6 @@ async function main() {
   check("18+ gate was blurred before", blurredBefore === true);
   check("18+ gate reveals on click", gateAfter.gateHidden && !gateAfter.blurred, JSON.stringify(gateAfter));
 
-  // ── clicker ──
-  await val(`(() => { const o = document.getElementById('orb'); for (let i = 0; i < 20; i++) o.dispatchEvent(new MouseEvent('click', {bubbles: true})); })()`);
-  await sleep(300);
-  const souls = String(await val(`document.getElementById('souls').textContent`));
-  check("orb taps count souls", souls !== "0" && souls !== "", `souls=${souls}`);
-  const canBuy = await val(`!document.querySelector('.gen').disabled`);
-  if (canBuy) {
-    await val(`document.querySelector('.gen').click()`);
-    await sleep(200);
-    const owned = String(await val(`document.querySelector('.gen .gcount').textContent`));
-    check("generator purchasable", owned.includes("1 owned"), owned);
-    const rate = String(await val(`document.getElementById('rate').textContent`));
-    check("soul rate updates", /soul/.test(rate), rate);
-  } else {
-    check("generator affordable after 20 taps", false, "first gen still disabled after 20 taps");
-  }
-
-  // ── save round-trip (fresh reload) ──
-  await val(`localStorage.setItem('soulurn.v1', JSON.stringify({souls: 555, tap: 1, owned: {haze: 3}, frenzyUntil: 0, lastSave: Date.now()}))`);
-  await raw(`location.reload()`);
-  await sleep(2000);
-  const reloaded = String(await val(`document.getElementById('souls').textContent`));
-  check("save persists across reload", reloaded !== "0" && reloaded !== "", `souls after reload=${reloaded}`);
 
   console.log(`\n${PASS.length} passed, ${FAIL.length} failed`);
   child.kill();

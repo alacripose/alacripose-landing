@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>alacripose — Deadlock mods</title>
-<meta name="description" content="Deadlock skins, ports, HUD and sound mods by alacripose. 30 published, 28 Drive-only. Commissions open.">
+<meta name="description" content="Deadlock skins, ports, HUD and sound mods by alacripose. Browse the current catalog and commission a $100 model port.">
 <meta property="og:title" content="alacripose — Deadlock mods">
-<meta property="og:description" content="Deadlock skins, ports, HUD and sound mods. Commissions open.">
+<meta property="og:description" content="Deadlock skins, ports, HUD and sound mods. $100 model ports, with $20 accessory add-ons.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='14' fill='%23120f0b' stroke='%23d1a437' stroke-width='2'/%3E%3Ccircle cx='16' cy='16' r='5' fill='%23d1a437'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -133,6 +133,7 @@
   }
   .mod-card:hover, .mod-card:focus-visible { border-color: var(--brass-dim); background: var(--surface4); }
   .mod-card img.thumb { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; display: block; background: var(--ground2); }
+  .mod-card img.thumb.face-focus { object-position: 50% 20%; }
   .mod-card .noimg {
     width: 100%; aspect-ratio: 16 / 10; display: flex; align-items: center; justify-content: center;
     background: repeating-linear-gradient(45deg, var(--ground2) 0 12px, var(--surface) 12px 24px);
@@ -159,6 +160,7 @@
     box-shadow: 6px 8px 0 rgba(0,0,0,.45); pointer-events: none; display: none;
   }
   #pop img { width: 100%; aspect-ratio: 16/9; object-fit: cover; display: block; background: var(--ground2); }
+  #pop img.face-focus { object-position: 50% 20%; }
   #pop .pbody { padding: 13px 15px 15px; }
   #pop .pname { font-family: "Limelight", serif; font-size: 17px; letter-spacing: .02em; }
   #pop .pdesc { color: var(--ink70); font-size: 13.5px; margin: 7px 0 9px; }
@@ -167,6 +169,30 @@
   #pop .credit { color: var(--teal); font-size: 12px; margin-top: 7px; }
   #pop .go { position: absolute; top: 10px; right: 10px; color: var(--brass); background: rgba(14,12,9,.85); border-radius: var(--radius); padding: 6px; }
   #pop .go .material-icons { font-size: 18px; }
+  .preview-btn { margin-top: 10px; min-height: 36px; padding: 0 10px; border: 1px solid var(--brass-dim); color: var(--brass); background: transparent; font-family: "IBM Plex Mono", monospace; font-size: 10px; letter-spacing: .08em; text-transform: uppercase; cursor: pointer; }
+  .preview-btn:hover { background: var(--surface8); color: var(--brass-hi); }
+  #model-preview { position: fixed; inset: 0; z-index: 100; display: flex; align-items: center; justify-content: center; padding: 18px; background: rgba(0,0,0,.78); }
+  #model-preview[hidden] { display: none; }
+  .model-preview-panel { width: min(720px, 100%); max-height: min(760px, 92vh); overflow: auto; background: #0b0a08; border: 1px solid var(--brass-dim); box-shadow: 8px 10px 0 rgba(0,0,0,.5); }
+  .model-preview-head { display: flex; justify-content: space-between; gap: 14px; align-items: start; padding: 16px 18px; border-bottom: 1px solid var(--divider); }
+  .model-preview-head h3 { font-family: "Limelight", serif; font-size: 20px; }
+  .model-preview-close { border: 0; background: transparent; color: var(--ink70); cursor: pointer; padding: 4px; }
+  .model-preview-close:hover { color: var(--brass); }
+  .model-preview-image { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; object-position: 50% 20%; display: block; background: var(--ground2); }
+  #model-preview-canvas { width: 100%; aspect-ratio: 16 / 9; display: block; background: radial-gradient(circle at 50% 35%, var(--surface6), var(--ground2)); }
+  #model-preview-canvas[hidden] { display: none; }
+  .model-preview-body { padding: 16px 18px 20px; }
+  .model-preview-status { color: var(--teal); font-family: "IBM Plex Mono", monospace; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; }
+  .model-preview-body p { color: var(--ink70); font-size: 13.5px; margin-top: 8px; }
+  .model-preview-meta { display: grid; gap: 5px; margin-top: 12px; color: var(--ink50); font-family: "IBM Plex Mono", monospace; font-size: 11px; overflow-wrap: anywhere; }
+  .model-preview-meta b { color: var(--brass); font-weight: 500; }
+  .model-file-section { margin-top: 16px; }
+  .model-file-section h4 { padding: 0 12px 6px; color: var(--ink50); font-family: "IBM Plex Mono", monospace; font-size: 10px; letter-spacing: .14em; text-transform: uppercase; font-weight: 400; }
+  .model-file-list { list-style: none; border: 1px solid var(--divider); background: var(--surface); }
+  .model-file-list li { display: flex; align-items: center; gap: 9px; min-height: 38px; padding: 7px 12px; border-bottom: 1px solid var(--divider); color: var(--ink70); font-family: "IBM Plex Mono", monospace; font-size: 11px; overflow-wrap: anywhere; }
+  .model-file-list li:last-child { border-bottom: 0; }
+  .model-file-list .material-icons { color: var(--brass-dim); font-size: 17px; }
+  .model-file-list .empty { color: var(--ink50); font-style: italic; }
 
   /* ── 18+ gate ───────────────────────────────────── */
   #nsfw-gate {
@@ -178,49 +204,10 @@
   .blurred .mod-card { filter: blur(14px) saturate(.4); pointer-events: none; user-select: none; }
   .blurred .mod-card .badges { filter: none; }
 
-  /* ── clicker ───────────────────────────────────── */
-  #clicker { background: linear-gradient(180deg, var(--ground), var(--ground2)); }
-  .game { display: grid; grid-template-columns: 300px 1fr; gap: 30px; align-items: start; }
-  @media (max-width: 760px) { .game { grid-template-columns: 1fr; } }
-  .orb-zone { position: relative; text-align: center; touch-action: manipulation; user-select: none; -webkit-user-select: none; }
-  #orb {
-    width: min(220px, 60vw); height: auto; cursor: pointer; display: block; margin: 6px auto 14px;
-    filter: drop-shadow(0 10px 18px rgba(209,164,55,.18));
-  }
-  @media (prefers-reduced-motion: no-preference) {
-    #orb { animation: orbreathe 3.4s ease-in-out infinite; }
-    @keyframes orbreathe { 50% { transform: scale(1.028); } }
-    #orb:active { transform: scale(.96); }
-  }
-  .souls-read { font-family: "Limelight", serif; font-size: 34px; color: var(--brass); line-height: 1; }
-  .souls-rate { font-family: "IBM Plex Mono", monospace; font-size: 12.5px; color: var(--ink70); margin-top: 6px; }
-  .float-n {
-    position: absolute; font-family: "IBM Plex Mono", monospace; font-size: 15px; color: var(--brass-hi);
-    pointer-events: none; z-index: 5; animation: floatup .16s ease-out forwards;
-  }
-  @keyframes floatup { to { transform: translateY(-34px); opacity: 0; } }
-  .frenzy-note { font-family: "IBM Plex Mono", monospace; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--teal); min-height: 16px; margin-top: 10px; }
-  .rejuv { position: absolute; width: 42px; height: 42px; cursor: pointer; z-index: 6; }
-  .gens { display: grid; gap: 8px; }
-  .gen {
-    display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 4px 14px;
-    background: var(--surface); border: 1px solid var(--divider); border-radius: var(--radius);
-    padding: 12px 16px; cursor: pointer; min-height: 56px; text-align: left; color: var(--ink); width: 100%;
-  }
-  .gen:hover:not(:disabled) { background: var(--surface4); border-color: var(--brass-dim); }
-  .gen:disabled { opacity: .52; cursor: default; }
-  .gen .gname { font-family: "Limelight", serif; font-size: 15.5px; }
-  .gen .gsub { color: var(--ink50); font-family: "IBM Plex Mono", monospace; font-size: 11px; }
-  .gen .gcost { font-family: "IBM Plex Mono", monospace; font-size: 13px; color: var(--brass); text-align: right; }
-  .gen .gcount { font-family: "IBM Plex Mono", monospace; font-size: 11.5px; color: var(--ink70); text-align: right; }
-  .gen .gcost.cant { color: var(--ink50); }
-  .upg { border-color: var(--teal); }
-  .upg .gname { color: var(--teal); }
-  .game-foot { font-family: "IBM Plex Mono", monospace; font-size: 10.5px; color: var(--ink50); margin-top: 18px; letter-spacing: .08em; }
-
   /* ── commissions ───────────────────────────────── */
   .price-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(215px, 1fr)); gap: 12px; }
   .price-card { background: var(--surface); border: 1px solid var(--divider); border-radius: var(--radius); padding: 24px 20px; }
+  .custom-model-card { background: #080706; border-color: var(--brass-dim); }
   .price-kind { font-family: "IBM Plex Mono", monospace; font-size: 10.5px; letter-spacing: .18em; text-transform: uppercase; color: var(--teal); margin-bottom: 10px; }
   .price { font-family: "Limelight", serif; font-size: 32px; color: var(--brass); }
   .price small { font-size: 14px; color: var(--ink50); font-family: "IBM Plex Mono", monospace; }
@@ -263,7 +250,6 @@
       <a href="#published">Mods</a>
       <a href="#drive">Drive drops</a>
       <a href="#adult">18+</a>
-      <a href="#clicker">Soul urn</a>
       <a href="#commissions">Commissions</a>
       <a href="#contact">Contact</a>
     </nav>
@@ -291,10 +277,10 @@
       </div>
     </div>
     <div class="hero-stats" role="list">
-      <div role="listitem"><div class="num">30</div><div class="lbl">published mods</div></div>
-      <div role="listitem"><div class="num">28</div><div class="lbl">drive-only drops</div></div>
+      <div role="listitem">      <div class="num" id="pub-count">30</div><div class="lbl">published mods</div></div>
+      <div role="listitem">      <div class="num" id="drive-count">28</div><div class="lbl">drive-only drops</div></div>
       <div role="listitem"><div class="num">400k+</div><div class="lbl">downloads</div></div>
-      <div role="listitem"><div class="num">$60+</div><div class="lbl">commissions from</div></div>
+      <div role="listitem"><div class="num">$100</div><div class="lbl">complete port</div></div>
     </div>
   </div>
 </header>
@@ -302,7 +288,7 @@
 <section id="published">
   <div class="wrap">
     <h2 class="sec">Published mods</h2>
-    <p class="sec-sub">On GameBanana, mirrored on DeadlockSkins, installable through Deadlock Mod Manager or Grimoire. Hover a card for details; every badge marks what's mine versus what I contributed to.</p>
+    <p class="sec-sub">On GameBanana, mirrored on DeadlockSkins, installable through Deadlock Mod Manager or Grimoire. Hover a card for details; every badge marks what's mine versus what I contributed to. The catalog below is rendered from the current checked release list.</p>
     <div class="chips" role="group" aria-label="filter mods">
       <button class="chip" data-filter="all" aria-pressed="true">All</button>
       <button class="chip" data-filter="skin" aria-pressed="false">Skins</button>
@@ -318,7 +304,7 @@
 <section id="drive">
   <div class="wrap">
     <h2 class="sec">Drive-only drops</h2>
-    <p class="sec-sub">Announced on X, never uploaded anywhere else. Straight from my releases folder. Previews are pulled from the VPK files themselves — the same way mod managers render them.</p>
+    <p class="sec-sub">Announced on X, never uploaded anywhere else. Straight from my releases folder. Previews are pulled from the VPK files themselves — the same way mod managers render them. Drive links always open the latest file currently listed here.</p>
     <div class="mods" id="drivegrid"><!-- filled by JS --></div>
   </div>
 </section>
@@ -336,53 +322,21 @@
   </div>
 </section>
 
-<section id="clicker">
-  <div class="wrap">
-    <h2 class="sec">The soul urn</h2>
-    <p class="sec-sub">A little shrine while you're here. Tap the urn, gather souls, put the roster to work. Saves in your browser; progress keeps while you're away (capped at 8 hours).</p>
-    <div class="game">
-      <div class="orb-zone" id="orbzone">
-        <svg id="orb" viewBox="0 0 200 200" role="button" tabindex="0" aria-label="tap to gain souls">
-          <defs>
-            <radialGradient id="og" cx="50%" cy="42%" r="62%">
-              <stop offset="0%" stop-color="#f4dd9b"/>
-              <stop offset="45%" stop-color="#d1a437"/>
-              <stop offset="100%" stop-color="#6b5010"/>
-            </radialGradient>
-          </defs>
-          <circle cx="100" cy="100" r="88" fill="url(#og)" stroke="#3a2c0e" stroke-width="6"/>
-          <ellipse cx="100" cy="100" rx="88" ry="88" fill="none" stroke="#9a7a29" stroke-width="2" stroke-dasharray="4 10" opacity=".8"/>
-          <path d="M62 108 q38 30 76 0" fill="none" stroke="#3a2c0e" stroke-width="5" opacity=".55"/>
-          <circle cx="82" cy="82" r="10" fill="#f8ecc9" opacity=".55"/>
-        </svg>
-        <div class="souls-read" id="souls">0</div>
-        <div class="souls-rate" id="rate">0 souls/s · tap +1</div>
-        <div class="frenzy-note" id="frenzy"></div>
-      </div>
-      <div>
-        <div class="gens" id="gens"></div>
-        <p class="game-foot">autosaves every 30s · offline progress on return · a rejuvenator wanders by now and then</p>
-      </div>
-    </div>
-  </div>
-</section>
-
 <section id="commissions">
   <div class="wrap">
     <h2 class="sec">Commissions</h2>
-    <p class="sec-sub">DM me on X or Discord with the idea. I quote on the actual work, not a rate card. Rates are pinned on my <a href="https://x.com/alacripose/status/2022605472264777808">X commission post</a>.</p>
+    <p class="sec-sub">For standard commissions, I do model rigging, ports from different formats, material work, and produce a mod VPK. I can customize base models, modify models, and make small custom items; fully custom hero models are a separate, much larger job. A complete model port is <strong>$100</strong>; optional accessories are <strong>+$20 each</strong>. <strong>Stripe has a two-week payment delay, so I can’t start work until that clears.</strong> Details are in my <a href="https://x.com/alacripose/status/2099071840425857323?s=20">current commission post</a>.</p>
     <div class="price-grid">
-      <div class="price-card"><div class="price-kind">skin mods</div><div class="price">$60–120</div><p>Custom hero skin. Price moves with how much is from scratch.</p></div>
-      <div class="price-card"><div class="price-kind">ports</div><div class="price">quote</div><p>Old Deadlock mods or assets from other games, onto a hero.</p></div>
-      <div class="price-card"><div class="price-kind">ability &amp; script mods</div><div class="price">quote</div><p>Hero scripting and ability reworks, scoped per job.</p></div>
-      <div class="price-card"><div class="price-kind">sound &amp; texture</div><div class="price">cheaper</div><p>Soundtrack swaps, sound mods, texture recolors.</p></div>
+      <div class="price-card"><div class="price-kind">complete model port</div><div class="price">$100</div><p>Flat price for the model rigging, weapon, materials, and portraits.</p></div>
+      <div class="price-card"><div class="price-kind">accessories</div><div class="price">+$20 <small>each</small></div><p>Particles, recolors, alternate versions, and other optional add-ons.</p></div>
+      <div class="price-card custom-model-card"><div class="price-kind">fully custom hero model</div><div class="price">$800+</div><p>A complete package that can include the model, rigging, weapon, materials, portraits, VPK, and anything else we settle on. Minimum three months; usually around six.</p></div>
     </div>
     <div class="steps">
-      <div class="step"><div class="t">DM</div><p>Hero or port source, references, budget if you have one.</p></div>
-      <div class="step"><div class="t">Quote</div><p>Fixed price and timeline.</p></div>
-      <div class="step"><div class="t">Deposit</div><p>50% via Stripe. Slot locked.</p></div>
-      <div class="step"><div class="t">Previews</div><p>You see progress and shape it with me.</p></div>
-      <div class="step"><div class="t">Delivery</div><p>Files + install help, then the balance.</p></div>
+      <div class="step"><div class="t">Send a DM</div><p>Tell me what you want made. References help.</p></div>
+      <div class="step"><div class="t">Settle the details</div><p>We work out the scope, price, and timeline before I start.</p></div>
+      <div class="step"><div class="t">Pay through Stripe</div><p>Stripe takes two weeks to release the payment. I can only start once it clears.</p></div>
+      <div class="step"><div class="t">I make the mod</div><p>It's a Skeb-style commission, so I don't send progress updates.</p></div>
+      <div class="step"><div class="t">I’ll contact you</div><p>When it's finished, I'll send the files and install help.</p></div>
     </div>
   </div>
 </section>
@@ -434,6 +388,26 @@
   </div>
 </footer>
 
+<div id="model-preview" hidden role="dialog" aria-modal="true" aria-labelledby="model-preview-title">
+  <div class="model-preview-panel">
+    <div class="model-preview-head">
+      <h3 id="model-preview-title">Source 2 asset preview</h3>
+      <button class="model-preview-close" id="model-preview-close" type="button" aria-label="Close preview"><span class="material-icons" aria-hidden="true">close</span></button>
+    </div>
+    <canvas id="model-preview-canvas" hidden aria-label="Interactive 3D model preview"></canvas>
+    <img class="model-preview-image" id="model-preview-image" alt="">
+    <div class="model-preview-body">
+      <div class="model-preview-status" id="model-preview-status">Compiled model source</div>
+      <p id="model-preview-description"></p>
+      <div class="model-preview-meta" id="model-preview-meta"></div>
+      <div class="model-file-section">
+        <h4>Files in source package</h4>
+        <ul class="model-file-list" id="model-preview-files"></ul>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div id="pop" role="tooltip" aria-hidden="true">
   <span class="go"><span class="material-icons" aria-hidden="true">open_in_new</span></span>
   <img id="pop-img" alt="">
@@ -451,7 +425,7 @@ const PUB = [
   {n:"LeBron James Abrams", gb:594818, img:"594818", cat:"skin", dl:"144k", d:"Abrams, but LeBron.", hero:"Abrams"},
   {n:"Kylo Ren BF2 Apollo", gb:653836, img:"653836", cat:"skin", dl:"35k", d:"Battlefront II Kylo on Apollo.", hero:"Apollo"},
   {n:"Sancho Mod", gb:665822, img:"665822", cat:"skin", dl:"22k", d:"Sancho on Apollo.", hero:"Apollo"},
-  {n:"Ava-Headed Calico", gb:620626, img:"620626", cat:"skin", dl:"15k", d:"Ava from Gloink, on Calico.", hero:"Calico"},
+  {n:"Ava-Headed Calico", gb:620626, img:"620626", previewId:"ava-headed-calico", cat:"skin", dl:"15k", d:"Ava from Gloink, on Calico.", hero:"Calico"},
   {n:"Tec-9 bobbyakimbo Haze", gb:623942, img:"623942", cat:"skin", dl:"16k", d:"Bobbyakimbo's Tec-9 fit on Haze.", hero:"Haze"},
   {n:"Labubu Soul Container", gb:619131, img:"619131", cat:"prop", dl:"12k", d:"A Labubu trapped in the soul container. Commission for LGTK.", hero:"—", badge:"commission"},
   {n:"Lovander Haze skin", gb:641750, img:"641750", cat:"collab", dl:"6.7k", d:"MasterManki7777's Lovander model, rigged and shaded by me.", hero:"Haze", badge:"collab", credit:"model: MasterManki7777"},
@@ -480,10 +454,10 @@ const PUB = [
   {n:"Neon Prime Overhaul", gb:624294, img:"624294", cat:"collab", dl:"2.3k", d:"Community HUD restoring the Neon Prime look. I made the NP coins — punchable coin bags, SFX and particles.", hero:"HUD", badge:"collab", credit:"lead: Space Bear · shop: Taski Maiden · icons: Ivanov"},
 ];
 const DRIVE = [
-  {n:"Mayu over The Doorman", id:"11VUuTyj4_DcKWBxc7HgrAQmVr9-XYn9g", img:"mayu", d:"Full PMMM Mayu skin — cards, deagle, hoodie body.", hero:"The Doorman"},
+  {n:"Mayu over The Doorman", id:"11VUuTyj4_DcKWBxc7HgrAQmVr9-XYn9g", img:"mayu", previewId:"mayu", d:"Full PMMM Mayu skin — cards, deagle, hoodie body.", hero:"The Doorman"},
   {n:"Mayu v2", id:"1XIyL_L7TXyXtyGDq90gjT15d1dVHlu06", img:"mayu_2", d:"Second pass with updated portrait cards.", hero:"The Doorman"},
   {n:"Mayu hoodie", id:"1TNal6zvD9xkIOsLz1K3A3lNiaH_vqac2", img:"mayu_hoodie", d:"Hoodie variant of the body.", hero:"The Doorman"},
-  {n:"Weiss over Apollo", id:"1VHRbA75zR8uiKTMCdpeEmJsBZemkxYGk", img:"weiss", d:"Weiss skin with portrait cards.", hero:"Apollo"},
+  {n:"Weiss over Apollo", id:"1VHRbA75zR8uiKTMCdpeEmJsBZemkxYGk", img:"weiss", previewId:"weiss", d:"Weiss skin with portrait cards.", hero:"Apollo"},
   {n:"Limbus Company over Apollo", id:"1DU_wU2p5ixOnAzYwx8gMU-kVr6QKK6mi", img:"limbus", d:"Limbus Company outfit.", hero:"Apollo"},
   {n:"Villince over Apollo", id:"1szRtfsVvt8Hnee2W95QwmeUdJdrP5zdp", img:"villince", d:"Villince with fencer-card portraits.", hero:"Apollo"},
   {n:"Graf soul container", id:"1xO9vetez0n97FlJK7kdfi535ghSL1spV", img:"graf", d:"Brown-fur cat accessory for the soul container.", hero:"prop"},
@@ -498,7 +472,7 @@ const DRIVE = [
   {n:"Trunks (DBZ) over Rem", id:"1lgJr9ewEiG6WuxS3CBkhIuecfoE5EVir", img:"trunks_rem", d:"Trunks on the familiar slot.", hero:"Rem"},
   {n:"Harlem Rose Ivy", id:"1LivG6I1Y2I0x53ZCZ9p4sWQEnmUvH3LJ", img:"harlem_rose_ivy", d:"With tengu portrait cards.", hero:"Ivy"},
   {n:"Harrier du Bois over Lash", id:"1EuPKtSb4iyNfRNQ_GySC2bBJFLd3zIsg", img:"harrier_du_bois_lash", d:"Tequila-sunset materials.", hero:"Lash"},
-  {n:"Okina Matara over Sinclair", id:"17UrGoCqa_hEo_MXso-a3jEyM72amFOF-", img:"matara_magician", d:"Magician-card portraits included.", hero:"Sinclair"},
+  {n:"Okina Matara over Sinclair", id:"17UrGoCqa_hEo_MXso-a3jEyM72amFOF-", img:"matara_magician", previewId:"okina-matara", d:"Magician-card portraits included.", hero:"Sinclair"},
   {n:"Bookworm CU (Paige)", id:"1hlM9CRD2_gySsNIk695wf-PjrbcRhVWI", img:"bookworm_cu", d:"Bookworm outfit on Paige.", hero:"Paige"},
   {n:"Trans flag bookworm tassel", id:"1fNiFTZ_yuGrMrfpi_MREZ0Rl8ii93y5X", img:"trans_flag_bookworm_tassle", d:"Trans-flag tassel for Paige's books.", hero:"Paige"},
   {n:"Face swap Drifter", id:"1HwIrHiAg0zQ05lLSZ6gPLJjtXXwpbobn", img:"face_drifter", d:"Face texture swap.", hero:"Drifter"},
@@ -544,12 +518,18 @@ const THUMB = {
   "villince": "villince-3688bc18.webp",
   "weiss": "weiss-421a990b.webp",
   "xenomorph": "xenomorph-8592d268.webp",
+  "ava_headed_calico": "ava_headed_calico-e78dfb60.webp",
 };
 const THUMBFILE = d => d && THUMB[d] ? `assets/thumbs/${THUMB[d]}` : null;
 </script>
 
 <script>
 /* ── render the grids ─────────────────────────────────────────── */
+let MODEL_MANIFEST = [];
+const modelManifestReady = fetch("tools/model_preview_manifest.json", {cache: "no-store"})
+  .then(r => r.ok ? r.json() : Promise.reject(r.status))
+  .then(data => { MODEL_MANIFEST = data.mods || []; return MODEL_MANIFEST; })
+  .catch(() => []);
 function card(m, kind) {
   const gbUrl = m.gb ? `https://gamebanana.com/${typeof m.gb === "string" && m.gb.includes("/") ? m.gb : "mods/" + m.gb}` : null;
   const drvUrl = m.id ? `https://drive.google.com/file/d/${m.id}/view` : null;
@@ -561,25 +541,87 @@ function card(m, kind) {
   if (m.badge === "collab") badges.push(`<span class="badge collab">collab</span>`);
   if (m.badge === "commission") badges.push(`<span class="badge commission">commission</span>`);
   if (m.badge === "nsfw" || kind === "nsfw") badges.push(`<span class="badge nsfw">18+</span>`);
+  const previewId = m.previewId || (kind === "drive" ? `drive:${m.id}` : null);
   const card = document.createElement("article");
   card.className = "mod-card";
   card.tabIndex = 0;
   card.dataset.cat = m.cat || "skin";
-  card.dataset.pop = JSON.stringify({n:m.n, d:m.d, dl:m.dl||"", hero:m.hero||"", credit:m.credit||"", url, img});
+  card.dataset.previewId = previewId || "";
+  card.dataset.pop = JSON.stringify({n:m.n, d:m.d, dl:m.dl||"", hero:m.hero||"", credit:m.credit||"", url, img, faceFocus:m.cat === "skin" || m.cat === "collab"});
   card.innerHTML = `
     ${badges.length ? `<div class="badges">${badges.join("")}</div>` : ""}
-    ${img ? `<img class="thumb" src="${img}" alt="${m.n} preview" loading="lazy">`
+    ${img ? `<img class="thumb${m.cat === "skin" || m.cat === "collab" ? " face-focus" : ""}" src="${img}" alt="${m.n} preview" loading="lazy">`
            : `<div class="noimg">no preview</div>`}
     <div class="cardbody">
       <div class="mname">${m.n}</div>
       <div class="mmeta">${m.dl ? `<span class="dl">${m.dl} dl</span>` : ""}<span>${m.hero}</span></div>
+      ${previewId ? `<button class="preview-btn" type="button" data-preview-id="${previewId}">View source preview</button>` : ""}
     </div>`;
-  card.addEventListener("click", e => { if (url && !e.target.closest(".badge")) window.open(url, "_blank", "noopener"); });
+  const previewButton = card.querySelector(".preview-btn");
+  if (previewButton) previewButton.onclick = e => {
+    e.stopPropagation();
+    openModelPreview(previewButton.dataset.previewId, img, m.n);
+  };
+  card.addEventListener("click", e => {
+    if (e.target.closest(".preview-btn")) return;
+    if (url && !e.target.closest(".badge")) window.open(url, "_blank", "noopener");
+  });
   return card;
 }
+const modelPreview = document.getElementById("model-preview");
+const modelPreviewImage = document.getElementById("model-preview-image");
+const modelPreviewTitle = document.getElementById("model-preview-title");
+const modelPreviewStatus = document.getElementById("model-preview-status");
+const modelPreviewDescription = document.getElementById("model-preview-description");  const modelPreviewMeta = document.getElementById("model-preview-meta");
+const modelPreviewFiles = document.getElementById("model-preview-files");
+function openModelPreview(id, fallbackImg, fallbackTitle) {
+  const item = MODEL_MANIFEST.find(x => x.id === id);
+  modelPreviewTitle.textContent = item ? item.label : fallbackTitle;
+  const modelCanvas = document.getElementById("model-preview-canvas");
+  modelCanvas.hidden = true;
+  modelPreviewImage.style.display = "";
+  modelPreviewImage.src = fallbackImg || "";
+  modelPreviewImage.alt = (item ? item.label : fallbackTitle) + " texture fallback";
+  modelPreviewStatus.textContent = item ? "Source 2 model source · texture fallback" : "Texture preview";
+  if (item && item.browserModel && window.renderSource2Model) {
+    modelPreviewStatus.textContent = "NPR 3D preview · Source 2 channels";
+    const nprByMesh = {};
+    (item.nprMaterials || []).forEach(m => nprByMesh[m.name.toLowerCase()] = m);
+    window.renderSource2Model(modelCanvas, item.browserModel, item.nprMaterials || []).then(h => {
+      modelPreview._dispose = h && h.dispose;
+      modelCanvas.hidden = false;
+      modelPreviewImage.style.display = "none";
+    }).catch(e => { modelPreviewStatus.textContent = "WebGL unavailable · texture fallback"; console.warn(e); });
+  }
+  modelPreviewDescription.textContent = item
+    ? "The compiled model is available for Source 2 tooling. This lightweight browser fallback keeps the card usable on phones until a Valve Resource Format browser renderer is available."
+    : "No compiled model manifest is available for this drop yet.";
+  modelPreviewMeta.innerHTML = item ? `<span>model <b>${item.root}/${item.model}</b></span><span>materials <b>${item.materials || "inherited game assets"}</b></span><span>maps <b>${item.featureMaps.join(", ") || "not listed"}</b></span>` : "";
+  const files = item && Array.isArray(item.files) ? item.files : (item ? [item.model, item.materials, ...item.featureMaps.map(x => `material-map:${x}`)].filter(Boolean) : []);
+  modelPreviewFiles.innerHTML = files.length
+    ? files.map(file => `<li><span class="material-icons" aria-hidden="true">description</span><span>${file}</span></li>`).join("")
+    : `<li class="empty"><span class="material-icons" aria-hidden="true">hourglass_empty</span><span>The Drive sync has not indexed this VPK yet.</span></li>`;
+  modelPreview.hidden = false;
+  document.getElementById("model-preview-close").focus();
+}
+function closeModelPreview() {
+  if (modelPreview._dispose) { try { modelPreview._dispose(); } catch {} modelPreview._dispose = null; }
+  modelPreview.hidden = true;
+}
+document.getElementById("model-preview-close").addEventListener("click", closeModelPreview);
+modelPreview.addEventListener("click", e => { if (e.target === modelPreview) closeModelPreview(); });
+document.addEventListener("keydown", e => { if (e.key === "Escape" && !modelPreview.hidden) closeModelPreview(); });
+
 const pubgrid = document.getElementById("pubgrid");
 PUB.forEach(m => { if (m.badge !== "nsfwx") pubgrid.appendChild(card(m, "pub")); });
+document.getElementById("pub-count").textContent = PUB.length;
+document.getElementById("drive-count").textContent = DRIVE.length;
 document.getElementById("drivegrid") && DRIVE.forEach(m => document.getElementById("drivegrid").appendChild(card(m, "drive")));
+// Keep the headline totals in sync with the checked catalog when the site is served with tools/catalog.json.
+fetch("tools/catalog.json", {cache: "no-store"}).then(r => r.ok ? r.json() : Promise.reject(r.status)).then(data => {
+  if (Array.isArray(data.published)) document.getElementById("pub-count").textContent = data.published.length;
+  if (Array.isArray(data.drive_only)) document.getElementById("drive-count").textContent = data.drive_only.length;
+}).catch(() => { /* Static arrays remain the offline fallback. */ });
 document.getElementById("nsfwgrid") && NSFW.forEach(m => document.getElementById("nsfwgrid").appendChild(card(m, "nsfw")));
 
 /* filters */
@@ -609,8 +651,12 @@ function showPop(el) {
   popDesc.textContent = d.d;
   popMeta.innerHTML = `${d.dl ? `<span>downloads <b>${d.dl}</b></span>` : ""}${d.hero ? `<span>slot <b>${d.hero}</b></span>` : ""}`;
   popCredit.textContent = d.credit || "";
-  if (d.img) { popImg.src = d.img; popImg.style.display = ""; popImg.alt = d.n + " preview"; }
-  else popImg.style.display = "none";
+  if (d.img) {
+    popImg.src = d.img;
+    popImg.style.display = "";
+    popImg.alt = d.n + " preview";
+    popImg.classList.toggle("face-focus", Boolean(d.faceFocus));
+  } else popImg.style.display = "none";
   pop.style.display = "block";
   pop.setAttribute("aria-hidden", "false");
   const r = el.getBoundingClientRect();
@@ -647,133 +693,202 @@ function revealNsfw() {
   nsfwgrid.classList.remove("blurred");
   nsfwgrid.setAttribute("aria-hidden", "false");
 }
+</script>
+<script type="module">
+/* ── NPR Source 2 viewer ─────────────────────────────────────────
+   Loads the GLB converted from the mod's VPK and rebuilds Deadlock's
+   pbr.vfx NPR channels on top of it: per-pixel tint masks, rim light,
+   inverted-hull solid outline, and AO. Channel URLs + tint vectors come
+   from tools/model_preview_manifest.json (nprMaterials). */
+import * as THREE from "https://esm.sh/three@0.170.0";
+import { GLTFLoader } from "https://esm.sh/three@0.170.0/examples/jsm/loaders/GLTFLoader.js";
+import { OrbitControls } from "https://esm.sh/three@0.170.0/examples/jsm/controls/OrbitControls.js";
 
-/* ── soul urn clicker ───────────────────────────────────────────── */
-const GEN_DEFS = [
-  {k:"haze",      n:"Haze",          sub:"quietly farms souls",        cost:15,    rate:0.1},
-  {k:"bebop",     n:"Bebop",        sub:"bombs souls loose",         cost:100,   rate:1},
-  {k:"abrams",    n:"Abrams",       sub:"shoulder-checks for souls", cost:1100,  rate:8},
-  {k:"ivy",       n:"Ivy",          sub:"grows a soul garden",       cost:12000, rate:47},
-  {k:"krill",     n:"Mo & Krill",   sub:"burrow for buried souls",   cost:130000,rate:260},
-  {k:"kelvin",    n:"Kelvin",       sub:"freezes souls fresh",       cost:1400000,rate:1400},
-  {k:"vindicta",  n:"Vindicta",     sub:"snipes souls from range",   cost:20000000,rate:7800},
-  {k:"pocket",    n:"Pocket",       sub:"bags souls in his coat",    cost:330000000,rate:44000},
-  {k:"warden",    n:"Warden",       sub:"guards the soul vault",     cost:5100000000,rate:260000},
-  {k:"greytalon", n:"Grey Talon",   sub:"ascends beyond counting",   cost:75000000000,rate:1600000},
-];
-const SUFFIX = ["", "K", "M", "B", "T", "Qa", "Qi", "Sx", "Sp", "Oc", "No", "Dc"];
-const fmt = n => {
-  if (n < 1000) return Math.floor(n).toString();
-  let t = Math.floor(Math.log10(n) / 3);
-  t = Math.min(t, SUFFIX.length - 1);
-  const v = n / Math.pow(10, t * 3);
-  return (v >= 100 ? v.toFixed(0) : v.toFixed(1)) + SUFFIX[t];
-};
-const SAVE_KEY = "soulurn.v1";
-let S = { souls: 0, tap: 1, owned: {}, frenzyUntil: 0, lastSave: Date.now() };
-try {
-  const raw = localStorage.getItem(SAVE_KEY);
-  if (raw) {
-    const parsed = JSON.parse(raw);
-    Object.assign(S, parsed);
-    // offline progress, capped 8h
-    const away = Math.min((Date.now() - (parsed.lastSave || Date.now())) / 1000, 8 * 3600);
-    if (away > 5) S.souls += totalRate() * away;
+const NPR_VERT = /* glsl */`
+  #include <common>
+  #include <skinning_pars_vertex>
+  varying vec2 vNprUv;
+  varying vec3 vNprNormal;
+  varying vec3 vNprViewDir;
+  void main() {
+    vNprUv = uv;
+    #include <begin_vertex>
+    #include <beginnormal_vertex>
+    #include <skinning_vertex>
+    #include <skinnormal_vertex>
+    #include <project_vertex>
+    vNprNormal = normalize(normalMatrix * objectNormal);
+    vNprViewDir = normalize(-mvPosition.xyz);
+    gl_Position = projectionMatrix * mvPosition;
   }
-} catch (e) { /* fresh start */ }
-function totalRate() {
-  let r = 0;
-  GEN_DEFS.forEach(g => { r += (S.owned[g.k] || 0) * g.rate; });
-  return r;
-}
-function genCost(g) { return Math.ceil(g.cost * Math.pow(1.15, S.owned[g.k] || 0)); }
-const orbEl = document.getElementById("orb");
-const soulsEl = document.getElementById("souls");
-const rateEl = document.getElementById("rate");
-const frenzyEl = document.getElementById("frenzy");
-const gensEl = document.getElementById("gens");
-const zone = document.getElementById("orbzone");
-const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
+`;
 
-function tapOrb(e) {
-  const gain = S.tap * (Date.now() < S.frenzyUntil ? 7 : 1);
-  S.souls += gain;
-  if (!reduceMotion) {
-    const fl = document.createElement("span");
-    fl.className = "float-n";
-    fl.textContent = "+" + fmt(gain);
-    const zr = zone.getBoundingClientRect();
-    fl.style.left = ((e && e.clientX ? e.clientX - zr.left : zr.width / 2) - 10) + "px";
-    fl.style.top = ((e && e.clientY ? e.clientY - zr.top : zr.height / 3)) + "px";
-    zone.appendChild(fl);
-    setTimeout(() => fl.remove(), 200);
+const NPR_FRAG = /* glsl */`
+  uniform sampler2D uAlbedo;
+  uniform sampler2D uNormalRoughness;
+  uniform sampler2D uAO;
+  uniform sampler2D uTintMaskRimLightMask;
+  uniform vec3 uTintColor;
+  uniform vec3 uRimColor;
+  uniform float uRimStrength;
+  uniform float uRimPower;
+  uniform vec3 uLightDir;
+  uniform float uHasAO;
+  uniform float uHasTint;
+  varying vec2 vNprUv;
+  varying vec3 vNprNormal;
+  varying vec3 vNprViewDir;
+  void main() {
+    vec4 albedo = texture2D(uAlbedo, vNprUv);
+    vec3 ao = uHasAO > 0.5 ? texture2D(uAO, vNprUv).rgb : vec3(1.0);
+    vec3 base = albedo.rgb * ao;
+
+    // Deadlock tint mask: per-pixel tint select. r channel picks tint vs albedo.
+    if (uHasTint > 0.5) {
+      vec4 tm = texture2D(uTintMaskRimLightMask, vNprUv);
+      base = mix(base, base * uTintColor * 2.0, tm.r);
+    }
+
+    // wrapped diffuse from the normal(-roughness) map, s2-style
+    vec3 nrm = texture2D(uNormalRoughness, vNprUv).rgb;
+    vec3 n = normalize(nrm * 2.0 - 1.0 + vec3(0.0, 0.0, 1.0));
+    float ndl = dot(normalize(vNprNormal), normalize(uLightDir)) * 0.5 + 0.5;
+    vec3 lit = base * (0.42 + 0.58 * smoothstep(0.25, 0.75, ndl));
+
+    // rim light from the tint/rim mask g channel
+    float fresnel = pow(1.0 - max(dot(normalize(vNprNormal), normalize(vNprViewDir)), 0.0), uRimPower);
+    float rimMask = uHasTint > 0.5 ? texture2D(uTintMaskRimLightMask, vNprUv).g : 1.0;
+    lit += uRimColor * fresnel * uRimStrength * rimMask;
+
+    gl_FragColor = vec4(lit, 1.0);
   }
-  render();
-}
-orbEl.addEventListener("click", tapOrb);
-orbEl.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); tapOrb(e); } });
+`;
 
-function buildGens() {
-  gensEl.innerHTML = "";
-  GEN_DEFS.forEach(g => {
-    const b = document.createElement("button");
-    b.className = "gen";
-    b.dataset.k = g.k;
-    b.innerHTML = `
-      <span><span class="gname">${g.n}</span><br><span class="gsub">${g.sub} · ${fmt(g.rate)}/s each</span></span>
-      <span><span class="gcost"></span><br><span class="gcount"></span></span>`;
-    b.addEventListener("click", () => {
-      const c = genCost(g);
-      if (S.souls >= c) { S.souls -= c; S.owned[g.k] = (S.owned[g.k] || 0) + 1; render(); }
+const OUTLINE_VERT = /* glsl */`
+  #include <common>
+  #include <skinning_pars_vertex>
+  uniform float uOutlineWidth;
+  void main() {
+    #include <begin_vertex>
+    #include <beginnormal_vertex>
+    #include <skinning_vertex>
+    #include <skinnormal_vertex>
+    // inverted hull: push along normals
+    transformed += objectNormal * uOutlineWidth;
+    #include <project_vertex>
+  }
+`;
+
+const OUTLINE_FRAG = /* glsl */`
+  uniform vec3 uOutlineColor;
+  void main() { gl_FragColor = vec4(uOutlineColor, 1.0); }
+`;
+
+function loadTex(loader, url) {
+  return loader.loadAsync(url).catch(() => null);
+}
+
+window.renderSource2Model = async (canvas, glbUrl, nprMaterials) => {
+  const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: false, powerPreference: "low-power" });
+  renderer.setPixelRatio(Math.min(devicePixelRatio, 1.5));
+  renderer.setSize(canvas.clientWidth || 640, canvas.clientHeight || 360, false);
+  renderer.outputColorSpace = "srgb";
+  renderer.setClearColor(0x161209);
+
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(35, (canvas.clientWidth || 640) / (canvas.clientHeight || 360), .01, 100);
+  const controls = new OrbitControls(camera, canvas);
+  controls.enableDamping = true;
+
+  const texLoader = new THREE.TextureLoader();
+  texLoader.setCrossOrigin("anonymous");
+  const gltf = await new GLTFLoader().loadAsync(glbUrl);
+  const model = gltf.scene;
+  scene.add(model);
+
+  // frame the model
+  const box = new THREE.Box3().setFromObject(model);
+  const size = box.getSize(new THREE.Vector3()).length();
+  const center = box.getCenter(new THREE.Vector3());
+  model.position.sub(center);
+  camera.position.set(size * 0.55, size * 0.28, size * 0.9);
+  camera.near = size / 100; camera.far = size * 10; camera.updateProjectionMatrix();
+  controls.target.set(0, 0, 0);
+  controls.minDistance = size * 0.3; controls.maxDistance = size * 3;
+
+  const outlineWidth = size * 0.004;
+  const matsByMesh = {};
+  model.traverse(node => {
+    if (!node.isMesh) return;
+    node.castShadow = true;
+    const meshName = (node.name || "").toLowerCase();
+    // match manifest material by mesh name fragment, else first
+    let def = nprMaterials && nprMaterials[0];
+    if (nprMaterials) {
+      for (const m of nprMaterials) {
+        const n = m.name.toLowerCase();
+        if (meshName.includes(n) || n.includes(meshName.split("_")[0])) { def = m; break; }
+      }
+    }
+    matsByMesh[node.uuid] = def;
+  });
+
+  model.traverse(async node => {
+    if (!node.isMesh) return;
+    const def = matsByMesh[node.uuid] || (nprMaterials && nprMaterials[0]);
+    const ch = (def && def.channels) || {};
+    const params = (def && def.params) || {};
+
+    const [albedo, normalRoughness, ao, tintRim] = await Promise.all([
+      loadTex(texLoader, ch.albedo || ch.albedoFallback),
+      loadTex(texLoader, ch.normalRoughness || ch.normal),
+      loadTex(texLoader, ch.ambientOcclusion),
+      loadTex(texLoader, ch.tintMaskRimLightMask || ch.tintMask),
+    ]);
+    if (albedo) albedo.colorSpace = THREE.SRGBColorSpace;
+
+    const tintVec = params.g_vColorTint1 || [1, 1, 1];
+    const outlineTint = params.g_vSolidOutlineTint || [0.1, 0.1, 0.1];
+    const uniforms = {
+      uAlbedo: { value: albedo || new THREE.Color(0.5, 0.5, 0.5) },
+      uNormalRoughness: { value: normalRoughness || new THREE.Color(0.5, 0.5, 1.0) },
+      uAO: { value: ao || new THREE.Color(1, 1, 1) },
+      uTintMaskRimLightMask: { value: tintRim || new THREE.Color(0, 0, 0) },
+      uTintColor: { value: new THREE.Vector3(tintVec[0], tintVec[1], tintVec[2]) },
+      uRimColor: { value: new THREE.Vector3(0.75, 0.85, 0.9) },
+      uRimStrength: { value: 0.35 },
+      uRimPower: { value: 2.2 },
+      uLightDir: { value: new THREE.Vector3(0.4, 0.8, 0.6).normalize() },
+      uHasAO: { value: ao ? 1 : 0 },
+      uHasTint: { value: tintRim ? 1 : 0 },
+    };
+    const mat = new THREE.ShaderMaterial({
+      vertexShader: NPR_VERT, fragmentShader: NPR_FRAG, uniforms,
     });
-    gensEl.appendChild(b);
-  });
-}
-function render() {
-  soulsEl.textContent = fmt(S.souls);
-  const fr = Date.now() < S.frenzyUntil;
-  rateEl.textContent = fmt(totalRate() * (fr ? 7 : 1)) + " souls/s · tap +" + fmt(S.tap * (fr ? 7 : 1));
-  frenzyEl.textContent = fr ? "SOUL FRENZY ×7" : "";
-  document.querySelectorAll(".gen").forEach(b => {
-    const g = GEN_DEFS.find(x => x.k === b.dataset.k);
-    const c = genCost(g);
-    const afford = S.souls >= c;
-    b.disabled = !afford;
-    b.querySelector(".gcost").textContent = fmt(c);
-    b.querySelector(".gcost").className = "gcost" + (afford ? "" : " cant");
-    b.querySelector(".gcount").textContent = (S.owned[g.k] || 0) + " owned";
-  });
-}
-buildGens();
-render();
-setInterval(render, 200);
-setInterval(() => { localStorage.setItem(SAVE_KEY, JSON.stringify({...S, lastSave: Date.now()})); }, 30000);
-addEventListener("beforeunload", () => localStorage.setItem(SAVE_KEY, JSON.stringify({...S, lastSave: Date.now()})));
+    node.material = mat;
 
-/* wandering rejuvenator (golden-cookie class) */
-let rejuvTimer = null;
-function scheduleRejuv() {
-  clearTimeout(rejuvTimer);
-  rejuvTimer = setTimeout(spawnRejuv, 60000 + Math.random() * 120000);
-}
-function spawnRejuv() {
-  const r = document.createElement("img");
-  r.src = "data:image/svg+xml," + encodeURIComponent(`<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'><circle cx='20' cy='20' r='17' fill='#8fbdb0' stroke='#0e0c09' stroke-width='3'/><circle cx='15' cy='15' r='4' fill='#d6efe8'/></svg>`);
-  r.className = "rejuv";
-  r.alt = "rejuvenator — tap for a bonus";
-  r.style.left = (8 + Math.random() * 70) + "%";
-  r.style.top = (8 + Math.random() * 70) + "%";
-  r.tabIndex = 0;
-  r.addEventListener("click", () => {
-    if (Math.random() < 0.5) S.frenzyUntil = Date.now() + 25000;
-    else S.souls += Math.max(13, totalRate() * 40);
-    r.remove(); render(); scheduleRejuv();
+    // inverted-hull solid outline (skips transmissive/keyglow style meshes)
+    if (ch.nprOutlineMask !== undefined || true) {
+      const outline = new THREE.Mesh(node.geometry, new THREE.ShaderMaterial({
+        vertexShader: OUTLINE_VERT, fragmentShader: OUTLINE_FRAG,
+        uniforms: { uOutlineWidth: { value: outlineWidth }, uOutlineColor: { value: new THREE.Vector3(outlineTint[0], outlineTint[1], outlineTint[2]) } },
+        side: THREE.BackSide,
+      }));
+      outline.name = node.name + "__outline";
+      node.add(outline);
+    }
   });
-  zone.appendChild(r);
-  setTimeout(() => { r.remove(); }, 13000);
-  scheduleRejuv();
-}
-scheduleRejuv();
+
+  let raf;
+  const tick = () => {
+    if (!canvas.isConnected || canvas.hidden) { cancelAnimationFrame(raf); return; }
+    controls.update();
+    renderer.render(scene, camera);
+    raf = requestAnimationFrame(tick);
+  };
+  tick();
+  return { dispose: () => { cancelAnimationFrame(raf); controls.dispose(); renderer.dispose(); } };
+};
 </script>
 </body>
 </html>

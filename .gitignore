@@ -2,3 +2,12 @@ tools/vrf/
 tools/*.zip
 assets/previews/
 *.vpk
+
+# Extracted Valve/Deadlock game content. Third-party assets with no
+# redistribution license, so keep them out of this public repo. The tooling
+# in tools/ regenerates these locally from a VPK.
+assets/mods/
+
+# Python build artifacts
+__pycache__/
+*.pyc

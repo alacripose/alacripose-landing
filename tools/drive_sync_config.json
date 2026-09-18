@@ -1,0 +1,14 @@
+{
+  "source": "google-drive",
+  "folderId": "1yAQkguc1k1d2HncEdFA6d4ttaFomYZ-M",
+  "folderUrl": "https://drive.google.com/drive/folders/1yAQkguc1k1d2HncEdFA6d4ttaFomYZ-M",
+  "public": true,
+  "include": [".vpk"],
+  "exclude": [".zip", ".gif", ".txt"],
+  "generatedOutputs": [
+    "tools/catalog.json",
+    "tools/vpk_targets.json",
+    "tools/model_preview_manifest.json"
+  ],
+  "previewPolicy": "download-and-process-temporarily; never require source files to be committed"
+}
