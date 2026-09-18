@@ -350,8 +350,8 @@
           "shader": "pbr.vfx",
           "nprLighting": true,
           "channels": {
-            "albedo": "assets/preview-models/mayu/models/heroes_wip/doorman_v2/materials/t_big hoodie_basecolor.ktx2",
-            "normalRoughness": "assets/preview-models/mayu/models/heroes_wip/doorman_v2/materials/t_big hoodie_normalmap.ktx2",
+            "albedo": "assets/preview-models/mayu/models/heroes_wip/doorman_v2/materials/t_big_hoodie_basecolor.ktx2",
+            "normalRoughness": "assets/preview-models/mayu/models/heroes_wip/doorman_v2/materials/t_big_hoodie_normalmap.ktx2",
             "ambientOcclusion": {
               "const": [
                 0,
@@ -360,7 +360,7 @@
                 255
               ]
             },
-            "tintMaskRimLightMask": "assets/preview-models/mayu/models/heroes_wip/doorman_v2/materials/t_big hoodie_basecolor.ktx2",
+            "tintMaskRimLightMask": "assets/preview-models/mayu/models/heroes_wip/doorman_v2/materials/t_big_hoodie_basecolor.ktx2",
             "nprOutlineMask": {
               "const": [
                 255,
@@ -369,7 +369,7 @@
                 255
               ]
             },
-            "nprTransmissiveColor": "assets/preview-models/mayu/models/heroes_wip/doorman_v2/materials/t_big hoodie_basecolor.ktx2"
+            "nprTransmissiveColor": "assets/preview-models/mayu/models/heroes_wip/doorman_v2/materials/t_big_hoodie_basecolor.ktx2"
           },
           "params": {
             "g_vColorTint1": [

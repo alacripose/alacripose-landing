@@ -90,7 +90,11 @@ const remap = new Map();
 for (const src of files) {
   if (!src.startsWith(SRC_ROOT)) throw new Error(`unexpected path outside ${SRC_ROOT}: ${src}`);
   if (!existsSync(src)) throw new Error(`missing: ${src}`);
-  const dst = DST_ROOT + src.slice(SRC_ROOT.length);
+  // Slugify the tail: VRF emits names like "t_big hoodie_normalmap.png", and a
+  // raw space in an asset URL needs %20 encoding everywhere it is used, which is
+  // an easy thing to get wrong later.
+  const rel = src.slice(SRC_ROOT.length).split("/").map((seg) => seg.replace(/\s+/g, "_")).join("/");
+  const dst = DST_ROOT + rel;
   remap.set(src, dst);
   if (DRY) {
     console.log(`  ${src} -> ${dst}`);
