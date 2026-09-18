@@ -784,8 +784,19 @@ const OUTLINE_FRAG = /* glsl */`
   void main() { gl_FragColor = vec4(uOutlineColor, 1.0); }
 `;
 
-function loadTex(loader, url) {
-  return loader.loadAsync(url).catch(() => null);
+function loadTex(loader, src) {
+  // A channel is normally a URL. When the .vmat declared a constant vector
+  // (TextureNormal1, TextureAmbientOcclusion1, ...), VRF emits a 1x1 PNG and
+  // the manifest inlines that value as {const:[r,g,b,a]} instead. Build the
+  // 1x1 texture at runtime so the exact constant is used and no stub files ship.
+  if (!src) return Promise.resolve(null);
+  if (typeof src === "object" && Array.isArray(src.const)) {
+    const [r, g, b, a] = src.const;
+    const tex = new THREE.DataTexture(new Uint8Array([r, g, b, a]), 1, 1, THREE.RGBAFormat);
+    tex.needsUpdate = true;
+    return Promise.resolve(tex);
+  }
+  return loader.loadAsync(src).catch(() => null);
 }
 
 window.renderSource2Model = async (canvas, glbUrl, nprMaterials) => {
@@ -842,7 +853,11 @@ window.renderSource2Model = async (canvas, glbUrl, nprMaterials) => {
     const [albedo, normalRoughness, ao, tintRim] = await Promise.all([
       loadTex(texLoader, ch.albedo || ch.albedoFallback),
       loadTex(texLoader, ch.normalRoughness || ch.normal),
-      loadTex(texLoader, ch.ambientOcclusion),
+      // A constant AO channel means the material has no AO map. Sampling it
+      // would multiply albedo by that constant (0,0,0 for most Deadlock
+      // materials) and render the model black, so a constant resolves to
+      // "absent" and uHasAO falls to 0.
+      loadTex(texLoader, typeof ch.ambientOcclusion === "string" ? ch.ambientOcclusion : null),
       loadTex(texLoader, ch.tintMaskRimLightMask || ch.tintMask),
     ]);
     if (albedo) albedo.colorSpace = THREE.SRGBColorSpace;
