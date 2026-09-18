@@ -11,3 +11,6 @@ assets/mods/
 # Python build artifacts
 __pycache__/
 *.pyc
+
+# KTX-Software (ktx/toktx CLI) for the KTX2 texture pass; installed locally.
+tools/ktx/

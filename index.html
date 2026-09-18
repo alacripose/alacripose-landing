@@ -882,8 +882,11 @@ window.renderSource2Model = async (canvas, glbUrl, nprMaterials) => {
     });
     node.material = mat;
 
-    // inverted-hull solid outline (skips transmissive/keyglow style meshes)
-    if (ch.nprOutlineMask !== undefined || true) {
+    // Inverted-hull solid outline. Only materials that declare an
+    // nprOutlineMask channel get one - that is how the game marks meshes that
+    // take an outline. In this manifest that is everything except mayu's collar
+    // and deagle, which are the transmissive/accessory meshes to skip.
+    if (ch.nprOutlineMask !== undefined) {
       const outline = new THREE.Mesh(node.geometry, new THREE.ShaderMaterial({
         vertexShader: OUTLINE_VERT, fragmentShader: OUTLINE_FRAG,
         uniforms: { uOutlineWidth: { value: outlineWidth }, uOutlineColor: { value: new THREE.Vector3(outlineTint[0], outlineTint[1], outlineTint[2]) } },
