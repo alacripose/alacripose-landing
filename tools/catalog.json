@@ -407,6 +407,237 @@
       "id": "1HwIrHiAg0zQ05lLSZ6gPLJjtXXwpbobn",
       "kind": "hero skin",
       "note": ""
+    },
+    {
+      "file": "ava_headed_calico.vpk",
+      "name": "Ava-Headed Calico",
+      "id": "1fb13U-86qILsLNRPX8V5YJWamN5cQ-hX",
+      "kind": "skin",
+      "note": "Drive build of the published release."
+    },
+    {
+      "file": "blazion_inferno.vpk",
+      "name": "Blazion (Mega Blaziken) Infernus",
+      "id": "1-hESOnuaaTzVeNqtyhClcdilbITQJQTh",
+      "kind": "skin",
+      "note": ""
+    },
+    {
+      "file": "bloons monkey city ivy.vpk",
+      "name": "Bloons Monkey City Ivy",
+      "id": "1LHM_58pKir8cgi_pL_2HwPRRVPujhnwm",
+      "kind": "skin",
+      "note": ""
+    },
+    {
+      "file": "bobbyakimbo_jacket_billy.vpk",
+      "name": "Bobbyakimbo Jacket Billy",
+      "id": "1Y_qw_ydFeC5FNoVwl2aKWbTxeXPEF3pN",
+      "kind": "skin",
+      "note": ""
+    },
+    {
+      "file": "cloakless_pocket_no_scarf.vpk",
+      "name": "Cloakless Pocket (no scarf)",
+      "id": "1QSMiu68dXhazkoN_TRDzzjV2agB5d_nx",
+      "kind": "skin",
+      "note": ""
+    },
+    {
+      "file": "cloakless_pocket_with_scarf.vpk",
+      "name": "Cloakless Pocket (with scarf)",
+      "id": "12P_hqIwxfXdYf-0PwPToVuEuk3Hfo03h",
+      "kind": "skin",
+      "note": ""
+    },
+    {
+      "file": "gamma_doppler_graves.vpk",
+      "name": "Gamma Doppler Graves",
+      "id": "1BzbR0k233CEd04Dkr7qduRNYK80VkQmM",
+      "kind": "skin",
+      "note": ""
+    },
+    {
+      "file": "grungelock_lite.vpk",
+      "name": "Grungelock (lite)",
+      "id": "1BDLOrXvymU9nl0uNpreKZ6dRu2b_jJxC",
+      "kind": "hud",
+      "note": ""
+    },
+    {
+      "file": "gun_turret_mcginnis_v2.vpk",
+      "name": "Gun Turret McGinnis V2",
+      "id": "1bDxXDM0RCtw_iWRXK_YDzTG2qWRRSa3h",
+      "kind": "prop",
+      "note": ""
+    },
+    {
+      "file": "holliday_dark_demon_recolor.vpk",
+      "name": "Holliday Dark Demon recolor",
+      "id": "1KE5fyjl7GlDjwiZZJ0gxCAt3T5j3VBuG",
+      "kind": "skin",
+      "note": ""
+    },
+    {
+      "file": "ivy_with_big_wings.vpk",
+      "name": "Ivy MASSIVE wingspan",
+      "id": "1hUozsl1JEr6yDfJyyz6Dn4kN-w2q_Rc0",
+      "kind": "skin",
+      "note": ""
+    },
+    {
+      "file": "jungle_creep_haze.vpk",
+      "name": "Glowing Jungle Creeps recolor",
+      "id": "1C5LOJTgmEzhuV3SEBCjPYaAcA2W0EcUi",
+      "kind": "prop",
+      "note": ""
+    },
+    {
+      "file": "minecraft_archmother.vpk",
+      "name": "Minecraft Archmother",
+      "id": "1MknUTW4Qk1hSUkAE0dRSTo7CYWtBqKom",
+      "kind": "skin",
+      "note": ""
+    },
+    {
+      "file": "newitems.vpk",
+      "name": "New items",
+      "id": "1UTrgn45X6DM4hKnzJxRBRcwWQhGSXjA5",
+      "kind": "prop",
+      "note": "Unlabelled item pack from the releases folder."
+    },
+    {
+      "file": "noir-kodak-trix-400.vpk",
+      "name": "Noir Kodak Tri-X 400",
+      "id": "1DBRaHeWecHVVWEnNKFQMc5zqUbrZ980S",
+      "kind": "hud",
+      "note": ""
+    },
+    {
+      "file": "pak05_dir.vpk",
+      "name": "pak05 (base pak)",
+      "id": "1kQVPT8bJBp28NDg9p8464zKvb7ajf3SE",
+      "kind": "misc",
+      "note": "Deadlock base pak, not a mod."
+    },
+    {
+      "file": "pak15_dir.vpk",
+      "name": "pak15 (base pak)",
+      "id": "1lhPMGHBHkbe_NzxCv_Q9hkiz-LcW939O",
+      "kind": "misc",
+      "note": "Deadlock base pak, not a mod."
+    },
+    {
+      "file": "rogue_venator.vpk",
+      "name": "Rogue Venator",
+      "id": "1dVahPI8fIh7Qw7cgy4MxNfoOvH0SoCJg",
+      "kind": "skin",
+      "note": ""
+    },
+    {
+      "file": "ROR Music Pack by Lurkeww with musicsoundevents from 4-10-2026.vpk",
+      "name": "ROR Music Pack",
+      "id": "1Z9EhvpBp64SfUYUFKSRqmQZJIQczexGY",
+      "kind": "sound",
+      "note": ""
+    },
+    {
+      "file": "sly_haze.vpk",
+      "name": "Sly Haze",
+      "id": "1y39qRsBdLEaD9rIZel1Mea8rJtyySkzQ",
+      "kind": "skin",
+      "note": ""
+    },
+    {
+      "file": "sombra_wraith_wip.vpk",
+      "name": "Sombra Wraith (WIP)",
+      "id": "1joG-AqFEZfHRHrIuQ-ulKrR3L-mESpIo",
+      "kind": "skin",
+      "note": ""
+    },
+    {
+      "file": "stamina_manager.vpk",
+      "name": "Stamina Manager",
+      "id": "1w9GOh67hAjvVGbe0zvy_X9PYmE6hTBEO",
+      "kind": "hud",
+      "note": ""
+    },
+    {
+      "file": "tec-9_bobbyakimbo_haze.vpk",
+      "name": "Tec-9 bobbyakimbo Haze",
+      "id": "1i4f5CJjl6QBwMpxvJ-D_Y5IuZKf0cnrT",
+      "kind": "skin",
+      "note": ""
+    },
+    {
+      "file": "maps.zip",
+      "name": "Map sources (zip)",
+      "id": "1Hya9jr_O5ZnklDrp4jl50pnGSsKez3fs",
+      "kind": "misc",
+      "note": "Source files for the custom maps."
+    },
+    {
+      "file": "mayu_jump.gif",
+      "name": "Mayu jump (gif)",
+      "id": "14RXFh0XaT_8bEBJGbXdHcYFB4CYk1Jim",
+      "kind": "misc",
+      "note": ""
+    },
+    {
+      "file": "testmap.vpk",
+      "name": "Test map",
+      "id": "1KQszr8NWcZtjZUace7Sj6pL5N8D-FNjj",
+      "kind": "misc",
+      "note": ""
+    },
+    {
+      "file": "black_white_bg.vpk",
+      "name": "Minified shop — black/white bg",
+      "id": "1B2VEE7ws0hvKFd93eUdVsnlmY-BAf6nH",
+      "kind": "hud",
+      "note": ""
+    },
+    {
+      "file": "ol_plains.vpk",
+      "name": "OpenLock — Plains",
+      "id": "1ZbsFFnpegXoezgPVBY7oG7qZLCuYKm5j",
+      "kind": "misc",
+      "note": ""
+    },
+    {
+      "file": "pak01_dir.vpk",
+      "name": "pak01 (unclassified)",
+      "id": "1oTKxTzc7WslsJe6XR171Eg8vvVIA-4vR",
+      "kind": "misc",
+      "note": ""
+    },
+    {
+      "file": "pak02_dir.vpk",
+      "name": "pak02 (unclassified)",
+      "id": "1sKJKQ2ru3D1jsWqwD1evSSUpUlKaIrtu",
+      "kind": "misc",
+      "note": ""
+    },
+    {
+      "file": "pak02_dir.vpk",
+      "name": "pak02 (unclassified, 2nd)",
+      "id": "1ymUap4m9PNWM-Smd0274QDb7DbgaNTJt",
+      "kind": "misc",
+      "note": ""
+    },
+    {
+      "file": "pak06_dir.vpk",
+      "name": "pak06 (unclassified)",
+      "id": "1_Kjkdx7u9NCdNB42W5mTivto76nSHt4t",
+      "kind": "misc",
+      "note": ""
+    },
+    {
+      "file": "pak44_dir.vpk",
+      "name": "pak44 (unclassified)",
+      "id": "153I3wf3jjNA3BZmeyPJveL0f916nYY1c",
+      "kind": "misc",
+      "note": ""
     }
   ],
   "nsfw_drive_only": [
@@ -433,6 +664,26 @@
       "name": "Lovander Haze (old)",
       "id": "1zH6yAvjqr4afdLVsB0z2N5TJzrCCHxqN",
       "kind": "hero skin"
+    }
+  ],
+  "modpacks": [
+    {
+      "file": "Secret Pack.mrpack",
+      "name": "Secret Pack — \"F O R E V E R\"",
+      "id": "1bAyK4BjVtyOCYQHdx9AJnbeBUVp2iQ5E",
+      "size": "226 MB",
+      "meta": "Minecraft 1.21.1 · NeoForge 21.1.217 · 247 mods",
+      "note": "Modrinth pack. Ships pre-generated Distant Horizons LODs for the server world, so it looks right on the dedicated server without a local render pass.",
+      "access": "Monkestation partner dedicated servers — access via the Monkestation Discord"
+    },
+    {
+      "file": "Coalescent Moons.zip",
+      "name": "Coalescent Moons",
+      "id": "1M-1Zzi-rzdqgNUjcKOauGGJCidSUhlTz",
+      "size": "1.35 GB",
+      "meta": "full instance archive",
+      "note": "Complete Minecraft instance — unpack it into your launcher's instances folder. Size means I could not read its loader metadata without pulling the whole archive.",
+      "access": "Monkestation partner dedicated servers — access via the Monkestation Discord"
     }
   ]
 }

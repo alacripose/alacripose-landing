@@ -3,12 +3,25 @@
   "folderId": "1yAQkguc1k1d2HncEdFA6d4ttaFomYZ-M",
   "folderUrl": "https://drive.google.com/drive/folders/1yAQkguc1k1d2HncEdFA6d4ttaFomYZ-M",
   "public": true,
-  "include": [".vpk"],
-  "exclude": [".zip", ".gif", ".txt"],
+  "include": [
+    ".vpk",
+    ".zip",
+    ".mrpack",
+    ".txt"
+  ],
+  "exclude": [
+    ".gif"
+  ],
   "generatedOutputs": [
     "tools/catalog.json",
+    "tools/drive_index.json",
     "tools/vpk_targets.json",
     "tools/model_preview_manifest.json"
   ],
-  "previewPolicy": "download-and-process-temporarily; never require source files to be committed"
+  "previewPolicy": "download-and-process-temporarily; never require source files to be committed",
+  "notes": ".vpk = Deadlock mods; .zip/.mrpack = Minecraft packs playable on the Monkestation partner servers; .txt = install/code notes.",
+  "ignore": [
+    "openlock_codes",
+    "openlock_codes.txt"
+  ]
 }
