@@ -124,10 +124,34 @@ async function main() {
   })()`));
   check("coverflow builds a slide per mod with art", cf.n >= 20, `slides=${cf.n}`);
   check("coverflow has art in its slides", cf.withArt >= Math.max(3, cf.n * 0.5), `art=${cf.withArt}/${cf.n}`);
-  check("coverflow uses 3D transforms", /matrix3d|matrix/.test(cf.frontTf), cf.frontTf.slice(0, 40));
+  const sideTf = await val(`(() => {
+    const st = document.getElementById('cf-stage');
+    const mid = st.getBoundingClientRect().left + st.getBoundingClientRect().width / 2;
+    const front = st.querySelector('.cf-slide.front');
+    let best = 'none';
+    for (const s of st.querySelectorAll('.cf-slide')) {
+      const r = s.getBoundingClientRect();
+      if (s === front || r.width === 0) continue;
+      if (r.left + r.width / 2 > mid + 40) { best = getComputedStyle(s).transform; break; }
+    }
+    return best;
+  })()`);
+  // the covers beside the front one must fan back in 3D; the front sits flat at z=0
+  check("side covers fan in 3D", /matrix3d/.test(sideTf), sideTf.slice(0, 44));
+  check("front cover sits flat on the front plane", /matrix\(1, 0, 0, 1, 0, 0\)/.test(cf.frontTf), cf.frontTf.slice(0, 40));
   check("coverflow keeps far slides off-screen", cf.hidden > 0, `hidden=${cf.hidden}`);
   check("coverflow labels every slide", cf.labels === cf.n, `${cf.labels}/${cf.n}`);
   const frontBefore = cf.front;
+  // a "next" item belongs on the right; if it sits left, the cylinder is mirrored
+  const nextIdx = (frontBefore + 1) % cf.n;
+  const nextSide = await val(`(() => {
+    const st = document.getElementById('cf-stage').getBoundingClientRect();
+    const s = document.querySelectorAll('#cf-stage .cf-slide')[${nextIdx}];
+    if (!s) return null;
+    const r = s.getBoundingClientRect();
+    return Math.round(r.left + r.width / 2 - (st.left + st.width / 2));
+  })()`);
+  check("the next mod waits on the right, not the left", nextSide === null || nextSide > 0, `offset=${nextSide}px`);
   await val(`document.getElementById('cf-next').click()`);
   await sleep(700);
   const frontAfter = await val(`[...document.querySelectorAll('#cf-stage .cf-slide')].indexOf(document.querySelector('#cf-stage .cf-slide.front'))`);
@@ -141,6 +165,34 @@ async function main() {
     return ids.length - new Set(ids).size;
   })()`);
   check("coverflow has no duplicate art", dupIds === 0, `dupes=${dupIds}`);
+
+  // ── carousel controls: pause (WCAG 2.2.2), live region, keyboard ──
+  const tog0 = JSON.parse(await val(`JSON.stringify({
+    label: document.getElementById('cf-toggle').getAttribute('aria-label'),
+    icon: document.getElementById('cf-toggle').textContent.trim() })`));
+  check("pause control offers to pause while playing", /Pause/i.test(tog0.label), tog0.label);
+  await val(`document.getElementById('cf-toggle').click()`);
+  await sleep(300);
+  const tog1 = JSON.parse(await val(`JSON.stringify({
+    label: document.getElementById('cf-toggle').getAttribute('aria-label'),
+    icon: document.getElementById('cf-toggle').textContent.trim(),
+    live: document.querySelector('[data-cf-live]').textContent })`));
+  check("pause control flips to play", /Play/i.test(tog1.label) && /play/i.test(tog1.icon), `${tog1.label} / ${tog1.icon}`);
+  check("pausing is announced", /paused/i.test(tog1.live), tog1.live);
+  const idxPaused = await val(`[...document.querySelectorAll('#cf-stage .cf-slide')].indexOf(document.querySelector('#cf-stage .cf-slide.front'))`);
+  await sleep(4200);
+  const idxStill = await val(`[...document.querySelectorAll('#cf-stage .cf-slide')].indexOf(document.querySelector('#cf-stage .cf-slide.front'))`);
+  check("paused carousel does not auto-advance", idxPaused === idxStill, `${idxPaused} -> ${idxStill}`);
+  await val(`document.getElementById('cf-toggle').click()`);
+  await val(`document.getElementById('heroflow').focus()`);
+  await val(`document.getElementById('heroflow').dispatchEvent(new KeyboardEvent('keydown', {key:'ArrowRight', bubbles:true, cancelable:true}))`);
+  await sleep(700);
+  const idxKey = await val(`[...document.querySelectorAll('#cf-stage .cf-slide')].indexOf(document.querySelector('#cf-stage .cf-slide.front'))`);
+  check("arrow keys move the carousel", idxKey === (idxStill + 1) % cf.n, `${idxStill} -> ${idxKey}`);
+  const live2 = await val(`document.querySelector('[data-cf-live]').textContent`);
+  check("keyboard navigation is announced", /Mod \d+ of \d+/.test(live2), live2);
+  const skipOk = await val(`(() => { const a = document.querySelector('.skip-link'); a.focus(); return document.activeElement === a; })()`);
+  check("skip link is focusable", skipOk === true);
 
   // ── filters ──
   await val(`document.querySelector('.chip[data-filter="sound"]').click()`);

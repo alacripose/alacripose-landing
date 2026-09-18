@@ -18,7 +18,7 @@
     --surface4: #241d14;
     --ink: #eadfc4;
     --ink70: rgba(234,223,196,.72);
-    --ink50: rgba(234,223,196,.52);
+    --ink50: rgba(234,223,196,.66);
     --divider: rgba(234,223,196,.12);
     --brass: #d1a437;
     --brass-hi: #e9c158;
@@ -31,7 +31,7 @@
     --day: #7ec8f0;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; }
+  html { scroll-behavior: smooth; scroll-padding-top: 72px; }
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
     *, *::before, *::after { animation: none !important; transition: none !important; }
@@ -86,6 +86,20 @@
   }
   @media (max-width: 640px) { body { background-size: 100% 70vh; } }
   a { color: var(--teal); text-decoration: none; }
+  :focus-visible { outline: 2px solid var(--brass); outline-offset: 2px; }
+  .sr-only {
+    position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+    overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; border: 0;
+  }
+  .skip-link {
+    position: absolute; left: 12px; top: -60px; z-index: 200;
+    background: var(--brass); color: var(--ground); padding: 11px 16px;
+    font-family: "IBM Plex Mono", monospace; font-size: 12.5px; letter-spacing: .1em;
+    text-transform: uppercase; text-decoration: none; transition: top .12s ease;
+  }
+  .skip-link:focus { top: 8px; color: var(--ground); }
+  /* WCAG 1.4.1 — links inside running text must not rely on colour alone */
+  p a, li a, .note a, footer a { text-decoration: underline; text-underline-offset: 3px; }
   a:hover { color: var(--brass-hi); }
   .wrap { max-width: 1120px; margin: 0 auto; padding: 0 22px; }
 
@@ -161,6 +175,7 @@
 </style>
 </head>
 <body>
+<a class="skip-link" href="#main">Skip to main content</a>
 
 <div class="topbar">
   <div class="wrap">
@@ -184,6 +199,7 @@
 </header>
 
 <div class="wrap">
+  <main id="main">
   <div class="board">
     <div class="tabs" role="tablist" aria-label="minecraft">
       <button class="tab" role="tab" id="tab-packs" aria-controls="panel-packs" aria-selected="true">Packs</button>
@@ -223,6 +239,7 @@
       <p class="note">Permanent invite, safe to share: <a href="https://discord.gg/sQYHfY6Eyc" rel="noopener" target="_blank">discord.gg/sQYHfY6Eyc</a></p>
     </section>
   </div>
+  </main>
 
   <footer class="small">
     <span>Servers hosted by Monkestation &middot; community: <a href="https://discord.gg/sQYHfY6Eyc" rel="noopener" target="_blank">Coalescent Nights</a> &middot; <a href="index.html">Deadlock mods</a></span>
@@ -378,6 +395,23 @@ fetch("tools/catalog.json", {cache: "no-store"})
     if (Array.isArray(d.community) && d.community.length) { COMMUNITY = d.community; renderCommunity(); }
   })
   .catch(function () { /* inline data stands in for the catalog */ });
+</script>
+<script>
+/* WCAG 3.2.5 best practice: warn about new tabs without adding visual noise. */
+function labelNewTabs(root) {
+  root.querySelectorAll('a[target="_blank"]').forEach(a => {
+  const said = (a.getAttribute("aria-label") || "") + " " + a.textContent;
+  if (/new (tab|window)/i.test(said)) return;
+  if (a.hasAttribute("aria-label")) { a.setAttribute("aria-label", a.getAttribute("aria-label") + ", opens in a new tab"); return; }
+  const hint = document.createElement("span");
+  hint.className = "sr-only";
+  hint.textContent = " (opens in a new tab)";
+    a.append(hint);
+  });
+}
+labelNewTabs(document);
+// the pack/community cards render from tools/catalog.json, so late links need catching too
+new MutationObserver(() => labelNewTabs(document)).observe(document.body, { childList: true, subtree: true });
 </script>
 </body>
 </html>

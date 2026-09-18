@@ -23,7 +23,7 @@
     --surface16: #382e20;      /* 16dp */
     --ink: #eadfc4;
     --ink70: rgba(234,223,196,.72);
-    --ink50: rgba(234,223,196,.52);
+    --ink50: rgba(234,223,196,.66);
     --divider: rgba(234,223,196,.12);
     --brass: #d1a437;
     --brass-hi: #e9c158;
@@ -33,7 +33,7 @@
     --radius: 2px;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; }
+  html { scroll-behavior: smooth; scroll-padding-top: 72px; }
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
     *, *::before, *::after { animation: none !important; transition: none !important; }
@@ -50,6 +50,19 @@
   *::-webkit-scrollbar-track { background: var(--ground); }
   *::-webkit-scrollbar-thumb { background: var(--brass-dim); border-radius: 0; }
   :focus-visible { outline: 2px solid var(--brass); outline-offset: 2px; }
+  .sr-only {
+    position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+    overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; border: 0;
+  }
+  .skip-link {
+    position: absolute; left: 12px; top: -60px; z-index: 200;
+    background: var(--brass); color: var(--ground); padding: 11px 16px;
+    font-family: "IBM Plex Mono", monospace; font-size: 12.5px; letter-spacing: .1em;
+    text-transform: uppercase; text-decoration: none; transition: top .12s ease;
+  }
+  .skip-link:focus { top: 8px; color: var(--ground); }
+  /* WCAG 1.4.1 — links inside running text must not rely on colour alone */
+  .sec-sub a, .pitch a, p a, li a { text-decoration: underline; text-underline-offset: 3px; }
   a { color: var(--teal); text-decoration: none; }
   a:hover { color: var(--brass-hi); }
   .mono { font-family: "IBM Plex Mono", monospace; }
@@ -95,10 +108,12 @@
   .btn:active { filter: brightness(.85); }
 
   /* hero coverflow: every mod with art on a cylinder, iTunes style */
-  .coverflow { position: relative; height: 404px; user-select: none; }
+  .coverflow { position: relative; height: 420px; user-select: none; overflow: hidden; }
   .cf-stage {
     position: absolute; inset: 0; perspective: 1500px; perspective-origin: 50% 40%;
     transform-style: preserve-3d; cursor: grab; touch-action: pan-y;
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 11%, #000 89%, transparent);
+    mask-image: linear-gradient(90deg, transparent, #000 11%, #000 89%, transparent);
   }
   .cf-stage.dragging { cursor: grabbing; }
   .cf-slide {
@@ -111,11 +126,11 @@
   .cf-slide img {
     width: 100%; aspect-ratio: 4 / 5; object-fit: contain; display: block;
     background: var(--ground2); border: 1px solid var(--divider);
-    -webkit-box-reflect: below 2px linear-gradient(transparent 58%, rgba(0,0,0,.30));
+    -webkit-box-reflect: below 2px linear-gradient(rgba(0,0,0,.30), transparent 52%);
   }
   .cf-slide.front img { border-color: var(--brass-dim); }
   .cf-slide .cf-cap {
-    margin-top: 8px; font-family: "IBM Plex Mono", monospace; font-size: 11px; letter-spacing: .05em;
+    margin: 0 0 8px; font-family: "IBM Plex Mono", monospace; font-size: 11px; letter-spacing: .05em;
     color: var(--ink70); text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
   }
   .cf-slide .cf-dl { color: var(--brass); }
@@ -125,12 +140,20 @@
     background: rgba(14,12,9,.72); border: 1px solid var(--divider); color: var(--brass); cursor: pointer;
   }
   .cf-nav:hover { border-color: var(--brass-dim); background: var(--surface6); }
-  .cf-nav.prev { left: -8px; }
-  .cf-nav.next { right: -8px; }
+  .cf-nav.prev { left: 6px; }
+  .cf-nav.next { right: 6px; }
   .cf-nav .material-icons { font-size: 24px; }
+  .cf-toggle {
+    position: absolute; bottom: 4px; left: 50%; transform: translateX(-50%); z-index: 6;
+    width: 40px; height: 40px; display: grid; place-items: center; cursor: pointer;
+    background: rgba(14,12,9,.72); border: 1px solid var(--divider); color: var(--ink70);
+  }
+  .cf-toggle:hover { border-color: var(--brass-dim); color: var(--brass); }
+  .cf-toggle .material-icons { font-size: 20px; }
+  @media (min-width: 761px) { .cf-nav { width: 44px; height: 44px; } }
   @media (prefers-reduced-motion: reduce) { .cf-slide { transition: none; } }
   @media (max-width: 760px) {
-    .coverflow { height: 306px; }
+    .coverflow { height: 320px; }
     .cf-slide { --cf-w: 140px; }
     .cf-nav { top: 34%; width: 36px; height: 36px; }
     .cf-nav.prev { left: 0; }
@@ -272,6 +295,7 @@
 </style>
 </head>
 <body id="top">
+<a class="skip-link" href="#main">Skip to main content</a>
 
 <div class="topbar">
   <div class="wrap">
@@ -299,10 +323,12 @@
           <a class="btn" href="#published"><span class="material-icons" aria-hidden="true">grid_view</span>Browse mods</a>
         </div>
       </div>
-      <div class="coverflow" id="heroflow" role="group" aria-label="browse mods by thumbnail">
+      <div class="coverflow" id="heroflow" role="region" aria-roledescription="carousel" aria-label="Mod thumbnails">
         <button class="cf-nav prev" id="cf-prev" type="button" aria-label="Previous mod"><span class="material-icons" aria-hidden="true">chevron_left</span></button>
         <div class="cf-stage" id="cf-stage"><!-- slides are built from every mod that has a thumbnail --></div>
         <button class="cf-nav next" id="cf-next" type="button" aria-label="Next mod"><span class="material-icons" aria-hidden="true">chevron_right</span></button>
+        <button class="cf-toggle" id="cf-toggle" type="button" data-cf-toggle aria-label="Pause rotating thumbnails"><span class="material-icons" aria-hidden="true">pause</span></button>
+        <p class="sr-only" data-cf-live aria-live="polite" aria-atomic="true"></p>
       </div>
     </div>
     <div class="hero-stats" role="list">
@@ -315,6 +341,7 @@
   </div>
 </header>
 
+<main id="main">
 <section id="published">
   <div class="wrap">
     <h2 class="sec">Published mods</h2>
@@ -418,6 +445,8 @@
     </div>
   </div>
 </section>
+
+</main>
 
 <footer>
   <div class="wrap">
@@ -1011,19 +1040,28 @@ window.renderSource2Model = async (canvas, glbUrl, nprMaterials) => {
     el.className = "cf-slide";
     el.href = it.url || "#published";
     if (it.url) { el.target = "_blank"; el.rel = "noopener"; }
-    el.setAttribute("aria-label", `${it.n}${it.dl ? ", " + it.dl + " downloads" : ""}`);
+    el.setAttribute("aria-label", `${it.n}${it.dl ? ", " + it.dl + " downloads" : ""}, opens in a new tab`);
     const img = document.createElement("img");
     img.src = it.img; img.alt = ""; img.loading = "lazy"; img.decoding = "async";
     const cap = document.createElement("span");
     cap.className = "cf-cap";
     cap.textContent = it.dl ? `${it.n} \u00b7 ${it.dl}` : it.n;
-    el.append(img, cap);
+    el.append(cap, img);
     stage.append(el);
     return el;
   });
 
   const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  let index = 0, timer = null, dragged = 0;
+  const live = document.querySelector("[data-cf-live]");
+  const toggle = document.getElementById("cf-toggle");
+  let index = 0, timer = null, dragged = 0, userPaused = reduce;
+
+  function announce(text) { if (live) live.textContent = text; }
+  function paintToggle() {
+    if (!toggle) return;
+    toggle.innerHTML = `<span class="material-icons" aria-hidden="true">${userPaused ? "play_arrow" : "pause"}</span>`;
+    toggle.setAttribute("aria-label", userPaused ? "Play rotating thumbnails" : "Pause rotating thumbnails");
+  }
 
   function layout() {
     const narrow = window.innerWidth < 760;
@@ -1040,7 +1078,7 @@ window.renderSource2Model = async (canvas, glbUrl, nprMaterials) => {
       const prev = parseFloat(el.dataset.d || "0");
       const jumped = Math.abs(d - prev) > span + 1;
       if (jumped) el.style.transition = "none";
-      el.style.transform = `rotateY(${(-d * step).toFixed(2)}deg) translateZ(${radius}px)`;
+      el.style.transform = `translateZ(${-radius}px) rotateY(${(d * step).toFixed(2)}deg) translateZ(${radius}px)`;
       el.style.zIndex = String(200 - dist);
       el.style.opacity = dist > span ? "0" : (dist === 0 ? "1" : String(Math.max(.3, .8 - dist * .13)));
       el.style.filter = dist === 0 ? "" : `brightness(${Math.max(.5, .85 - dist * .09)}) saturate(.85)`;
@@ -1052,26 +1090,48 @@ window.renderSource2Model = async (canvas, glbUrl, nprMaterials) => {
       if (jumped) requestAnimationFrame(() => { el.style.transition = ""; });
     });
   }
-  function go(delta) {
+  function go(delta, voiced) {
     index = (index + delta % slides.length + slides.length) % slides.length;
     layout(); schedule();
+    if (voiced) {
+      const it = ITEMS[index];
+      announce(`Mod ${index + 1} of ${ITEMS.length}: ${it.n}${it.dl ? ", " + it.dl + " downloads" : ""}`);
+    }
   }
-  function play() { if (reduce) return; stop(); timer = setInterval(() => go(1), 3400); }
+  function play() { if (userPaused) return; stop(); timer = setInterval(() => go(1), 3400); }
   function stop() { if (timer) { clearInterval(timer); timer = null; } }
   function schedule() { if (timer) play(); }
 
   const prevBtn = document.getElementById("cf-prev");
   const nextBtn = document.getElementById("cf-next");
-  if (prevBtn) prevBtn.addEventListener("click", () => go(-1));
-  if (nextBtn) nextBtn.addEventListener("click", () => go(1));
+  if (prevBtn) prevBtn.addEventListener("click", () => go(-1, true));
+  if (nextBtn) nextBtn.addEventListener("click", () => go(1, true));
+  if (toggle) toggle.addEventListener("click", () => {
+    userPaused = !userPaused;
+    if (userPaused) stop(); else play();
+    paintToggle();
+    announce(userPaused ? "Rotation paused" : "Rotation resumed");
+  });
+  // every other new-tab link on the page gets the same warning, without visual noise
+  function labelNewTabs(root) {
+    root.querySelectorAll('a[target="_blank"]').forEach(a => {
+      const said = (a.getAttribute("aria-label") || "") + " " + a.textContent;
+      if (/new (tab|window)/i.test(said)) return;
+      if (a.hasAttribute("aria-label")) { a.setAttribute("aria-label", a.getAttribute("aria-label") + ", opens in a new tab"); return; }
+      const hint = document.createElement("span");
+      hint.className = "sr-only";
+      hint.textContent = " (opens in a new tab)";
+      a.append(hint);
+    });
+  }
 
   flow.tabIndex = 0;
   ["mouseenter", "focusin"].forEach(ev => flow.addEventListener(ev, stop));
   ["mouseleave", "focusout"].forEach(ev => flow.addEventListener(ev, schedule));
   document.addEventListener("visibilitychange", () => { if (document.hidden) stop(); else schedule(); });
   flow.addEventListener("keydown", e => {
-    if (e.key === "ArrowLeft") { e.preventDefault(); go(-1); }
-    else if (e.key === "ArrowRight") { e.preventDefault(); go(1); }
+    if (e.key === "ArrowLeft") { e.preventDefault(); go(-1, true); }
+    else if (e.key === "ArrowRight") { e.preventDefault(); go(1, true); }
   });
 
   let downX = null;
@@ -1083,7 +1143,7 @@ window.renderSource2Model = async (canvas, glbUrl, nprMaterials) => {
     if (downX === null) return;
     const dx = e.clientX - downX;
     dragged = Math.max(dragged, Math.abs(dx));
-    if (Math.abs(dx) > 55) { go(dx < 0 ? 1 : -1); downX = e.clientX; }
+    if (Math.abs(dx) > 55) { go(dx < 0 ? 1 : -1, true); downX = e.clientX; }
   });
   const release = e => {
     if (downX === null) return;
@@ -1100,6 +1160,9 @@ window.renderSource2Model = async (canvas, glbUrl, nprMaterials) => {
   window.addEventListener("resize", () => { clearTimeout(rt); rt = setTimeout(layout, 120); });
 
   layout();
+  paintToggle();
+  labelNewTabs(document);
+  new MutationObserver(() => labelNewTabs(document)).observe(document.body, { childList: true, subtree: true });
   play();
 })();
 </script>
