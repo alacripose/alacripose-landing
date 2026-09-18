@@ -169,6 +169,7 @@
       <a href="#packs" data-goto="packs">Packs</a>
       <a href="#servers" data-goto="servers">Servers</a>
       <a href="#connect" data-goto="connect">How to connect</a>
+      <a href="#community" data-goto="community">Community</a>
       <a href="index.html">&larr; All mods</a>
     </nav>
   </div>
@@ -178,7 +179,7 @@
   <div class="wrap">
     <p class="crumb"><a href="index.html">alacripose</a> / minecraft</p>
     <h1>MINECRAFT</h1>
-    <p>Modpacks I run with my partner, on dedicated servers hosted with <strong>Monkestation</strong>. Download a pack and the server details are already inside it - installing the pack is the whole gate.</p>
+    <p>Modpacks I run with my partner on <strong>Coalescent Nights</strong>, a small gaming community built around the Minecraft project Rainworld: Coalescence. The servers are hosted by Monkestation. Download a pack and the server details are already inside it - installing the pack is the whole gate.</p>
   </div>
 </header>
 
@@ -188,6 +189,7 @@
       <button class="tab" role="tab" id="tab-packs" aria-controls="panel-packs" aria-selected="true">Packs</button>
       <button class="tab" role="tab" id="tab-servers" aria-controls="panel-servers" aria-selected="false">Servers</button>
       <button class="tab" role="tab" id="tab-connect" aria-controls="panel-connect" aria-selected="false">How to connect</button>
+      <button class="tab" role="tab" id="tab-community" aria-controls="panel-community" aria-selected="false">Community</button>
     </div>
 
     <section class="panel" id="panel-packs" role="tabpanel" aria-labelledby="tab-packs" tabindex="0">
@@ -200,7 +202,7 @@
       <h2 class="sec">Servers</h2>
       <p class="sec-sub">Hosted with Monkestation. Access comes with the packs - the addresses below are the same ones baked into them.</p>
       <div class="cards" id="servercards"><!-- filled by JS --></div>
-      <p class="note">Stuck, or want to know when a pack updates? The <a href="https://discord.com/invite/monkestation" rel="noopener" target="_blank">Monkestation Discord</a> is where we coordinate.</p>
+      <p class="note">Stuck, or want to know when a pack updates? Ask in <a href="https://discord.gg/sQYHfY6Eyc" rel="noopener" target="_blank">Coalescent Nights</a> - that is where we coordinate. The servers themselves are hosted by Monkestation.</p>
     </section>
 
     <section class="panel" id="panel-connect" role="tabpanel" aria-labelledby="tab-connect" tabindex="0" hidden>
@@ -213,10 +215,17 @@
       </ol>
       <p class="note">On Bedrock? The Kitty Kat server runs Geyser, so the same address works from a Bedrock client - no Java account needed.</p>
     </section>
+
+    <section class="panel" id="panel-community" role="tabpanel" aria-labelledby="tab-community" tabindex="0" hidden>
+      <h2 class="sec">Community</h2>
+      <p class="sec-sub">The servers are hosted by Monkestation, but the community running them is ours: <strong>Coalescent Nights</strong>.</p>
+      <div class="cards" id="communitycards"><!-- filled by JS --></div>
+      <p class="note">Permanent invite, safe to share: <a href="https://discord.gg/sQYHfY6Eyc" rel="noopener" target="_blank">discord.gg/sQYHfY6Eyc</a></p>
+    </section>
   </div>
 
   <footer class="small">
-    <span>Hosted with <a href="https://discord.com/invite/monkestation" rel="noopener" target="_blank">Monkestation</a> &middot; <a href="index.html">Deadlock mods</a></span>
+    <span>Servers hosted by Monkestation &middot; community: <a href="https://discord.gg/sQYHfY6Eyc" rel="noopener" target="_blank">Coalescent Nights</a> &middot; <a href="index.html">Deadlock mods</a></span>
   </footer>
 </div>
 
@@ -231,6 +240,20 @@ let PACKS = [
   {name:"Coalescent Moons 1.0", id:"1M-1Zzi-rzdqgNUjcKOauGGJCidSUhlTz",
    format:"zip (Prism instance)", size:"1.35 GB", minecraft:"1.21.1", loader:"NeoForge 21.1.229", mods:551,
    note:"Full Prism Launcher instance. Configured for 11 GB of RAM."}
+];
+let COMMUNITY = [
+  {name:"Coalescent Nights",
+   note:"A small gaming community built around the Minecraft project Rainworld: Coalescence. Minecraft is the main focus, but we also support Don't Starve, Deadlock, Roblox, TF2 and more. We are LGBTQIA+ friendly, and both the Discord and the Minecraft server are moderated and updated constantly.",
+   action:{label:"Join the Discord", href:"https://discord.gg/sQYHfY6Eyc"}},
+  {name:"Helpers team",
+   note:"We are always looking for people to help out with creating the mod for our server. Reach out to @Cosmic if you would like to be added to the helpers team. This is a volunteer role that provides no compensation.",
+   action:null},
+  {name:"Build team and roles",
+   note:"We have a build team role for anyone who would like creative build access on the server. That and other roles, such as game-specific ones, can be assigned by yourself in #reaction-roles.",
+   action:null},
+  {name:"Community events",
+   note:"We can help set up community events if you want somewhere to hang out, play together, or just chat. Nobody has to be a modder to join.",
+   action:null}
 ];
 let SERVERS = [
   {name:"All The Mods 10 Aeronautics", address:"play-direct.monkestation.com:25583",
@@ -288,8 +311,26 @@ function renderServers() {
   });
 }
 
+function renderCommunity() {
+  var box = document.getElementById("communitycards");
+  box.innerHTML = "";
+  COMMUNITY.forEach(function (c) {
+    var card = el("article", "card");
+    var h = el("h3"); h.textContent = c.name;
+    var b = el("p", "body"); b.textContent = c.note;
+    card.append(h, b);
+    if (c.action) {
+      var a = el("div", "actions");
+      a.innerHTML = '<a class="btn primary" href="' + c.action.href + '" rel="noopener" target="_blank">'
+        + c.action.label + '</a>';
+      card.appendChild(a);
+    }
+    box.appendChild(card);
+  });
+}
+
 /* tabs, deep-linkable: minecraft.html#servers opens the Servers tab */
-var TABS = ["packs", "servers", "connect"];
+var TABS = ["packs", "servers", "connect", "community"];
 function selectTab(key, focus) {
   if (TABS.indexOf(key) === -1) key = "packs";
   TABS.forEach(function (k) {
@@ -327,12 +368,14 @@ selectTab((location.hash || "").replace("#", "") || "packs", false);
 
 renderPacks();
 renderServers();
+renderCommunity();
 
 fetch("tools/catalog.json", {cache: "no-store"})
   .then(function (r) { return r.ok ? r.json() : Promise.reject(r.status); })
   .then(function (d) {
     if (Array.isArray(d.modpacks) && d.modpacks.length) { PACKS = d.modpacks; renderPacks(); }
     if (Array.isArray(d.servers) && d.servers.length) { SERVERS = d.servers; renderServers(); }
+    if (Array.isArray(d.community) && d.community.length) { COMMUNITY = d.community; renderCommunity(); }
   })
   .catch(function () { /* inline data stands in for the catalog */ });
 </script>

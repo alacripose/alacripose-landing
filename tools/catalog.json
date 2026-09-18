@@ -708,5 +708,32 @@
       "kind": "optional vanilla+",
       "note": "Vanilla+ 1.16.5 with Geyser (Bedrock cross-play), hosted for the Deadlock Modding Discord."
     }
-  ]
+  ],
+  "community": [
+    {
+      "name": "Coalescent Nights",
+      "note": "A small gaming community built around the Minecraft project Rainworld: Coalescence. Minecraft is the main focus, but we also support Don't Starve, Deadlock, Roblox, TF2 and more. We are LGBTQIA+ friendly, and both the Discord and the Minecraft server are moderated and updated constantly.",
+      "action": {
+        "label": "Join the Discord",
+        "href": "https://discord.gg/sQYHfY6Eyc"
+      }
+    },
+    {
+      "name": "Helpers team",
+      "note": "We are always looking for people to help out with creating the mod for our server. Reach out to @Cosmic if you would like to be added to the helpers team. This is a volunteer role that provides no compensation.",
+      "action": null
+    },
+    {
+      "name": "Build team and roles",
+      "note": "We have a build team role for anyone who would like creative build access on the server. That and other roles, such as game-specific ones, can be assigned by yourself in #reaction-roles.",
+      "action": null
+    },
+    {
+      "name": "Community events",
+      "note": "We can help set up community events if you want somewhere to hang out, play together, or just chat. Nobody has to be a modder to join.",
+      "action": null
+    }
+  ],
+  "communityInvite": "https://discord.gg/sQYHfY6Eyc",
+  "hosting": "Minecraft servers hosted by Monkestation"
 }
