@@ -20,6 +20,7 @@ import urllib.request
 CONFIG = os.path.join(os.path.dirname(__file__), "drive_sync_config.json")
 UA = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"}
 ENTRY = re.compile(r'<div class="flip-entry"')
+EXCLUDED = []  # from drive_sync_config.json excludePaths
 # Folders link to /drive/folders/<id>; files link to /drive/file/<id>/view.
 # The icon class is not a reliable marker — public folder listings vary.
 FOLDER_LINK = re.compile(r'href="https://drive\.google\.com/drive/folders/')
@@ -40,6 +41,16 @@ def list_folder(folder_id: str) -> list:
         out.append({"id": fid.group(1), "name": name,
                     "is_dir": bool(FOLDER_LINK.search(chunk))})
     return out
+
+
+def is_featured(rel_path: str, excluded: list) -> bool:
+    """False when any path segment matches an excludePaths entry.
+
+    The Drive folder "not_featured" is the signal: move a file in or out of it
+    and re-run the scan, no code change needed.
+    """
+    parts = rel_path.split("/")[:-1]
+    return not any(seg in excluded for seg in parts)
 
 
 def walk(folder_id: str, path: str, depth: int, max_depth: int, seen: set):
@@ -63,6 +74,7 @@ def walk(folder_id: str, path: str, depth: int, max_depth: int, seen: set):
             ext = os.path.splitext(e["name"])[1].lower()
             files.append({
                 "id": e["id"], "name": e["name"], "path": here, "ext": ext,
+                "featured": is_featured(here, EXCLUDED),
                 "download": "https://drive.google.com/uc?export=download&id=%s" % e["id"],
                 "view": "https://drive.google.com/file/d/%s/view" % e["id"],
             })
@@ -92,6 +104,7 @@ def main() -> int:
     cfg = json.load(io.open(CONFIG, encoding="utf-8"))
     root = cfg["folderId"]
     ignored = set(cfg.get("ignore") or [])
+    EXCLUDED[:] = cfg.get("excludePaths") or []
     print("scanning Drive folder %s (depth %d)" % (root, args.depth))
 
     files, folders, _ = walk(root, "", 1, args.depth, {root})
@@ -104,7 +117,9 @@ def main() -> int:
     by_ext = {}
     for f in files:
         by_ext[f["ext"] or "(none)"] = by_ext.get(f["ext"] or "(none)", 0) + 1
+    nf = [f for f in files if not f["featured"]]
     print("\n%d files, %d folders" % (len(files), len(folders)))
+    print("%d featured, %d excluded via %s" % (len(files) - len(nf), len(nf), EXCLUDED or "[]"))
     for ext, n in sorted(by_ext.items(), key=lambda kv: -kv[1]):
         print("   %-12s %d" % (ext, n))
 

@@ -514,20 +514,6 @@
       "note": ""
     },
     {
-      "file": "pak05_dir.vpk",
-      "name": "pak05 (base pak)",
-      "id": "1kQVPT8bJBp28NDg9p8464zKvb7ajf3SE",
-      "kind": "misc",
-      "note": "Deadlock base pak, not a mod."
-    },
-    {
-      "file": "pak15_dir.vpk",
-      "name": "pak15 (base pak)",
-      "id": "1lhPMGHBHkbe_NzxCv_Q9hkiz-LcW939O",
-      "kind": "misc",
-      "note": "Deadlock base pak, not a mod."
-    },
-    {
       "file": "rogue_venator.vpk",
       "name": "Rogue Venator",
       "id": "1dVahPI8fIh7Qw7cgy4MxNfoOvH0SoCJg",
@@ -584,58 +570,9 @@
       "note": ""
     },
     {
-      "file": "testmap.vpk",
-      "name": "Test map",
-      "id": "1KQszr8NWcZtjZUace7Sj6pL5N8D-FNjj",
-      "kind": "misc",
-      "note": ""
-    },
-    {
-      "file": "black_white_bg.vpk",
-      "name": "Minified shop — black/white bg",
-      "id": "1B2VEE7ws0hvKFd93eUdVsnlmY-BAf6nH",
-      "kind": "hud",
-      "note": ""
-    },
-    {
       "file": "ol_plains.vpk",
       "name": "OpenLock — Plains",
       "id": "1ZbsFFnpegXoezgPVBY7oG7qZLCuYKm5j",
-      "kind": "misc",
-      "note": ""
-    },
-    {
-      "file": "pak01_dir.vpk",
-      "name": "pak01 (unclassified)",
-      "id": "1oTKxTzc7WslsJe6XR171Eg8vvVIA-4vR",
-      "kind": "misc",
-      "note": ""
-    },
-    {
-      "file": "pak02_dir.vpk",
-      "name": "pak02 (unclassified)",
-      "id": "1sKJKQ2ru3D1jsWqwD1evSSUpUlKaIrtu",
-      "kind": "misc",
-      "note": ""
-    },
-    {
-      "file": "pak02_dir.vpk",
-      "name": "pak02 (unclassified, 2nd)",
-      "id": "1ymUap4m9PNWM-Smd0274QDb7DbgaNTJt",
-      "kind": "misc",
-      "note": ""
-    },
-    {
-      "file": "pak06_dir.vpk",
-      "name": "pak06 (unclassified)",
-      "id": "1_Kjkdx7u9NCdNB42W5mTivto76nSHt4t",
-      "kind": "misc",
-      "note": ""
-    },
-    {
-      "file": "pak44_dir.vpk",
-      "name": "pak44 (unclassified)",
-      "id": "153I3wf3jjNA3BZmeyPJveL0f916nYY1c",
       "kind": "misc",
       "note": ""
     }
@@ -658,12 +595,6 @@
       "name": "Lovander Venator",
       "id": "1Wui7DOba2ADWrLlGoCgSwQDoXyf1NcuG",
       "kind": "hero skin"
-    },
-    {
-      "file": "lovander_haze.vpk",
-      "name": "Lovander Haze (old)",
-      "id": "1zH6yAvjqr4afdLVsB0z2N5TJzrCCHxqN",
-      "kind": "hero skin"
     }
   ],
   "modpacks": [
@@ -671,19 +602,111 @@
       "file": "Secret Pack.mrpack",
       "name": "Secret Pack — \"F O R E V E R\"",
       "id": "1bAyK4BjVtyOCYQHdx9AJnbeBUVp2iQ5E",
+      "format": "mrpack",
       "size": "226 MB",
-      "meta": "Minecraft 1.21.1 · NeoForge 21.1.217 · 247 mods",
-      "note": "Modrinth pack. Ships pre-generated Distant Horizons LODs for the server world, so it looks right on the dedicated server without a local render pass.",
-      "access": "Monkestation partner dedicated servers — access via the Monkestation Discord"
+      "minecraft": "1.21.1",
+      "loader": "NeoForge 21.1.217",
+      "mods": 247,
+      "verified_from": "modrinth.index.json inside the pack",
+      "note": "Ships pre-generated Distant Horizons LODs for the server world."
     },
     {
       "file": "Coalescent Moons.zip",
-      "name": "Coalescent Moons",
+      "name": "Coalescent Moons 1.0",
       "id": "1M-1Zzi-rzdqgNUjcKOauGGJCidSUhlTz",
+      "format": "zip (Prism instance)",
       "size": "1.35 GB",
-      "meta": "full instance archive",
-      "note": "Complete Minecraft instance — unpack it into your launcher's instances folder. Size means I could not read its loader metadata without pulling the whole archive.",
-      "access": "Monkestation partner dedicated servers — access via the Monkestation Discord"
+      "minecraft": "1.21.1",
+      "loader": "NeoForge 21.1.229",
+      "mods": 551,
+      "verified_from": "mmc-pack.json and instance.cfg inside the archive",
+      "note": "Full Prism Launcher instance. Asks for 11 GB of RAM."
+    }
+  ],
+  "excluded_from_site": [
+    {
+      "file": "lovander_haze.vpk",
+      "name": "lovander_haze.vpk",
+      "id": "1zH6yAvjqr4afdLVsB0z2N5TJzrCCHxqN",
+      "path": "not_featured/lovander_haze.vpk",
+      "reason": "in the Drive not_featured folder"
+    },
+    {
+      "file": "testmap.vpk",
+      "name": "testmap.vpk",
+      "id": "1KQszr8NWcZtjZUace7Sj6pL5N8D-FNjj",
+      "path": "not_featured/maps/testmap.vpk",
+      "reason": "in the Drive not_featured folder"
+    },
+    {
+      "file": "black_white_bg.vpk",
+      "name": "black_white_bg.vpk",
+      "id": "1B2VEE7ws0hvKFd93eUdVsnlmY-BAf6nH",
+      "path": "not_featured/Minified-shop/black_white_bg.vpk",
+      "reason": "in the Drive not_featured folder"
+    },
+    {
+      "file": "pak05_dir.vpk",
+      "name": "pak05_dir.vpk",
+      "id": "1kQVPT8bJBp28NDg9p8464zKvb7ajf3SE",
+      "path": "not_featured/pak05_dir.vpk",
+      "reason": "in the Drive not_featured folder"
+    },
+    {
+      "file": "pak15_dir.vpk",
+      "name": "pak15_dir.vpk",
+      "id": "1lhPMGHBHkbe_NzxCv_Q9hkiz-LcW939O",
+      "path": "not_featured/pak15_dir.vpk",
+      "reason": "in the Drive not_featured folder"
+    },
+    {
+      "file": "pak01_dir.vpk",
+      "name": "pak01_dir.vpk",
+      "id": "1oTKxTzc7WslsJe6XR171Eg8vvVIA-4vR",
+      "path": "not_featured/unknown/pak01_dir.vpk",
+      "reason": "in the Drive not_featured folder"
+    },
+    {
+      "file": "pak02_dir.vpk",
+      "name": "pak02_dir.vpk",
+      "id": "1sKJKQ2ru3D1jsWqwD1evSSUpUlKaIrtu",
+      "path": "not_featured/unknown/pak02_dir.vpk",
+      "reason": "in the Drive not_featured folder"
+    },
+    {
+      "file": "pak02_dir.vpk",
+      "name": "pak02_dir.vpk",
+      "id": "1ymUap4m9PNWM-Smd0274QDb7DbgaNTJt",
+      "path": "not_featured/unknown/pak02_dir.vpk",
+      "reason": "in the Drive not_featured folder"
+    },
+    {
+      "file": "pak06_dir.vpk",
+      "name": "pak06_dir.vpk",
+      "id": "1_Kjkdx7u9NCdNB42W5mTivto76nSHt4t",
+      "path": "not_featured/unknown/pak06_dir.vpk",
+      "reason": "in the Drive not_featured folder"
+    },
+    {
+      "file": "pak44_dir.vpk",
+      "name": "pak44_dir.vpk",
+      "id": "153I3wf3jjNA3BZmeyPJveL0f916nYY1c",
+      "path": "not_featured/unknown/pak44_dir.vpk",
+      "reason": "in the Drive not_featured folder"
+    }
+  ],
+  "servers": [
+    {
+      "name": "All The Mods 10 Aeronautics",
+      "address": "play-direct.monkestation.com:25583",
+      "kind": "modded",
+      "note": "The modded server the 1.21.1 NeoForge packs connect to."
+    },
+    {
+      "name": "Kitty Kat Server",
+      "address": "play-direct.monkestation.com:25582",
+      "kind": "optional vanilla+",
+      "note": "Vanilla+ 1.16.5 with Geyser (Bedrock cross-play), hosted for the Deadlock Modding Discord."
     }
   ]
 }

@@ -23,5 +23,8 @@
   "ignore": [
     "openlock_codes",
     "openlock_codes.txt"
+  ],
+  "excludePaths": [
+    "not_featured"
   ]
 }

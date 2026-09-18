@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>alacripose - Minecraft packs and servers</title>
+<meta name="description" content="Minecraft modpacks by alacripose, playable on dedicated servers hosted with Monkestation.">
+<meta property="og:title" content="alacripose - Minecraft packs and servers">
+<meta property="og:description" content="Modpacks and the dedicated servers they run on, hosted with Monkestation.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='14' fill='%23101a3d' stroke='%23d1a437' stroke-width='2'/%3E%3Ccircle cx='16' cy='16' r='5' fill='%23d1a437'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Limelight&family=Bitter:ital,wght@0,300;0,400;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<style>
+  :root {
+    --ground: #0e0c09;
+    --surface4: #241d14;
+    --ink: #eadfc4;
+    --ink70: rgba(234,223,196,.72);
+    --ink50: rgba(234,223,196,.52);
+    --divider: rgba(234,223,196,.12);
+    --brass: #d1a437;
+    --brass-hi: #e9c158;
+    --brass-dim: #9a7a29;
+    --teal: #8fbdb0;
+    --radius: 2px;
+    --night: #070b1c;
+    --panel: rgba(9,13,30,.78);
+    --panel-line: rgba(190,215,255,.16);
+    --day: #7ec8f0;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+  }
+  /* sky blue overhead, deepening to a starry night at the horizon */
+  body {
+    min-height: 100%;
+    color: var(--ink);
+    font-family: "Bitter", Georgia, serif; font-size: 16.5px; line-height: 1.62;
+    -webkit-font-smoothing: antialiased;
+    background-color: var(--night);
+    background-image: linear-gradient(180deg,
+      var(--day) 0%, #6cb6e6 12%, #4f8ec9 30%, #35619f 48%,
+      #223f77 64%, #16294f 78%, #0d1730 89%, var(--night) 100%);
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: 100% 100vh;
+  }
+  /* starfield: fixed, so the sky holds still while the page scrolls */
+  body::before {
+    content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none;
+    background-repeat: no-repeat;
+    background-image:
+      radial-gradient(1.6px 1.6px at 8% 92%, #fff, transparent),
+      radial-gradient(1.2px 1.2px at 17% 84%, #eaf3ff, transparent),
+      radial-gradient(1px 1px at 24% 95%, #fff, transparent),
+      radial-gradient(1.8px 1.8px at 33% 88%, #fff, transparent),
+      radial-gradient(1px 1px at 41% 79%, #dfe9ff, transparent),
+      radial-gradient(1.3px 1.3px at 49% 93%, #fff, transparent),
+      radial-gradient(1px 1px at 57% 86%, #fff, transparent),
+      radial-gradient(1.7px 1.7px at 64% 96%, #fff, transparent),
+      radial-gradient(1.1px 1.1px at 72% 82%, #eaf3ff, transparent),
+      radial-gradient(1px 1px at 81% 90%, #fff, transparent),
+      radial-gradient(1.4px 1.4px at 89% 94%, #fff, transparent),
+      radial-gradient(1px 1px at 95% 80%, #dfe9ff, transparent),
+      radial-gradient(1px 1px at 12% 70%, #cfe0ff, transparent),
+      radial-gradient(1.3px 1.3px at 28% 74%, #fff, transparent),
+      radial-gradient(1px 1px at 44% 68%, #fff, transparent),
+      radial-gradient(1.2px 1.2px at 61% 76%, #eaf3ff, transparent),
+      radial-gradient(1px 1px at 77% 70%, #cfe0ff, transparent),
+      radial-gradient(1.4px 1.4px at 92% 73%, #fff, transparent),
+      radial-gradient(1px 1px at 5% 58%, #cfe0ff, transparent),
+      radial-gradient(1.1px 1.1px at 21% 62%, #fff, transparent),
+      radial-gradient(1px 1px at 37% 55%, #dfe9ff, transparent),
+      radial-gradient(1.2px 1.2px at 55% 60%, #fff, transparent),
+      radial-gradient(1px 1px at 70% 52%, #cfe0ff, transparent),
+      radial-gradient(1.1px 1.1px at 86% 57%, #fff, transparent),
+      radial-gradient(1px 1px at 15% 44%, #cfe0ff, transparent),
+      radial-gradient(1px 1px at 46% 38%, #dfe9ff, transparent),
+      radial-gradient(1.2px 1.2px at 68% 33%, #fff, transparent),
+      radial-gradient(1px 1px at 88% 41%, #cfe0ff, transparent);
+  }
+  @media (max-width: 640px) { body { background-size: 100% 70vh; } }
+  a { color: var(--teal); text-decoration: none; }
+  a:hover { color: var(--brass-hi); }
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 22px; }
+
+  .topbar { position: sticky; top: 0; z-index: 60; background: var(--surface4); border-bottom: 1px solid var(--divider); }
+  .topbar .wrap { display: flex; align-items: center; justify-content: space-between; height: 60px; gap: 16px; }
+  .wordmark { font-family: "Limelight", serif; color: var(--brass); letter-spacing: .17em; font-size: 16px; white-space: nowrap; }
+  .topnav { display: flex; gap: 4px; overflow-x: auto; }
+  .topnav a {
+    font-family: "IBM Plex Mono", monospace; font-size: 12px; letter-spacing: .12em;
+    text-transform: uppercase; color: var(--ink70); padding: 13px 12px; white-space: nowrap;
+  }
+  .topnav a:hover { color: var(--ink); }
+
+  header.hero { padding: 46px 0 30px; }
+  h1 { font-family: "Limelight", serif; font-size: clamp(30px, 6vw, 52px); letter-spacing: .05em; color: #fff; text-shadow: 0 2px 18px rgba(3,7,20,.55); }
+  .hero p { color: rgba(255,255,255,.92); max-width: 64ch; margin-top: 10px; text-shadow: 0 1px 12px rgba(3,7,20,.6); }
+  .hero .crumb { font-family: "IBM Plex Mono", monospace; font-size: 11.5px; letter-spacing: .14em; text-transform: uppercase; color: rgba(255,255,255,.75); margin-bottom: 12px; }
+  .hero .crumb a { color: rgba(255,255,255,.9); }
+
+  .board { background: var(--panel); border: 1px solid var(--panel-line); backdrop-filter: blur(9px); border-radius: var(--radius); padding: 26px; margin-bottom: 34px; }
+  .tabs { display: flex; gap: 6px; flex-wrap: wrap; border-bottom: 1px solid var(--panel-line); margin: -6px 0 22px; }
+  .tab {
+    font-family: "IBM Plex Mono", monospace; font-size: 12px; letter-spacing: .12em; text-transform: uppercase;
+    background: transparent; border: 0; border-bottom: 2px solid transparent; color: rgba(234,223,196,.66);
+    padding: 12px 14px; cursor: pointer;
+  }
+  .tab:hover { color: var(--ink); }
+  .tab[aria-selected="true"] { color: var(--brass-hi); border-bottom-color: var(--brass); }
+  .tab:focus-visible { outline: 2px solid var(--brass); outline-offset: 2px; }
+  .panel[hidden] { display: none; }
+  h2.sec { font-family: "Limelight", serif; font-size: clamp(21px, 3vw, 30px); letter-spacing: .05em; margin-bottom: 6px; color: var(--ink); }
+  .sec-sub { color: var(--ink70); max-width: 66ch; margin-bottom: 24px; }
+
+  .cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 14px; }
+  .card { border: 1px solid var(--panel-line); background: rgba(20,26,48,.55); padding: 18px; display: flex; flex-direction: column; }
+  .card h3 { font-family: "Limelight", serif; font-size: 19px; letter-spacing: .02em; line-height: 1.25; }
+  .meta { display: flex; flex-wrap: wrap; gap: 4px 12px; margin-top: 8px; font-family: "IBM Plex Mono", monospace; font-size: 11.5px; color: var(--ink50); }
+  .meta .hi { color: var(--brass); }
+  .card p.body { color: var(--ink70); font-size: 13.5px; line-height: 1.55; margin: 10px 0 14px; }
+  .actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px; min-height: 40px; padding: 0 16px;
+    font-family: "IBM Plex Mono", monospace; font-size: 11.5px; letter-spacing: .1em; text-transform: uppercase;
+    border: 1px solid var(--brass); color: var(--brass); background: transparent; cursor: pointer;
+  }
+  .btn.primary { background: var(--brass); color: #120f0b; }
+  .btn.primary:hover { background: var(--brass-hi); border-color: var(--brass-hi); color: #120f0b; }
+  .btn:not(.primary):hover { background: rgba(234,223,196,.08); }
+  .btn .material-icons { font-size: 16px; }
+
+  .addr { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-top: 12px; }
+  code.addrval {
+    font-family: "IBM Plex Mono", monospace; font-size: 13.5px; color: var(--brass-hi);
+    background: rgba(7,11,28,.72); border: 1px solid var(--panel-line); padding: 8px 11px;
+  }
+  .copy { font-family: "IBM Plex Mono", monospace; font-size: 10.5px; letter-spacing: .1em; text-transform: uppercase;
+    background: transparent; border: 1px solid var(--panel-line); color: var(--ink70); padding: 8px 10px; cursor: pointer; }
+  .copy:hover { border-color: var(--brass); color: var(--brass); }
+  .tag { display: inline-block; font-family: "IBM Plex Mono", monospace; font-size: 10px; letter-spacing: .12em;
+    text-transform: uppercase; border: 1px solid var(--panel-line); color: var(--ink70); padding: 3px 7px; }
+  ol.steps { counter-reset: s; list-style: none; display: grid; gap: 12px; }
+  ol.steps li { counter-increment: s; position: relative; padding-left: 40px; color: var(--ink70); }
+  ol.steps li::before {
+    content: counter(s); position: absolute; left: 0; top: 1px; width: 26px; height: 26px;
+    display: grid; place-items: center; border: 1px solid var(--brass-dim); color: var(--brass);
+    font-family: "IBM Plex Mono", monospace; font-size: 12px;
+  }
+  ol.steps strong { color: var(--ink); }
+  .note { border-left: 2px solid var(--brass-dim); padding: 2px 0 2px 14px; color: var(--ink70); font-size: 13.5px; margin-top: 18px; }
+  footer.small { padding: 30px 0 46px; font-family: "IBM Plex Mono", monospace; font-size: 11px; letter-spacing: .1em;
+    text-transform: uppercase; color: rgba(255,255,255,.6); }
+  footer.small a { color: rgba(255,255,255,.82); }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="wrap">
+    <a class="wordmark" href="index.html">ALACRIPOSE</a>
+    <nav class="topnav" aria-label="minecraft sections">
+      <a href="#packs" data-goto="packs">Packs</a>
+      <a href="#servers" data-goto="servers">Servers</a>
+      <a href="#connect" data-goto="connect">How to connect</a>
+      <a href="index.html">&larr; All mods</a>
+    </nav>
+  </div>
+</div>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="crumb"><a href="index.html">alacripose</a> / minecraft</p>
+    <h1>MINECRAFT</h1>
+    <p>Modpacks I run with my partner, on dedicated servers hosted with <strong>Monkestation</strong>. Download a pack and the server details are already inside it - installing the pack is the whole gate.</p>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="board">
+    <div class="tabs" role="tablist" aria-label="minecraft">
+      <button class="tab" role="tab" id="tab-packs" aria-controls="panel-packs" aria-selected="true">Packs</button>
+      <button class="tab" role="tab" id="tab-servers" aria-controls="panel-servers" aria-selected="false">Servers</button>
+      <button class="tab" role="tab" id="tab-connect" aria-controls="panel-connect" aria-selected="false">How to connect</button>
+    </div>
+
+    <section class="panel" id="panel-packs" role="tabpanel" aria-labelledby="tab-packs" tabindex="0">
+      <h2 class="sec">Packs</h2>
+      <p class="sec-sub">Both run on Minecraft 1.21.1 with NeoForge. Download from Drive, then import with Prism Launcher or the Modrinth App.</p>
+      <div class="cards" id="packcards"><!-- filled by JS --></div>
+    </section>
+
+    <section class="panel" id="panel-servers" role="tabpanel" aria-labelledby="tab-servers" tabindex="0" hidden>
+      <h2 class="sec">Servers</h2>
+      <p class="sec-sub">Hosted with Monkestation. Access comes with the packs - the addresses below are the same ones baked into them.</p>
+      <div class="cards" id="servercards"><!-- filled by JS --></div>
+      <p class="note">Stuck, or want to know when a pack updates? The <a href="https://discord.com/invite/monkestation" rel="noopener" target="_blank">Monkestation Discord</a> is where we coordinate.</p>
+    </section>
+
+    <section class="panel" id="panel-connect" role="tabpanel" aria-labelledby="tab-connect" tabindex="0" hidden>
+      <h2 class="sec">How to connect</h2>
+      <ol class="steps">
+        <li><strong>Download a pack.</strong> Grab either one from the Packs tab - they live in the same Drive folder as everything else.</li>
+        <li><strong>Import it.</strong> A <strong>.mrpack</strong> opens straight into Prism Launcher or the Modrinth App. The <strong>.zip</strong> is a full Prism instance, so use Import Instance from File.</li>
+        <li><strong>Give it RAM.</strong> Coalescent Moons ships configured for 11 GB. Prism &rarr; Edit Instance &rarr; Settings if your machine needs less.</li>
+        <li><strong>Launch and connect.</strong> The server is already listed in the pack's multiplayer menu. Both packs target Java 21.</li>
+      </ol>
+      <p class="note">On Bedrock? The Kitty Kat server runs Geyser, so the same address works from a Bedrock client - no Java account needed.</p>
+    </section>
+  </div>
+
+  <footer class="small">
+    <span>Hosted with <a href="https://discord.com/invite/monkestation" rel="noopener" target="_blank">Monkestation</a> &middot; <a href="index.html">Deadlock mods</a></span>
+  </footer>
+</div>
+
+<script>
+/* Pack facts were read out of the packs themselves: modrinth.index.json inside the
+   .mrpack, and mmc-pack.json + instance.cfg inside the Prism instance. tools/catalog.json
+   carries the same entries and overrides these when it is reachable. */
+let PACKS = [
+  {name:'Secret Pack - "F O R E V E R"', id:"1bAyK4BjVtyOCYQHdx9AJnbeBUVp2iQ5E",
+   format:"mrpack", size:"226 MB", minecraft:"1.21.1", loader:"NeoForge 21.1.217", mods:247,
+   note:"Ships pre-generated Distant Horizons LODs for the server world, so the far view matches the server."},
+  {name:"Coalescent Moons 1.0", id:"1M-1Zzi-rzdqgNUjcKOauGGJCidSUhlTz",
+   format:"zip (Prism instance)", size:"1.35 GB", minecraft:"1.21.1", loader:"NeoForge 21.1.229", mods:551,
+   note:"Full Prism Launcher instance. Configured for 11 GB of RAM."}
+];
+let SERVERS = [
+  {name:"All The Mods 10 Aeronautics", address:"play-direct.monkestation.com:25583",
+   kind:"modded", note:"The modded server the 1.21.1 NeoForge packs connect to."},
+  {name:"Kitty Kat Server", address:"play-direct.monkestation.com:25582",
+   kind:"optional vanilla+",
+   note:"Vanilla+ 1.16.5 with Geyser (Bedrock cross-play), hosted for the Deadlock Modding Discord."}
+];
+
+function el(tag, cls) { var n = document.createElement(tag); if (cls) n.className = cls; return n; }
+
+function renderPacks() {
+  var box = document.getElementById("packcards");
+  box.innerHTML = "";
+  PACKS.forEach(function (p) {
+    var c = el("article", "card");
+    var h = el("h3"); h.textContent = p.name;
+    var m = el("div", "meta");
+    m.innerHTML = '<span class="hi">' + p.size + '</span><span>' + p.format + '</span><span>'
+      + p.minecraft + ' &middot; ' + p.loader + '</span><span>' + p.mods + ' mods</span>';
+    var b = el("p", "body"); b.textContent = p.note || "";
+    var a = el("div", "actions");
+    a.innerHTML = '<a class="btn primary" href="https://drive.google.com/uc?export=download&id=' + p.id
+      + '" rel="noopener" target="_blank"><span class="material-icons" aria-hidden="true">download</span>Download '
+      + p.size + '</a>';
+    c.append(h, m, b, a);
+    box.appendChild(c);
+  });
+}
+
+function renderServers() {
+  var box = document.getElementById("servercards");
+  box.innerHTML = "";
+  SERVERS.forEach(function (sv) {
+    var c = el("article", "card");
+    var h = el("h3"); h.textContent = sv.name;
+    var m = el("div", "meta"); m.innerHTML = '<span class="tag">' + sv.kind + '</span>';
+    var b = el("p", "body"); b.textContent = sv.note;
+    var row = el("div", "addr");
+    var code = el("code", "addrval"); code.textContent = sv.address;
+    var copy = el("button", "copy"); copy.type = "button"; copy.textContent = "Copy";
+    copy.addEventListener("click", function () {
+      var done = function (label) {
+        copy.textContent = label;
+        setTimeout(function () { copy.textContent = "Copy"; }, 1600);
+      };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(sv.address).then(function () { done("Copied"); },
+                                                      function () { done("Select it"); });
+      } else { done("Select it"); }
+    });
+    row.append(code, copy);
+    c.append(h, m, b, row);
+    box.appendChild(c);
+  });
+}
+
+/* tabs, deep-linkable: minecraft.html#servers opens the Servers tab */
+var TABS = ["packs", "servers", "connect"];
+function selectTab(key, focus) {
+  if (TABS.indexOf(key) === -1) key = "packs";
+  TABS.forEach(function (k) {
+    var tab = document.getElementById("tab-" + k);
+    var panel = document.getElementById("panel-" + k);
+    var on = k === key;
+    tab.setAttribute("aria-selected", on ? "true" : "false");
+    panel.hidden = !on;
+    if (on && focus) tab.focus();
+  });
+}
+Array.prototype.forEach.call(document.querySelectorAll(".tab"), function (tab) {
+  tab.addEventListener("click", function () {
+    var key = tab.id.replace("tab-", "");
+    selectTab(key, false);
+    history.replaceState(null, "", "#" + key);
+  });
+  tab.addEventListener("keydown", function (e) {
+    if (e.key !== "ArrowRight" && e.key !== "ArrowLeft") return;
+    e.preventDefault();
+    var i = TABS.indexOf(tab.id.replace("tab-", ""));
+    var next = TABS[(i + (e.key === "ArrowRight" ? 1 : TABS.length - 1)) % TABS.length];
+    selectTab(next, true);
+    history.replaceState(null, "", "#" + next);
+  });
+});
+Array.prototype.forEach.call(document.querySelectorAll("[data-goto]"), function (a) {
+  a.addEventListener("click", function (e) {
+    e.preventDefault();
+    selectTab(a.dataset.goto, true);
+    history.replaceState(null, "", "#" + a.dataset.goto);
+  });
+});
+selectTab((location.hash || "").replace("#", "") || "packs", false);
+
+renderPacks();
+renderServers();
+
+fetch("tools/catalog.json", {cache: "no-store"})
+  .then(function (r) { return r.ok ? r.json() : Promise.reject(r.status); })
+  .then(function (d) {
+    if (Array.isArray(d.modpacks) && d.modpacks.length) { PACKS = d.modpacks; renderPacks(); }
+    if (Array.isArray(d.servers) && d.servers.length) { SERVERS = d.servers; renderServers(); }
+  })
+  .catch(function () { /* inline data stands in for the catalog */ });
+</script>
+</body>
+</html>

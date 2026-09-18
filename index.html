@@ -143,9 +143,6 @@
   .mod-card .mname { font-family: "Limelight", serif; font-size: 16.5px; letter-spacing: .02em; color: var(--ink); line-height: 1.25; }
   .mod-card .mmeta { display: flex; flex-wrap: wrap; gap: 4px 12px; margin-top: 6px; font-family: "IBM Plex Mono", monospace; font-size: 11.5px; color: var(--ink50); }
   .mod-card .mmeta .dl { color: var(--brass); }
-  .mod-card .packdesc { color: var(--ink70); font-size: 12.5px; line-height: 1.5; margin: 9px 0 12px; }
-  .mod-card .packbtns { display: flex; flex-wrap: wrap; gap: 8px; }
-  .mod-card .packbtns .btn { min-height: 38px; padding: 0 14px; font-size: 11.5px; }
   .badges { position: absolute; top: 8px; left: 8px; display: flex; gap: 6px; z-index: 2; }
   .badge {
     font-family: "IBM Plex Mono", monospace; font-size: 10px; letter-spacing: .12em;
@@ -251,7 +248,7 @@
     <nav aria-label="sections">
       <a href="#published">Mods</a>
       <a href="#drive">Drive drops</a>
-      <a href="#packs">Minecraft</a>
+      <a href="minecraft.html">Minecraft</a>
       <a href="#adult">18+</a>
       <a href="#commissions">Commissions</a>
       <a href="#contact">Contact</a>
@@ -313,11 +310,11 @@
   </div>
 </section>
 
-<section id="packs">
+<section id="minecraft">
   <div class="wrap">
-    <h2 class="sec">Minecraft packs</h2>
-    <p class="sec-sub">Full modpacks you can download and play on the dedicated servers hosted with <a href="https://discord.com/invite/monkestation" rel="noopener" target="_blank">Monkestation</a>, in partnership with me and my partner. Download the pack, then join the Monkestation Discord for server access, the current pack version and install help.</p>
-    <div class="mods" id="packgrid"><!-- filled by JS --></div>
+    <h2 class="sec">Minecraft servers</h2>
+    <p class="sec-sub">Two modpacks, playable on dedicated servers hosted with <strong>Monkestation</strong> in partnership with me and my partner — plus an optional vanilla+ 1.16.5 server with Geyser for the Deadlock Modding Discord. Server access ships inside the packs themselves.</p>
+    <a class="btn primary" href="minecraft.html"><span class="material-icons" aria-hidden="true">grass</span>Open the Minecraft page</a>
   </div>
 </section>
 
@@ -509,8 +506,6 @@ const DRIVE = [
   {n:"Minecraft Archmother", id:"1MknUTW4Qk1hSUkAE0dRSTo7CYWtBqKom", img:"minecraft_archmother", cat:"skin", hero:"—"},
   {n:"New items", id:"1UTrgn45X6DM4hKnzJxRBRcwWQhGSXjA5", cat:"prop", hero:"—", d:"Unlabelled item pack from the releases folder."},
   {n:"Noir Kodak Tri-X 400", id:"1DBRaHeWecHVVWEnNKFQMc5zqUbrZ980S", cat:"hud", hero:"post-fx"},
-  {n:"pak05 (base pak)", id:"1kQVPT8bJBp28NDg9p8464zKvb7ajf3SE", cat:"misc", hero:"—", d:"Deadlock base pak, not a mod."},
-  {n:"pak15 (base pak)", id:"1lhPMGHBHkbe_NzxCv_Q9hkiz-LcW939O", cat:"misc", hero:"—", d:"Deadlock base pak, not a mod."},
   {n:"Rogue Venator", id:"1dVahPI8fIh7Qw7cgy4MxNfoOvH0SoCJg", cat:"skin", hero:"Venator"},
   {n:"ROR Music Pack", id:"1Z9EhvpBp64SfUYUFKSRqmQZJIQczexGY", cat:"sound", hero:"sound", badge:"collab", credit:"Music: Lurkeww"},
   {n:"Sly Haze", id:"1y39qRsBdLEaD9rIZel1Mea8rJtyySkzQ", cat:"skin", hero:"Haze"},
@@ -519,20 +514,12 @@ const DRIVE = [
   {n:"Tec-9 bobbyakimbo Haze", id:"1i4f5CJjl6QBwMpxvJ-D_Y5IuZKf0cnrT", img:"tec-9_bobbyakimbo_haze", cat:"skin", hero:"Haze", badge:"collab", credit:"model: bobbyakimbo"},
   {n:"Map sources (zip)", id:"1Hya9jr_O5ZnklDrp4jl50pnGSsKez3fs", cat:"misc", hero:"—", d:"Source files for the custom maps."},
   {n:"Mayu jump (gif)", id:"14RXFh0XaT_8bEBJGbXdHcYFB4CYk1Jim", cat:"misc", hero:"—"},
-  {n:"Test map", id:"1KQszr8NWcZtjZUace7Sj6pL5N8D-FNjj", cat:"misc", hero:"map"},
-  {n:"Minified shop — black/white bg", id:"1B2VEE7ws0hvKFd93eUdVsnlmY-BAf6nH", cat:"hud", hero:"HUD"},
   {n:"OpenLock — Plains", id:"1ZbsFFnpegXoezgPVBY7oG7qZLCuYKm5j", cat:"misc", hero:"map"},
-  {n:"pak01 (unclassified)", id:"1oTKxTzc7WslsJe6XR171Eg8vvVIA-4vR", cat:"misc", hero:"—"},
-  {n:"pak02 (unclassified)", id:"1sKJKQ2ru3D1jsWqwD1evSSUpUlKaIrtu", cat:"misc", hero:"—"},
-  {n:"pak02 (unclassified, 2nd)", id:"1ymUap4m9PNWM-Smd0274QDb7DbgaNTJt", cat:"misc", hero:"—"},
-  {n:"pak06 (unclassified)", id:"1_Kjkdx7u9NCdNB42W5mTivto76nSHt4t", cat:"misc", hero:"—"},
-  {n:"pak44 (unclassified)", id:"153I3wf3jjNA3BZmeyPJveL0f916nYY1c", cat:"misc", hero:"—"},
 ];
 const NSFW = [
   {n:"Lovander horse", id:"1D_b-FKBXDmTtv6M_2qrDTG72aReUPRMG", img:null, d:"NSFW.", hero:"—"},
   {n:"Punisher Abrams", id:"1kBHBwtqhr8S7ucXr_tVy5MYkR5gMRIPb", img:null, d:"NSFW.", hero:"Abrams"},
   {n:"Lovander Venator", id:"1Wui7DOba2ADWrLlGoCgSwQDoXyf1NcuG", img:null, d:"NSFW.", hero:"Venator"},
-  {n:"Lovander Haze (old)", id:"1zH6yAvjqr4afdLVsB0z2N5TJzrCCHxqN", img:null, d:"NSFW. Old build.", hero:"Haze"},
 ];
 const THUMB = {
   "ava_headed_calico": "ava_headed_calico-e78dfb60.webp",
@@ -567,11 +554,6 @@ const THUMB = {
 };
 const THUMBFILE = d => d && THUMB[d] ? `assets/thumbs/${THUMB[d]}` : null;
 
-/* Minecraft packs playable on the Monkestation partner servers. */
-const PACKS = [
-  {n:"Secret Pack — \"F O R E V E R\"", id:"1bAyK4BjVtyOCYQHdx9AJnbeBUVp2iQ5E", file:"Secret Pack.mrpack", size:"226 MB", meta:"Minecraft 1.21.1 · NeoForge 21.1.217 · 247 mods", d:"Modrinth pack. Ships pre-generated Distant Horizons LODs for the server world, so it looks right on the dedicated server without a local render pass."},
-  {n:"Coalescent Moons", id:"1M-1Zzi-rzdqgNUjcKOauGGJCidSUhlTz", file:"Coalescent Moons.zip", size:"1.35 GB", meta:"full instance archive", d:"Complete Minecraft instance — unpack it into your launcher's instances folder. Size means I could not read its loader metadata without pulling the whole archive."},
-];
 </script>
 
 <script>
@@ -673,25 +655,10 @@ document.getElementById("drivegrid") && DRIVE.forEach(m => document.getElementBy
 fetch("tools/catalog.json", {cache: "no-store"}).then(r => r.ok ? r.json() : Promise.reject(r.status)).then(data => {
   if (Array.isArray(data.published)) document.getElementById("pub-count").textContent = data.published.length;
   if (Array.isArray(data.drive_only)) document.getElementById("drive-count").textContent = data.drive_only.length;
+  if (Array.isArray(data.modpacks)) document.getElementById("pack-count").textContent = data.modpacks.length;
 }).catch(() => { /* Static arrays remain the offline fallback. */ });
 document.getElementById("nsfwgrid") && NSFW.forEach(m => document.getElementById("nsfwgrid").appendChild(card(m, "nsfw")));
 
-PACKS.forEach(p => {
-  const el = document.createElement("article");
-  el.className = "mod-card";
-  el.innerHTML = `
-    <div class="cardbody">
-      <div class="mname">${p.n}</div>
-      <div class="mmeta"><span class="dl">${p.size}</span><span>${p.meta}</span></div>
-      <p class="packdesc">${p.d}</p>
-      <div class="packbtns">
-        <a class="btn primary" href="https://drive.google.com/uc?export=download&id=${p.id}" rel="noopener" target="_blank">Download</a>
-        <a class="btn" href="https://discord.com/invite/monkestation" rel="noopener" target="_blank">Server access</a>
-      </div>
-    </div>`;
-  document.getElementById("packgrid").appendChild(el);
-});
-document.getElementById("pack-count").textContent = PACKS.length;
 
 /* filters */
 document.querySelectorAll(".chip").forEach(chip => {
