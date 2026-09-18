@@ -45,7 +45,7 @@
       ],
       "notes": "Complete model source with body, head, hair, hoodie, collar, and weapon materials. Scanned: 42 entries in VPK.",
       "materialSource": "drive-vpk",
-      "browserModel": "assets/previews/mayu/glb/models/heroes_wip/doorman_v2/doorman.glb",
+      "browserModel": "assets/preview-models/mayu/glb/models/heroes_wip/doorman_v2/doorman.glb",
       "files": [
         "models/heroes_wip/doorman_v2/doorman.vmdl",
         "models/heroes_wip/doorman_v2/materials/body.vmat",
@@ -62,8 +62,8 @@
           "shader": "pbr.vfx",
           "nprLighting": true,
           "channels": {
-            "albedo": "assets/previews/mayu/models/heroes_wip/doorman_v2/materials/body_base_color_1001.png",
-            "normalRoughness": "assets/previews/mayu/models/heroes_wip/doorman_v2/materials/body_normal_1001.png",
+            "albedo": "assets/preview-models/mayu/models/heroes_wip/doorman_v2/materials/body_base_color_1001.ktx2",
+            "normalRoughness": "assets/preview-models/mayu/models/heroes_wip/doorman_v2/materials/body_normal_1001.ktx2",
             "ambientOcclusion": {
               "const": [
                 0,
@@ -88,32 +88,32 @@
                 255
               ]
             },
-            "nprTransmissiveColor": "assets/previews/mayu/models/heroes_wip/doorman_v2/materials/body_base_color_1001.png"
+            "nprTransmissiveColor": "assets/preview-models/mayu/models/heroes_wip/doorman_v2/materials/body_base_color_1001.ktx2"
           },
           "params": {
             "g_vColorTint1": [
-              1.0,
-              1.0,
-              1.0,
-              0.0
+              1,
+              1,
+              1,
+              0
             ],
             "g_vHighlightTint1": [
-              1.0,
-              1.0,
-              1.0,
-              0.0
+              1,
+              1,
+              1,
+              0
             ],
             "g_vSolidOutlineTint": [
               0.102,
               0.102,
               0.102,
-              0.0
+              0
             ],
             "g_vSolidOutlineAdditive": [
               0.0118,
               0.0118,
               0.0118,
-              0.0
+              0
             ],
             "g_flHighlightCoverage1": "0",
             "g_flHighlightHardness1": "0",
@@ -125,34 +125,34 @@
           "shader": "pbr.vfx",
           "nprLighting": true,
           "channels": {
-            "albedo": "assets/previews/mayu/models/heroes_wip/doorman_v2/materials/collar_base_color.png",
-            "normalRoughness": "assets/previews/mayu/models/heroes_wip/doorman_v2/materials/collar_normal_opengl.png",
-            "nprTransmissiveColor": "assets/previews/mayu/models/heroes_wip/doorman_v2/materials/collar_base_color.png"
+            "albedo": "assets/preview-models/mayu/models/heroes_wip/doorman_v2/materials/collar_base_color.ktx2",
+            "normalRoughness": "assets/preview-models/mayu/models/heroes_wip/doorman_v2/materials/collar_normal_opengl.ktx2",
+            "nprTransmissiveColor": "assets/preview-models/mayu/models/heroes_wip/doorman_v2/materials/collar_base_color.ktx2"
           },
           "params": {
             "g_vColorTint1": [
-              1.0,
-              1.0,
-              1.0,
-              0.0
+              1,
+              1,
+              1,
+              0
             ],
             "g_vHighlightTint1": [
-              1.0,
-              1.0,
-              1.0,
-              0.0
+              1,
+              1,
+              1,
+              0
             ],
             "g_vSolidOutlineTint": [
               0.102,
               0.102,
               0.102,
-              0.0
+              0
             ],
             "g_vSolidOutlineAdditive": [
               0.0118,
               0.0118,
               0.0118,
-              0.0
+              0
             ],
             "g_flHighlightCoverage1": "0",
             "g_flHighlightHardness1": "0",
@@ -164,34 +164,34 @@
           "shader": "pbr.vfx",
           "nprLighting": true,
           "channels": {
-            "albedo": "assets/previews/mayu/models/heroes_wip/doorman_v2/materials/deserteagle_chrome_skin_base_color.png",
-            "normalRoughness": "assets/previews/mayu/models/heroes_wip/doorman_v2/materials/deserteagle_chrome_skin_base_color.png",
-            "nprTransmissiveColor": "assets/previews/mayu/models/heroes_wip/doorman_v2/materials/deserteagle_chrome_skin_base_color.png"
+            "albedo": "assets/preview-models/mayu/models/heroes_wip/doorman_v2/materials/deserteagle_chrome_skin_base_color.ktx2",
+            "normalRoughness": "assets/preview-models/mayu/models/heroes_wip/doorman_v2/materials/deserteagle_chrome_skin_base_color.ktx2",
+            "nprTransmissiveColor": "assets/preview-models/mayu/models/heroes_wip/doorman_v2/materials/deserteagle_chrome_skin_base_color.ktx2"
           },
           "params": {
             "g_vColorTint1": [
-              1.0,
-              1.0,
-              1.0,
-              0.0
+              1,
+              1,
+              1,
+              0
             ],
             "g_vHighlightTint1": [
-              1.0,
-              1.0,
-              1.0,
-              0.0
+              1,
+              1,
+              1,
+              0
             ],
             "g_vSolidOutlineTint": [
               0.102,
               0.102,
               0.102,
-              0.0
+              0
             ],
             "g_vSolidOutlineAdditive": [
               0.0118,
               0.0118,
               0.0118,
-              0.0
+              0
             ],
             "g_flHighlightCoverage1": "0",
             "g_flHighlightHardness1": "0",
@@ -254,28 +254,28 @@
           },
           "params": {
             "g_vColorTint1": [
-              1.0,
-              1.0,
-              1.0,
-              0.0
+              1,
+              1,
+              1,
+              0
             ],
             "g_vHighlightTint1": [
               0.6353,
               0.2,
               0.8549,
-              1.0
+              1
             ],
             "g_vSolidOutlineTint": [
               0.6353,
               0.2,
               0.8549,
-              1.0
+              1
             ],
             "g_vSolidOutlineAdditive": [
               0.6353,
               0.2,
               0.8549,
-              1.0
+              1
             ],
             "g_flHighlightCoverage1": "0.613",
             "g_flHighlightHardness1": "1",
@@ -287,8 +287,8 @@
           "shader": "pbr.vfx",
           "nprLighting": true,
           "channels": {
-            "albedo": "assets/previews/mayu/models/heroes_wip/doorman_v2/materials/body_base_color_1002.png",
-            "normalRoughness": "assets/previews/mayu/models/heroes_wip/doorman_v2/materials/body_normal_1002.png",
+            "albedo": "assets/preview-models/mayu/models/heroes_wip/doorman_v2/materials/body_base_color_1002.ktx2",
+            "normalRoughness": "assets/preview-models/mayu/models/heroes_wip/doorman_v2/materials/body_normal_1002.ktx2",
             "ambientOcclusion": {
               "const": [
                 0,
@@ -313,32 +313,32 @@
                 255
               ]
             },
-            "nprTransmissiveColor": "assets/previews/mayu/models/heroes_wip/doorman_v2/materials/body_base_color_1002.png"
+            "nprTransmissiveColor": "assets/preview-models/mayu/models/heroes_wip/doorman_v2/materials/body_base_color_1002.ktx2"
           },
           "params": {
             "g_vColorTint1": [
-              1.0,
-              1.0,
-              1.0,
-              0.0
+              1,
+              1,
+              1,
+              0
             ],
             "g_vHighlightTint1": [
-              1.0,
-              1.0,
-              1.0,
-              0.0
+              1,
+              1,
+              1,
+              0
             ],
             "g_vSolidOutlineTint": [
               0.102,
               0.102,
               0.102,
-              0.0
+              0
             ],
             "g_vSolidOutlineAdditive": [
               0.0118,
               0.0118,
               0.0118,
-              0.0
+              0
             ],
             "g_flHighlightCoverage1": "0",
             "g_flHighlightHardness1": "0",
@@ -350,8 +350,8 @@
           "shader": "pbr.vfx",
           "nprLighting": true,
           "channels": {
-            "albedo": "assets/previews/mayu/models/heroes_wip/doorman_v2/materials/t_big hoodie_basecolor.png",
-            "normalRoughness": "assets/previews/mayu/models/heroes_wip/doorman_v2/materials/t_big hoodie_normalmap.png",
+            "albedo": "assets/preview-models/mayu/models/heroes_wip/doorman_v2/materials/t_big hoodie_basecolor.ktx2",
+            "normalRoughness": "assets/preview-models/mayu/models/heroes_wip/doorman_v2/materials/t_big hoodie_normalmap.ktx2",
             "ambientOcclusion": {
               "const": [
                 0,
@@ -360,7 +360,7 @@
                 255
               ]
             },
-            "tintMaskRimLightMask": "assets/previews/mayu/models/heroes_wip/doorman_v2/materials/t_big hoodie_basecolor.png",
+            "tintMaskRimLightMask": "assets/preview-models/mayu/models/heroes_wip/doorman_v2/materials/t_big hoodie_basecolor.ktx2",
             "nprOutlineMask": {
               "const": [
                 255,
@@ -369,32 +369,32 @@
                 255
               ]
             },
-            "nprTransmissiveColor": "assets/previews/mayu/models/heroes_wip/doorman_v2/materials/t_big hoodie_basecolor.png"
+            "nprTransmissiveColor": "assets/preview-models/mayu/models/heroes_wip/doorman_v2/materials/t_big hoodie_basecolor.ktx2"
           },
           "params": {
             "g_vColorTint1": [
-              1.0,
-              1.0,
-              1.0,
-              0.0
+              1,
+              1,
+              1,
+              0
             ],
             "g_vHighlightTint1": [
-              1.0,
-              1.0,
-              1.0,
-              0.0
+              1,
+              1,
+              1,
+              0
             ],
             "g_vSolidOutlineTint": [
               0.102,
               0.102,
               0.102,
-              0.0
+              0
             ],
             "g_vSolidOutlineAdditive": [
               0.0118,
               0.0118,
               0.0118,
-              0.0
+              0
             ],
             "g_flHighlightCoverage1": "0",
             "g_flHighlightHardness1": "0",
@@ -439,14 +439,14 @@
         "models/heroes_wip/fencer/materials/weapon.vmat"
       ],
       "textureCount": 36,
-      "browserModel": "assets/previews/weiss/fencer.glb",
+      "browserModel": "assets/preview-models/weiss/fencer.glb",
       "nprMaterials": [
         {
           "name": "body",
           "shader": "pbr.vfx",
           "nprLighting": true,
           "channels": {
-            "albedo": "assets/previews/weiss/models/heroes_wip/fencer/materials/weiss_body.png",
+            "albedo": "assets/preview-models/weiss/models/heroes_wip/fencer/materials/weiss_body.ktx2",
             "normalRoughness": {
               "const": [
                 127,
@@ -463,7 +463,7 @@
                 255
               ]
             },
-            "tintMaskRimLightMask": "assets/previews/weiss/models/heroes_wip/fencer/materials/weiss_body.png",
+            "tintMaskRimLightMask": "assets/preview-models/weiss/models/heroes_wip/fencer/materials/weiss_body.ktx2",
             "tintMask": {
               "const": [
                 255,
@@ -472,33 +472,33 @@
                 255
               ]
             },
-            "nprOutlineMask": "assets/previews/weiss/models/heroes_wip/fencer/materials/weiss_body.png",
-            "nprTransmissiveColor": "assets/previews/weiss/models/heroes_wip/fencer/materials/weiss_body.png"
+            "nprOutlineMask": "assets/preview-models/weiss/models/heroes_wip/fencer/materials/weiss_body.ktx2",
+            "nprTransmissiveColor": "assets/preview-models/weiss/models/heroes_wip/fencer/materials/weiss_body.ktx2"
           },
           "params": {
             "g_vColorTint1": [
-              1.0,
-              1.0,
-              1.0,
-              0.0
+              1,
+              1,
+              1,
+              0
             ],
             "g_vHighlightTint1": [
-              1.0,
-              1.0,
-              1.0,
-              0.0
+              1,
+              1,
+              1,
+              0
             ],
             "g_vSolidOutlineTint": [
               0.102,
               0.102,
               0.102,
-              0.0
+              0
             ],
             "g_vSolidOutlineAdditive": [
               0.0118,
               0.0118,
               0.0118,
-              0.0
+              0
             ],
             "g_flHighlightCoverage1": "0",
             "g_flHighlightHardness1": "0",
@@ -510,7 +510,7 @@
           "shader": "pbr.vfx",
           "nprLighting": true,
           "channels": {
-            "albedo": "assets/previews/weiss/models/heroes_wip/fencer/materials/weiss_dress.png",
+            "albedo": "assets/preview-models/weiss/models/heroes_wip/fencer/materials/weiss_dress.ktx2",
             "normalRoughness": {
               "const": [
                 127,
@@ -527,7 +527,7 @@
                 255
               ]
             },
-            "tintMaskRimLightMask": "assets/previews/weiss/models/heroes_wip/fencer/materials/weiss_dress.png",
+            "tintMaskRimLightMask": "assets/preview-models/weiss/models/heroes_wip/fencer/materials/weiss_dress.ktx2",
             "tintMask": {
               "const": [
                 255,
@@ -536,33 +536,33 @@
                 255
               ]
             },
-            "nprOutlineMask": "assets/previews/weiss/models/heroes_wip/fencer/materials/weiss_dress.png",
-            "nprTransmissiveColor": "assets/previews/weiss/models/heroes_wip/fencer/materials/weiss_dress.png"
+            "nprOutlineMask": "assets/preview-models/weiss/models/heroes_wip/fencer/materials/weiss_dress.ktx2",
+            "nprTransmissiveColor": "assets/preview-models/weiss/models/heroes_wip/fencer/materials/weiss_dress.ktx2"
           },
           "params": {
             "g_vColorTint1": [
-              1.0,
-              1.0,
-              1.0,
-              0.0
+              1,
+              1,
+              1,
+              0
             ],
             "g_vHighlightTint1": [
-              1.0,
-              1.0,
-              1.0,
-              0.0
+              1,
+              1,
+              1,
+              0
             ],
             "g_vSolidOutlineTint": [
               0.102,
               0.102,
               0.102,
-              0.0
+              0
             ],
             "g_vSolidOutlineAdditive": [
               0.0118,
               0.0118,
               0.0118,
-              0.0
+              0
             ],
             "g_flHighlightCoverage1": "0",
             "g_flHighlightHardness1": "0",
@@ -574,7 +574,7 @@
           "shader": "pbr.vfx",
           "nprLighting": true,
           "channels": {
-            "albedo": "assets/previews/weiss/models/heroes_wip/fencer/materials/weiss_hair.png",
+            "albedo": "assets/preview-models/weiss/models/heroes_wip/fencer/materials/weiss_hair.ktx2",
             "normalRoughness": {
               "const": [
                 127,
@@ -591,7 +591,7 @@
                 255
               ]
             },
-            "tintMaskRimLightMask": "assets/previews/weiss/models/heroes_wip/fencer/materials/weiss_hair.png",
+            "tintMaskRimLightMask": "assets/preview-models/weiss/models/heroes_wip/fencer/materials/weiss_hair.ktx2",
             "tintMask": {
               "const": [
                 255,
@@ -600,33 +600,33 @@
                 255
               ]
             },
-            "nprOutlineMask": "assets/previews/weiss/models/heroes_wip/fencer/materials/weiss_hair.png",
-            "nprTransmissiveColor": "assets/previews/weiss/models/heroes_wip/fencer/materials/weiss_hair.png"
+            "nprOutlineMask": "assets/preview-models/weiss/models/heroes_wip/fencer/materials/weiss_hair.ktx2",
+            "nprTransmissiveColor": "assets/preview-models/weiss/models/heroes_wip/fencer/materials/weiss_hair.ktx2"
           },
           "params": {
             "g_vColorTint1": [
-              1.0,
-              1.0,
-              1.0,
-              0.0
+              1,
+              1,
+              1,
+              0
             ],
             "g_vHighlightTint1": [
-              1.0,
-              1.0,
-              1.0,
-              0.0
+              1,
+              1,
+              1,
+              0
             ],
             "g_vSolidOutlineTint": [
               0.102,
               0.102,
               0.102,
-              0.0
+              0
             ],
             "g_vSolidOutlineAdditive": [
               0.0118,
               0.0118,
               0.0118,
-              0.0
+              0
             ],
             "g_flHighlightCoverage1": "0",
             "g_flHighlightHardness1": "0",
@@ -638,7 +638,7 @@
           "shader": "pbr.vfx",
           "nprLighting": true,
           "channels": {
-            "albedo": "assets/previews/weiss/models/heroes_wip/fencer/materials/weiss_jacket.png",
+            "albedo": "assets/preview-models/weiss/models/heroes_wip/fencer/materials/weiss_jacket.ktx2",
             "normalRoughness": {
               "const": [
                 127,
@@ -655,7 +655,7 @@
                 255
               ]
             },
-            "tintMaskRimLightMask": "assets/previews/weiss/models/heroes_wip/fencer/materials/weiss_jacket.png",
+            "tintMaskRimLightMask": "assets/preview-models/weiss/models/heroes_wip/fencer/materials/weiss_jacket.ktx2",
             "tintMask": {
               "const": [
                 255,
@@ -664,33 +664,33 @@
                 255
               ]
             },
-            "nprOutlineMask": "assets/previews/weiss/models/heroes_wip/fencer/materials/weiss_jacket.png",
-            "nprTransmissiveColor": "assets/previews/weiss/models/heroes_wip/fencer/materials/weiss_jacket.png"
+            "nprOutlineMask": "assets/preview-models/weiss/models/heroes_wip/fencer/materials/weiss_jacket.ktx2",
+            "nprTransmissiveColor": "assets/preview-models/weiss/models/heroes_wip/fencer/materials/weiss_jacket.ktx2"
           },
           "params": {
             "g_vColorTint1": [
-              1.0,
-              1.0,
-              1.0,
-              0.0
+              1,
+              1,
+              1,
+              0
             ],
             "g_vHighlightTint1": [
-              1.0,
-              1.0,
-              1.0,
-              0.0
+              1,
+              1,
+              1,
+              0
             ],
             "g_vSolidOutlineTint": [
               0.102,
               0.102,
               0.102,
-              0.0
+              0
             ],
             "g_vSolidOutlineAdditive": [
               0.0118,
               0.0118,
               0.0118,
-              0.0
+              0
             ],
             "g_flHighlightCoverage1": "0",
             "g_flHighlightHardness1": "0",
@@ -702,10 +702,10 @@
           "shader": "pbr.vfx",
           "nprLighting": true,
           "channels": {
-            "albedo": "assets/previews/weiss/models/heroes_wip/fencer/materials/myretenaster_albedo.png",
-            "normalRoughness": "assets/previews/weiss/models/heroes_wip/fencer/materials/myretenaster_normal.png",
-            "ambientOcclusion": "assets/previews/weiss/models/heroes_wip/fencer/materials/myretenaster_ao.png",
-            "tintMaskRimLightMask": "assets/previews/weiss/models/heroes_wip/fencer/materials/myretenaster_albedo.png",
+            "albedo": "assets/preview-models/weiss/models/heroes_wip/fencer/materials/myretenaster_albedo.ktx2",
+            "normalRoughness": "assets/preview-models/weiss/models/heroes_wip/fencer/materials/myretenaster_normal.ktx2",
+            "ambientOcclusion": "assets/preview-models/weiss/models/heroes_wip/fencer/materials/myretenaster_ao.ktx2",
+            "tintMaskRimLightMask": "assets/preview-models/weiss/models/heroes_wip/fencer/materials/myretenaster_albedo.ktx2",
             "tintMask": {
               "const": [
                 255,
@@ -714,33 +714,33 @@
                 255
               ]
             },
-            "nprOutlineMask": "assets/previews/weiss/models/heroes_wip/fencer/materials/myretenaster_albedo.png",
-            "nprTransmissiveColor": "assets/previews/weiss/models/heroes_wip/fencer/materials/myretenaster_albedo.png"
+            "nprOutlineMask": "assets/preview-models/weiss/models/heroes_wip/fencer/materials/myretenaster_albedo.ktx2",
+            "nprTransmissiveColor": "assets/preview-models/weiss/models/heroes_wip/fencer/materials/myretenaster_albedo.ktx2"
           },
           "params": {
             "g_vColorTint1": [
-              1.0,
-              1.0,
-              1.0,
-              0.0
+              1,
+              1,
+              1,
+              0
             ],
             "g_vHighlightTint1": [
-              1.0,
-              1.0,
-              1.0,
-              0.0
+              1,
+              1,
+              1,
+              0
             ],
             "g_vSolidOutlineTint": [
               0.102,
               0.102,
               0.102,
-              0.0
+              0
             ],
             "g_vSolidOutlineAdditive": [
               0.0118,
               0.0118,
               0.0118,
-              0.0
+              0
             ],
             "g_flHighlightCoverage1": "0",
             "g_flHighlightHardness1": "0",

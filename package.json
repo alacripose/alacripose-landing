@@ -1,0 +1,12 @@
+{
+  "name": "alacripose-landing-tools",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Build tooling for the landing page: VRF extraction and 3D preview optimization",
+  "scripts": {
+    "optimize-previews": "node tools/optimize_previews.mjs"
+  },
+  "devDependencies": {
+    "ktx2-encoder": "^0.6.0"
+  }
+}

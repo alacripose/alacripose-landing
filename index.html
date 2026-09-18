@@ -703,6 +703,7 @@ function revealNsfw() {
 import * as THREE from "https://esm.sh/three@0.170.0";
 import { GLTFLoader } from "https://esm.sh/three@0.170.0/examples/jsm/loaders/GLTFLoader.js";
 import { OrbitControls } from "https://esm.sh/three@0.170.0/examples/jsm/controls/OrbitControls.js";
+import { KTX2Loader } from "https://esm.sh/three@0.170.0/examples/jsm/loaders/KTX2Loader.js";
 
 const NPR_VERT = /* glsl */`
   #include <common>
@@ -811,8 +812,13 @@ window.renderSource2Model = async (canvas, glbUrl, nprMaterials) => {
   const controls = new OrbitControls(camera, canvas);
   controls.enableDamping = true;
 
-  const texLoader = new THREE.TextureLoader();
-  texLoader.setCrossOrigin("anonymous");
+  // Channel textures are KTX2 (Basis Universal), so they load through
+  // KTX2Loader, which transcodes to whichever GPU format this device supports.
+  // The Emscripten transcoder is vendored at assets/vendor/basis/ and must match
+  // the three version imported above.
+  const texLoader = new KTX2Loader()
+    .setTranscoderPath("assets/vendor/basis/")
+    .detectSupport(renderer);
   const gltf = await new GLTFLoader().loadAsync(glbUrl);
   const model = gltf.scene;
   scene.add(model);
