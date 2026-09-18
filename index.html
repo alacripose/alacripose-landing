@@ -94,18 +94,48 @@
   .btn:not(.primary):hover { background: var(--surface8); }
   .btn:active { filter: brightness(.85); }
 
-  /* image mosaic: top mods lead the first viewport */
-  .mosaic { display: grid; grid-template-columns: repeat(2, 1fr); grid-auto-rows: 150px; gap: 6px; }
-  .mosaic a { display: block; overflow: hidden; background: var(--surface); position: relative; }
-  .mosaic img { width: 100%; height: 100%; object-fit: cover; display: block; }
-  .mosaic a:first-child { grid-row: span 2; grid-column: span 2; }
-  .mosaic .mosaic-cap {
-    position: absolute; left: 0; right: 0; bottom: 0; padding: 26px 12px 8px;
-    background: linear-gradient(transparent, rgba(10,8,5,.92));
-    font-family: "IBM Plex Mono", monospace; font-size: 11.5px; letter-spacing: .06em;
-    color: var(--ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  /* hero coverflow: every mod with art on a cylinder, iTunes style */
+  .coverflow { position: relative; height: 404px; user-select: none; }
+  .cf-stage {
+    position: absolute; inset: 0; perspective: 1500px; perspective-origin: 50% 40%;
+    transform-style: preserve-3d; cursor: grab; touch-action: pan-y;
   }
-  .mosaic a:hover img { filter: brightness(1.12); }
+  .cf-stage.dragging { cursor: grabbing; }
+  .cf-slide {
+    position: absolute; top: 10px; left: 50%; width: var(--cf-w, 190px);
+    margin-left: calc(var(--cf-w, 190px) / -2);
+    transform-style: preserve-3d; will-change: transform, opacity;
+    transition: transform .5s cubic-bezier(.22,.68,.28,1), opacity .5s ease, filter .5s ease;
+  }
+  .cf-slide.hidden { display: none; }
+  .cf-slide img {
+    width: 100%; aspect-ratio: 4 / 5; object-fit: contain; display: block;
+    background: var(--ground2); border: 1px solid var(--divider);
+    -webkit-box-reflect: below 2px linear-gradient(transparent 58%, rgba(0,0,0,.30));
+  }
+  .cf-slide.front img { border-color: var(--brass-dim); }
+  .cf-slide .cf-cap {
+    margin-top: 8px; font-family: "IBM Plex Mono", monospace; font-size: 11px; letter-spacing: .05em;
+    color: var(--ink70); text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .cf-slide .cf-dl { color: var(--brass); }
+  .cf-slide.front .cf-cap { color: var(--ink); }
+  .cf-nav {
+    position: absolute; top: 42%; z-index: 5; width: 42px; height: 42px; display: grid; place-items: center;
+    background: rgba(14,12,9,.72); border: 1px solid var(--divider); color: var(--brass); cursor: pointer;
+  }
+  .cf-nav:hover { border-color: var(--brass-dim); background: var(--surface6); }
+  .cf-nav.prev { left: -8px; }
+  .cf-nav.next { right: -8px; }
+  .cf-nav .material-icons { font-size: 24px; }
+  @media (prefers-reduced-motion: reduce) { .cf-slide { transition: none; } }
+  @media (max-width: 760px) {
+    .coverflow { height: 306px; }
+    .cf-slide { --cf-w: 140px; }
+    .cf-nav { top: 34%; width: 36px; height: 36px; }
+    .cf-nav.prev { left: 0; }
+    .cf-nav.next { right: 0; }
+  }
 
   .hero-stats { display: flex; flex-wrap: wrap; gap: 34px; padding: 22px 0 30px; border-bottom: 1px solid var(--divider); }
   .hero-stats .num { font-family: "Limelight", serif; font-size: 27px; color: var(--brass); }
@@ -269,12 +299,10 @@
           <a class="btn" href="#published"><span class="material-icons" aria-hidden="true">grid_view</span>Browse mods</a>
         </div>
       </div>
-      <div class="mosaic" aria-label="most downloaded mods">
-        <a href="https://gamebanana.com/mods/594818"><img src="assets/gbthumbs/594818.webp" alt="LeBron James Abrams hero card" loading="lazy"><span class="mosaic-cap">LeBron James Abrams · 144k</span></a>
-        <a href="https://gamebanana.com/mods/653836"><img src="assets/gbthumbs/653836.webp" alt="Kylo Ren Apollo hero card" loading="lazy"><span class="mosaic-cap">Kylo Ren BF2 Apollo · 35k</span></a>
-        <a href="https://gamebanana.com/mods/620626"><img src="assets/gbthumbs/620626.webp" alt="Ava-Headed Calico hero card" loading="lazy"><span class="mosaic-cap">Ava-Headed Calico · 15k</span></a>
-        <a href="https://gamebanana.com/mods/665822"><img src="assets/gbthumbs/665822.webp" alt="Sancho Apollo hero card" loading="lazy"><span class="mosaic-cap">Sancho · 22k</span></a>
-        <a href="https://gamebanana.com/mods/623942"><img src="assets/gbthumbs/623942.webp" alt="Tec-9 Haze hero card" loading="lazy"><span class="mosaic-cap">Tec-9 Haze · 16k</span></a>
+      <div class="coverflow" id="heroflow" role="group" aria-label="browse mods by thumbnail">
+        <button class="cf-nav prev" id="cf-prev" type="button" aria-label="Previous mod"><span class="material-icons" aria-hidden="true">chevron_left</span></button>
+        <div class="cf-stage" id="cf-stage"><!-- slides are built from every mod that has a thumbnail --></div>
+        <button class="cf-nav next" id="cf-next" type="button" aria-label="Next mod"><span class="material-icons" aria-hidden="true">chevron_right</span></button>
       </div>
     </div>
     <div class="hero-stats" role="list">
@@ -952,6 +980,128 @@ window.renderSource2Model = async (canvas, glbUrl, nprMaterials) => {
   tick();
   return { dispose: () => { cancelAnimationFrame(raf); controls.dispose(); renderer.dispose(); } };
 };
+</script>
+<script>
+/* hero coverflow: every mod that has a thumbnail rides a cylinder */
+(function () {
+  const stage = document.getElementById("cf-stage");
+  const flow  = document.getElementById("heroflow");
+  if (!stage || !flow) return;
+
+  const num = v => { const m = String(v || "").match(/([\d.]+)\s*(k|m)?/i);
+    return m ? parseFloat(m[1]) * (m[2] ? (/k/i.test(m[2]) ? 1e3 : 1e6) : 1) : 0; };
+
+  const ITEMS = [];
+  (PUB || []).forEach(m => {
+    if (m.badge === "nsfwx" || !m.img) return;
+    ITEMS.push({ n: m.n, dl: m.dl,
+      img: `assets/gbthumbs/${m.img}.webp`,
+      url: m.gb ? `https://gamebanana.com/${typeof m.gb === "string" && m.gb.includes("/") ? m.gb : "mods/" + m.gb}` : null });
+  });
+  (DRIVE || []).forEach(m => {
+    const t = THUMBFILE(m.img);
+    if (!t) return;
+    ITEMS.push({ n: m.n, dl: m.dl, img: t, url: `https://drive.google.com/file/d/${m.id}/view` });
+  });
+  ITEMS.sort((a, b) => num(b.dl) - num(a.dl));
+  if (!ITEMS.length) { flow.style.display = "none"; return; }
+
+  const slides = ITEMS.map(it => {
+    const el = document.createElement("a");
+    el.className = "cf-slide";
+    el.href = it.url || "#published";
+    if (it.url) { el.target = "_blank"; el.rel = "noopener"; }
+    el.setAttribute("aria-label", `${it.n}${it.dl ? ", " + it.dl + " downloads" : ""}`);
+    const img = document.createElement("img");
+    img.src = it.img; img.alt = ""; img.loading = "lazy"; img.decoding = "async";
+    const cap = document.createElement("span");
+    cap.className = "cf-cap";
+    cap.textContent = it.dl ? `${it.n} \u00b7 ${it.dl}` : it.n;
+    el.append(img, cap);
+    stage.append(el);
+    return el;
+  });
+
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  let index = 0, timer = null, dragged = 0;
+
+  function layout() {
+    const narrow = window.innerWidth < 760;
+    const w = narrow ? 140 : 190;
+    const step = narrow ? 30 : 26;
+    const radius = Math.round((w / 2) / Math.tan((step / 2) * Math.PI / 180));
+    const span = narrow ? 3 : 5;
+    slides.forEach((el, i) => {
+      let d = i - index;
+      const half = slides.length / 2;
+      if (d > half) d -= slides.length;
+      if (d <= -half) d += slides.length;
+      const dist = Math.abs(d);
+      const prev = parseFloat(el.dataset.d || "0");
+      const jumped = Math.abs(d - prev) > span + 1;
+      if (jumped) el.style.transition = "none";
+      el.style.transform = `rotateY(${(-d * step).toFixed(2)}deg) translateZ(${radius}px)`;
+      el.style.zIndex = String(200 - dist);
+      el.style.opacity = dist > span ? "0" : (dist === 0 ? "1" : String(Math.max(.3, .8 - dist * .13)));
+      el.style.filter = dist === 0 ? "" : `brightness(${Math.max(.5, .85 - dist * .09)}) saturate(.85)`;
+      el.classList.toggle("hidden", dist > span);
+      el.classList.toggle("front", dist === 0);
+      if (dist === 0) { el.removeAttribute("tabindex"); el.removeAttribute("aria-hidden"); }
+      else { el.tabIndex = -1; el.setAttribute("aria-hidden", "true"); }
+      el.dataset.d = String(d);
+      if (jumped) requestAnimationFrame(() => { el.style.transition = ""; });
+    });
+  }
+  function go(delta) {
+    index = (index + delta % slides.length + slides.length) % slides.length;
+    layout(); schedule();
+  }
+  function play() { if (reduce) return; stop(); timer = setInterval(() => go(1), 3400); }
+  function stop() { if (timer) { clearInterval(timer); timer = null; } }
+  function schedule() { if (timer) play(); }
+
+  const prevBtn = document.getElementById("cf-prev");
+  const nextBtn = document.getElementById("cf-next");
+  if (prevBtn) prevBtn.addEventListener("click", () => go(-1));
+  if (nextBtn) nextBtn.addEventListener("click", () => go(1));
+
+  flow.tabIndex = 0;
+  ["mouseenter", "focusin"].forEach(ev => flow.addEventListener(ev, stop));
+  ["mouseleave", "focusout"].forEach(ev => flow.addEventListener(ev, schedule));
+  document.addEventListener("visibilitychange", () => { if (document.hidden) stop(); else schedule(); });
+  flow.addEventListener("keydown", e => {
+    if (e.key === "ArrowLeft") { e.preventDefault(); go(-1); }
+    else if (e.key === "ArrowRight") { e.preventDefault(); go(1); }
+  });
+
+  let downX = null;
+  stage.addEventListener("pointerdown", e => {
+    downX = e.clientX; dragged = 0; stop(); stage.classList.add("dragging");
+    try { stage.setPointerCapture(e.pointerId); } catch (_) {}
+  });
+  stage.addEventListener("pointermove", e => {
+    if (downX === null) return;
+    const dx = e.clientX - downX;
+    dragged = Math.max(dragged, Math.abs(dx));
+    if (Math.abs(dx) > 55) { go(dx < 0 ? 1 : -1); downX = e.clientX; }
+  });
+  const release = e => {
+    if (downX === null) return;
+    downX = null;
+    stage.classList.remove("dragging");
+    try { if (e && e.pointerId != null && stage.hasPointerCapture(e.pointerId)) stage.releasePointerCapture(e.pointerId); } catch (_) {}
+    schedule();
+  };
+  stage.addEventListener("pointerup", release);
+  stage.addEventListener("pointercancel", release);
+  stage.addEventListener("click", e => { if (dragged > 10) { e.preventDefault(); e.stopPropagation(); } }, true);
+
+  let rt = null;
+  window.addEventListener("resize", () => { clearTimeout(rt); rt = setTimeout(layout, 120); });
+
+  layout();
+  play();
+})();
 </script>
 </body>
 </html>

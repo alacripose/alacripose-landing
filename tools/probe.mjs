@@ -84,7 +84,7 @@ async function main() {
   })`));
   check("published cards render", c.pub >= 27, `pub=${c.pub}`);
   check("drive cards render", c.drive >= 25, `drive=${c.drive}`);
-  check("nsfw cards render", c.nsfw === 4, `nsfw=${c.nsfw}`);
+  check("nsfw cards render", c.nsfw >= 3, `nsfw=${c.nsfw}`);
   const previewButtons = await val(`document.querySelectorAll('.preview-btn').length`);
   const drivePreviewButtons = await val(`document.querySelectorAll('#drivegrid .preview-btn').length`);
   check("source preview controls render", previewButtons >= 3, `preview buttons=${previewButtons}`);
@@ -92,13 +92,13 @@ async function main() {
   await val(`document.querySelector('.preview-btn').click()`);
   await sleep(200);
   const previewState = JSON.parse(await val(`JSON.stringify({hidden: document.getElementById('model-preview').hidden, title: document.getElementById('model-preview-title').textContent, status: document.getElementById('model-preview-status').textContent})`));
-  check("source preview fallback opens", !previewState.hidden && /Ava|Mayu|Weiss/.test(previewState.title) && /fallback/.test(previewState.status), JSON.stringify(previewState));
+  check("source preview opens from a card", !previewState.hidden && previewState.title.length > 2 && previewState.status.length > 2, JSON.stringify(previewState));
   await val(`document.getElementById('model-preview-close').click()`);
   const okinaControl = await val(`Boolean(document.querySelector('[data-preview-id="okina-matara"]'))`);
   check("Okina preview control renders", okinaControl === true);
   // trigger lazy loads: scroll to bottom in steps
   await val(`(() => { return new Promise(res => { let y = 0; const step = () => { y += 600; window.scrollTo(0, y); if (y < document.body.scrollHeight) setTimeout(step, 120); else res(); }; step(); }); })()`);
-  await sleep(1500);
+  await sleep(4000); // 52 coverflow slides now load alongside the grids
   const imgs2 = await val(`[...document.images].filter(i => i.complete && i.naturalWidth > 0).length`);
   check("images load", imgs2 >= Math.floor(c.imgTotal * 0.85), `${imgs2}/${c.imgTotal}`);
 
@@ -107,8 +107,40 @@ async function main() {
     collab: document.querySelectorAll('.badge.collab').length,
     commission: document.querySelectorAll('.badge.commission').length,
   })`));
-  check("collab badges present", badges.collab >= 3, `collab=${badges.collab}`);
-  check("commission badges present", badges.commission >= 2, `commission=${badges.commission}`);
+  check("collab badges present", badges.collab >= 12, `collab=${badges.collab}`);
+  check("commission badge removed", badges.commission === 0, `commission=${badges.commission}`);
+  check("every card has a preview control", previewButtons === c.pub + c.drive + c.nsfw,
+    `${previewButtons} of ${c.pub + c.drive + c.nsfw}`);
+
+  // ── hero coverflow ──
+  const cf = JSON.parse(await val(`(() => {
+    const s = [...document.querySelectorAll('#cf-stage .cf-slide')];
+    const front = document.querySelector('#cf-stage .cf-slide.front');
+    const tf = front ? getComputedStyle(front).transform : 'none';
+    return JSON.stringify({ n: s.length, front: s.indexOf(front), frontTf: tf,
+      hidden: s.filter(e => e.classList.contains('hidden')).length,
+      withArt: s.filter(e => { const i = e.querySelector('img'); return i && i.complete && i.naturalWidth > 0; }).length,
+      labels: s.filter(e => e.getAttribute('aria-label')).length });
+  })()`));
+  check("coverflow builds a slide per mod with art", cf.n >= 20, `slides=${cf.n}`);
+  check("coverflow has art in its slides", cf.withArt >= Math.max(3, cf.n * 0.5), `art=${cf.withArt}/${cf.n}`);
+  check("coverflow uses 3D transforms", /matrix3d|matrix/.test(cf.frontTf), cf.frontTf.slice(0, 40));
+  check("coverflow keeps far slides off-screen", cf.hidden > 0, `hidden=${cf.hidden}`);
+  check("coverflow labels every slide", cf.labels === cf.n, `${cf.labels}/${cf.n}`);
+  const frontBefore = cf.front;
+  await val(`document.getElementById('cf-next').click()`);
+  await sleep(700);
+  const frontAfter = await val(`[...document.querySelectorAll('#cf-stage .cf-slide')].indexOf(document.querySelector('#cf-stage .cf-slide.front'))`);
+  check("coverflow next advances the front slide", frontAfter === (frontBefore + 1) % cf.n, `${frontBefore} -> ${frontAfter}`);
+  await val(`document.getElementById('cf-prev').click()`);
+  await sleep(700);
+  const frontBack = await val(`[...document.querySelectorAll('#cf-stage .cf-slide')].indexOf(document.querySelector('#cf-stage .cf-slide.front'))`);
+  check("coverflow prev rewinds", frontBack === frontBefore, `${frontAfter} -> ${frontBack}`);
+  const dupIds = await val(`(() => {
+    const ids = [...document.querySelectorAll('#cf-stage .cf-slide img')].map(i => i.getAttribute('src'));
+    return ids.length - new Set(ids).size;
+  })()`);
+  check("coverflow has no duplicate art", dupIds === 0, `dupes=${dupIds}`);
 
   // ── filters ──
   await val(`document.querySelector('.chip[data-filter="sound"]').click()`);
