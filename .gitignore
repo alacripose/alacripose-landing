@@ -15,3 +15,6 @@ __pycache__/
 # KTX-Software (ktx/toktx CLI) for the KTX2 texture pass; installed locally.
 tools/ktx/
 node_modules/
+
+# preview build scratch (VPK downloads + exported GLBs)
+_previews/
